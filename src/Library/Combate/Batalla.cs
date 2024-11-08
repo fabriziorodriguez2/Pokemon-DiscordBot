@@ -5,8 +5,13 @@ using Ucu.Poo.Pokemon;
 
 namespace Library.Combate
 {
-    // El principio SRP se aplica ya que esta clase tiene la responsabilidad de manejar la batalla:
-    // iniciar, terminar y avanzar el turno de manera clara y precisa.
+    //Clase Batalla:
+    //La clase Batalla cumple con el principio de Responsabilidad Única (SRP) porque se encarga 
+    //exclusivamente de la lógica relacionada con el manejo de una batalla entre dos jugadores. 
+    //Esto incluye iniciar y terminar la batalla, avanzar los turnos, y determinar el estado de 
+    //la batalla (si ha terminado o no).
+    //Esto hace que también cumpla con Expert al gestionar únicamente la lógica de la batalla y
+    //ser experta en ello.
     public class Batalla
     {
         private bool turnos { get; set; }

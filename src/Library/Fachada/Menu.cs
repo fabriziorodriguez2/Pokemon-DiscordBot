@@ -3,6 +3,14 @@ using Ucu.Poo.Pokemon;
 
 namespace Library.Combate
 {
+    //Clase Menu:
+    //La clase Menu cumple con el Principio de Responsabilidad Única (SRP) al gestionar exclusivamente 
+    //las interacciones del menú para la batalla de Pokémon, y en el Principio de Abierto/Cerrado (OCP), 
+    //ya que permite la extensión sin modificar la funcionalidad existente. Además, sigue el Principio de 
+    //Inversión de Dependencias (DIP) al depender de abstracciones como Jugador e IMovimiento, y el Principio 
+    //de Sustitución de Liskov (LSP) al permitir el uso de diferentes implementaciones de IMovimiento.
+
+
     public class Menu
     {
         private Batalla batallaActual;

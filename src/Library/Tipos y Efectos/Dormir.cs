@@ -1,6 +1,13 @@
 using DefaultNamespace;
 
 namespace Library.Tipos;
+//Dormir:
+//La clase Dormir tiene una responsabilidad clara: gestionar el efecto de "dormir" de un Pokémon, lo cual 
+//está alineado con el SRP.
+//OCP: La clase Dormir puede extenderse con nuevos comportamientos derivados de Efecto sin necesidad de 
+//modificar la clase base. 
+//LSP: La clase Dormir es una subclase de Efecto, y puede ser utilizada donde se espera un objeto Efecto.
+
 
 public class Dormir:Efecto
 {

@@ -4,6 +4,15 @@ using Ucu.Poo.Pokemon;
 
 namespace DefaultNamespace;
 
+//Clase Pokemon:
+//Sigue el principio SRP al encargarse solo de gestionar atributos como vida, defensa, 
+//movimientos, estado, acciones de ataque y defensa, etc.
+//También aplica el principio Expert, ya que maneja su lógica propia al ejecutar los
+//movimientos de los Pokemones, como defenderse, recibir ataques o danios de los efectos.
+//El polimorfismo se muestra en el uso de las interfaces IMovimientoAtaque, IMovimientoDefensa e IMovimientoEspecial, 
+//haciendo que diferentes tipos de movimientos interactúen con el mismo Pokémon. 
+//Respeta el principio LSP porque los objetos que implementan estas interfaces pueden usarse de manera 
+//intercambiable sin romper el funcionamiento.
 public class Pokemon
 {
     private string name;

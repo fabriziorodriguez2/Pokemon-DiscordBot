@@ -3,6 +3,9 @@ using Library.Tipos;
 using Ucu.Poo.Pokemon;
 
 namespace Library.Combate;
+//Clase Jugador:
+//SRP se aplica al gestionar la información del jugador, como su nombre, equipo e inventario.
+//Expert está presente, ya que la clase maneja sus propios datos y toma decisiones basadas en ellos.
 
 public class Jugador
 {

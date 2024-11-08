@@ -7,6 +7,12 @@ using Quemar = Library.Tipos.Quemar;
 
 namespace DefaultNamespace;
 
+//Clase Pokedex:
+//Cumple con el princpio de SRP, ya que se encarga de crear todos los pokemones con sus tipos,
+//efectividades, movimientos característicos y los efectos de sus movimientos especiales.
+//Cumple con Expert porque tiene toda la informacion necesaria para sus tareas en sí misma.
+//Cumple con Creator ya que se encarga de crear instancias de la clase Pokemon, Efecto y Tipo.
+
 public static class Pokedex
 {
     private static List<Tipo> listatiposdisponibles = new List<Tipo>();
