@@ -200,7 +200,7 @@ namespace Library.Combate
             }
             
         }
-        public void Mostrar_items_disponibles() //Llama al método de jugador para mostrar los items
+        public void MostrarItemsDisponibles() //Llama al método de jugador para mostrar los items
         {
             if (batallaActual.GetBatallaIniciada())
             {
@@ -209,16 +209,16 @@ namespace Library.Combate
             }
         }
 
-        public void UsarItem(string item, int numero_de_pokemon) //Este método utiliza el item que le pases por string
+        public void UsarItem(string item, int numeroDePokemon) //Este método utiliza el item que le pases por string
         {
             if (batallaActual.GetBatallaIniciada())
             {
                 Jugador jugadorAtacante = batallaActual.GetAtacante();
                 List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
-            
-                if (numero_de_pokemon >= 0 && numero_de_pokemon < pokemons.Count)
+
+                if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count)
                 {
-                    Pokemon pokemonElegido = pokemons[numero_de_pokemon];
+                    Pokemon pokemonElegido = pokemons[numeroDePokemon];
                     jugadorAtacante.UsarItem(item, pokemonElegido);
                     batallaActual.AvanzarTurno();
                 }
@@ -227,6 +227,6 @@ namespace Library.Combate
                     Console.WriteLine("Seleccione el pokemon correctamente");
                 }
             }
-            }
+        }
     }
 }
