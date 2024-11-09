@@ -25,6 +25,7 @@ public class Revivir : Item
     public override void AplicarEfecto(Pokemon pokemon)
     {
         pokemon.Revivir();
+        pokemon.Curar((int)(pokemon.GetVidaActual()/2));
         Console.WriteLine($"{pokemon.GetName()} ha revivido con la mitad de su HP.");
     }
 }

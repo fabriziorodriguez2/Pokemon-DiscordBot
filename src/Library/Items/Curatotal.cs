@@ -7,14 +7,14 @@ namespace Library.Combate;
 //Cumple con polimorfismo debido a que sobreescribe el metodo Aplicar Efecto de la clase.
 //Cumple con SRP debido a que tiene una sola responsabilidad: aplicar un efecto de curación a un Pokémon. 
 
-public class CuraTotal : Item
+public class Curatotal : Item
 {
     /// <summary>
     /// Constructor de la clase `CuraTotal`.
     /// Inicializa un nuevo objeto `CuraTotal` con una cantidad especificada.
     /// </summary>
     /// <param name="cantidad">Cantidad de ítems disponibles.</param>
-    public CuraTotal(int cantidad) : base( cantidad) { }
+    public Curatotal(int cantidad) : base( cantidad) { }
     
     /// <summary>
     /// Aplica el efecto de curación al Pokémon indicado, eliminando todos sus efectos de estado,

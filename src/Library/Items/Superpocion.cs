@@ -12,13 +12,13 @@ namespace Library.Combate;
 //Cumple con LSP: La clase SuperPocion puede ser sustituida por cualquier otra clase que herede de Item sin alterar el 
 //comportamiento esperado. 
 
-public class SuperPocion : Item
+public class Superpocion : Item
 {
     /// <summary>
-    /// Inicializa una nueva instancia de la clase <see cref="SuperPocion"/> con la cantidad especificada.
+    /// Inicializa una nueva instancia de la clase <see cref="Superpocion"/> con la cantidad especificada.
     /// </summary>
     /// <param name="cantidad">La cantidad de ítems "SuperPocion" disponibles.</param>
-    public SuperPocion(int cantidad) : base(cantidad) { }
+    public Superpocion(int cantidad) : base(cantidad) { }
 
     /// <summary>
     /// Aplica el efecto de curar a un Pokémon, restaurando 70 puntos de vida.

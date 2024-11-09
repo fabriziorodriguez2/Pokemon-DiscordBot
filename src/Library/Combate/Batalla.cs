@@ -15,6 +15,7 @@ namespace Library.Combate
     public class Batalla
     {
         private bool turnos { get; set; }
+        private List<Jugador> jugadoresEnEspera { get; set; }
         private Jugador jugadorAtacante { get; set; }
         private Jugador jugadorDefensor { get; set; }
         private bool batallaTerminada { get; set; }
@@ -49,7 +50,8 @@ namespace Library.Combate
         {
             if (jugadorDefensor != null && jugadorAtacante != null)
             {
-                Console.WriteLine("No podemos agregar más jugadores, ya hay 2 jugadores para jugar");
+                Console.WriteLine("No podemos agregar más jugadores pero se te va agregar a una lista de espera, ya hay 2 jugadores para jugar");
+                jugadoresEnEspera.Add(jugador);
             }
             else
             {

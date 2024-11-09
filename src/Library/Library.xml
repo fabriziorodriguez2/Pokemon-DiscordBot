@@ -4,6 +4,725 @@
         <name>Library</name>
     </assembly>
     <members>
+        <member name="T:Library.Combate.Jugador">
+            <summary>
+            La clase Jugador representa a un jugador que posee un equipo de Pokémon y un inventario de items.
+            </summary>
+            <remarks>
+            Se aplican los principios de SRP (Responsabilidad Única) al gestionar la información del jugador y sus interacciones con el equipo y los items.
+            El principio Expert también se sigue, ya que la clase toma decisiones relacionadas con el estado del jugador y su equipo.
+            </remarks>
+        </member>
+        <member name="M:Library.Combate.Jugador.#ctor(System.String)">
+            <summary>
+            Constructor que inicializa un nuevo jugador con un nombre.
+            </summary>
+            <param name="name">El nombre del jugador.</param>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetPokemonEnTurnoAtaca">
+            <summary>
+            Obtiene si el Pokémon en turno puede atacar.
+            </summary>
+            <returns><c>true</c> si el Pokémon puede atacar, <c>false</c> en caso contrario.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.HacerEfectoPokemonEnTurno(DefaultNamespace.Pokemon)">
+            <summary>
+            Aplica el efecto del Pokémon en turno sobre otro Pokémon.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto.</param>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetEfectoPokemonTurno">
+            <summary>
+            Obtiene el efecto que tiene el Pokémon en turno.
+            </summary>
+            <returns>El efecto actual sobre el Pokémon en turno.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.PokemonAtacado(Ucu.Poo.Pokemon.IMovimientoAtaque)">
+            <summary>
+            Recibe un ataque hacia el Pokémon en turno.
+            </summary>
+            <param name="ataque">El movimiento de ataque que se va a recibir.</param>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetCantpokemon">
+            <summary>
+            Obtiene la cantidad de Pokémon que tiene el jugador.
+            </summary>
+            <returns>La cantidad de Pokémon en el equipo del jugador.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetNamePokemonTurno">
+            <summary>
+            Obtiene el nombre del Pokémon en turno.
+            </summary>
+            <returns>El nombre del Pokémon en turno.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.PokemonEnTurnoAlive">
+            <summary>
+            Verifica si el Pokémon en turno está vivo.
+            </summary>
+            <returns><c>true</c> si el Pokémon está vivo, <c>false</c> en caso contrario.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetName">
+            <summary>
+            Obtiene el nombre del jugador.
+            </summary>
+            <returns>El nombre del jugador.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.TeamIsAlive">
+            <summary>
+            Verifica si el equipo del jugador está vivo.
+            </summary>
+            <returns><c>true</c> si el equipo está vivo, <c>false</c> en caso contrario.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetPokemons">
+            <summary>
+            Obtiene la lista de Pokémon del jugador.
+            </summary>
+            <returns>La lista de Pokémon del jugador.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.AgregarAlEquipo(System.String)">
+            <summary>
+            Agrega un Pokémon al equipo del jugador.
+            </summary>
+            <param name="nombre">El nombre del Pokémon que se quiere agregar al equipo.</param>
+        </member>
+        <member name="M:Library.Combate.Jugador.ActualizarEstadoEquipo">
+            <summary>
+            Actualiza el estado del equipo, verificando si al menos un Pokémon está vivo.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Jugador.CambiarPokemon(DefaultNamespace.Pokemon)">
+            <summary>
+            Cambia el Pokémon en turno por otro del equipo.
+            </summary>
+            <param name="pokemon">El Pokémon que se desea poner en turno.</param>
+        </member>
+        <member name="M:Library.Combate.Jugador.GetPokemonEnTurno">
+            <summary>
+            Obtiene el Pokémon en turno.
+            </summary>
+            <returns>El Pokémon que está en turno.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.HpPokemonEnTurno">
+            <summary>
+            Obtiene los puntos de vida actuales del Pokémon en turno.
+            </summary>
+            <returns>La cantidad de vida actual del Pokémon en turno.</returns>
+        </member>
+        <member name="M:Library.Combate.Jugador.MostarEstadoEquipo">
+            <summary>
+            Muestra el estado de todos los Pokémon del equipo del jugador.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Jugador.UsarItem(System.String,DefaultNamespace.Pokemon)">
+            <summary>
+            Usa un item del inventario sobre un Pokémon.
+            </summary>
+            <param name="item">El nombre del item a usar.</param>
+            <param name="pokemon">El Pokémon sobre el que se va a usar el item.</param>
+        </member>
+        <member name="M:Library.Combate.Jugador.Mostrar_items">
+            <summary>
+            Muestra todos los items disponibles en el inventario del jugador.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Batalla.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase Batalla, estableciendo los valores iniciales.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Batalla.RecibirAtaqueB(Ucu.Poo.Pokemon.IMovimientoAtaque)">
+            <summary>
+            Recibe un ataque y lo aplica al Pokémon defensor.
+            </summary>
+            <param name="ataque">El movimiento de ataque que se aplica al defensor.</param>
+        </member>
+        <member name="M:Library.Combate.Batalla.AgregarJugador(Library.Combate.Jugador)">
+            <summary>
+            Agrega un jugador a la batalla, asignándolo como atacante o defensor.
+            </summary>
+            <param name="jugador">El jugador que se va a agregar a la batalla.</param>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetAtacante">
+            <summary>
+            Obtiene el jugador atacante actual.
+            </summary>
+            <returns>El jugador que está atacando en la batalla.</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.AgregarPokemonBA(System.String)">
+            <summary>
+            Agrega un Pokémon al equipo del jugador atacante.
+            </summary>
+            <param name="pokemon">El nombre del Pokémon que se agrega al equipo.</param>
+        </member>
+        <member name="M:Library.Combate.Batalla.AgregarPokemonBD(System.String)">
+            <summary>
+            Agrega un Pokémon al equipo del jugador defensor.
+            </summary>
+            <param name="pokemon">El nombre del Pokémon que se agrega al equipo.</param>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetPokemonActualB">
+            <summary>
+            Obtiene el Pokémon actual del jugador atacante.
+            </summary>
+            <returns>El Pokémon en turno del jugador atacante.</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetHpDefensorB">
+            <summary>
+            Obtiene el valor de vida del Pokémon defensor en turno.
+            </summary>
+            <returns>El valor de vida del Pokémon defensor.</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetHpAtacanteB">
+            <summary>
+            Obtiene el valor de vida del Pokémon atacante en turno.
+            </summary>
+            <returns>El valor de vida del Pokémon atacante.</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetDefensor">
+            <summary>
+            Obtiene el jugador defensor actual.
+            </summary>
+            <returns>El jugador que está defendiendo en la batalla.</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetBatallaTerminada">
+            <summary>
+            Obtiene el estado de la batalla, indicando si está terminada o no.
+            </summary>
+            <returns>El estado de la batalla (terminada o no).</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.GetBatallaIniciada">
+            <summary>
+            Obtiene el estado de la batalla, indicando si ha sido iniciada.
+            </summary>
+            <returns>El estado de la batalla (iniciada o no).</returns>
+        </member>
+        <member name="M:Library.Combate.Batalla.IniciarBatalla">
+            <summary>
+            Inicia la batalla si ambos jugadores tienen Pokémon en sus equipos y la batalla no ha comenzado.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Batalla.TerminarBatalla">
+            <summary>
+            Finaliza la batalla si alguno de los jugadores ha perdido todos sus Pokémon.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Batalla.VerificarPokemonDefensorDebilitado">
+            <summary>
+            Verifica si el Pokémon defensor está debilitado y cambia al siguiente Pokémon si es necesario.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Batalla.AvanzarTurno">
+            <summary>
+            Avanza al siguiente turno de la batalla, alternando entre los jugadores y verificando si alguno de los equipos ha perdido.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Batalla.CambiarTurno">
+            <summary>
+            Cambia el turno entre el jugador atacante y el defensor. El atacante es el defensor y viceversa
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Menu.GetPokemonRival">
+            <summary>
+            Obtiene el Pokémon actual del jugador rival.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.Curatotal.#ctor(System.Int32)">
+            <summary>
+            Constructor de la clase `CuraTotal`.
+            Inicializa un nuevo objeto `CuraTotal` con una cantidad especificada.
+            </summary>
+            <param name="cantidad">Cantidad de ítems disponibles.</param>
+        </member>
+        <member name="M:Library.Combate.Curatotal.AplicarEfecto(DefaultNamespace.Pokemon)">
+            <summary>
+            Aplica el efecto de curación al Pokémon indicado, eliminando todos sus efectos de estado,
+            siempre que el Pokémon esté vivo y tenga algun efecto.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto de curación.</param>
+        </member>
+        <member name="M:Library.Combate.InventarioItems.#ctor">
+            <summary>
+            Constructor que inicializa el inventario con una lista de ítems predefinidos.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.InventarioItems.MostrarItems">
+            <summary>
+            Muestra en consola los ítems disponibles en el inventario y su cantidad.
+            </summary>
+        </member>
+        <member name="M:Library.Combate.InventarioItems.UsarItem(System.String,DefaultNamespace.Pokemon)">
+            <summary>
+            Utiliza un ítem del inventario para aplicar su efecto sobre el Pokémon.
+            </summary>
+            <param name="item">El nombre del ítem a usar.</param>
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto del ítem.</param>
+        </member>
+        <member name="P:Library.Combate.Item.Cantidad">
+            <summary>
+            Obtiene o establece la cantidad de este ítem disponible.
+            </summary>
+            <value>La cantidad de ítems disponibles.</value>
+        </member>
+        <member name="M:Library.Combate.Item.#ctor(System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Combate.Item"/> con la cantidad especificada.
+            </summary>
+            <param name="cantidad">La cantidad inicial del ítem.</param>
+        </member>
+        <member name="M:Library.Combate.Item.AplicarEfecto(DefaultNamespace.Pokemon)">
+            <summary>
+            Aplica el efecto del ítem sobre un Pokémon especificado.
+            Este método es abstracto y debe ser implementado en clases derivadas para aplicar el efecto específico de cada tipo de ítem.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto del ítem.</param>
+        </member>
+        <member name="M:Library.Combate.Revivir.#ctor(System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Combate.Revivir"/> con la cantidad especificada.
+            </summary>
+            <param name="cantidad">La cantidad de ítems "Revivir" disponibles.</param>
+        </member>
+        <member name="M:Library.Combate.Revivir.AplicarEfecto(DefaultNamespace.Pokemon)">
+            <summary>
+            Aplica el efecto de revivir a un Pokémon, restaurando la mitad de su HP.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto de revivir.</param>
+        </member>
+        <member name="M:Library.Combate.Superpocion.#ctor(System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Combate.Superpocion"/> con la cantidad especificada.
+            </summary>
+            <param name="cantidad">La cantidad de ítems "SuperPocion" disponibles.</param>
+        </member>
+        <member name="M:Library.Combate.Superpocion.AplicarEfecto(DefaultNamespace.Pokemon)">
+            <summary>
+            Aplica el efecto de curar a un Pokémon, restaurando 70 puntos de vida.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto curativo.</param>
+        </member>
+        <member name="M:Library.Tipos.Dormir.#ctor">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Tipos.Dormir"/> y establece un número aleatorio  
+            de turnos de sueño entre 1 y 4.  
+            </summary>  
+        </member>
+        <member name="M:Library.Tipos.Dormir.HacerEfecto(DefaultNamespace.Pokemon)">
+            <summary>  
+            Aplica el efecto de dormir al Pokémon.  
+            Si el número de turnos se ha reducido a 0, el Pokémon puede atacar de nuevo.  
+            De lo contrario, se indica que el Pokémon está dormido y no puede atacar.  
+            </summary>  
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto de dormir.</param>  
+        </member>
+        <member name="M:Library.Tipos.Efecto.#ctor">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Tipos.Efecto"/>.  
+            El constructor es protegido para permitir que solo las subclases lo utilicen.  
+            </summary>  
+        </member>
+        <member name="M:Library.Tipos.Efecto.HacerEfecto(DefaultNamespace.Pokemon)">
+            <summary>  
+            Método virtual que aplica el efecto a un Pokémon.  
+            Este método puede ser sobrescrito por las subclases para proporcionar una implementación específica.  
+            </summary>  
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto.</param>  
+        </member>
+        <member name="M:Library.Tipos.Efecto.CrearCopia(System.Type)">
+            <summary>  
+            Crea una copia de un efecto específico definido por el tipo proporcionado.  
+            Utiliza reflexión para instanciar el tipo dinámicamente.  
+            </summary>  
+            <param name="tipoEfecto">El tipo del efecto que se desea copiar.</param>  
+            <returns>Una nueva instancia del efecto del tipo especificado.</returns>  
+        </member>
+        <member name="M:Library.Tipos.Envenenar.#ctor">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Tipos.Envenenar"/>.  
+            </summary>  
+        </member>
+        <member name="M:Library.Tipos.Envenenar.HacerEfecto(DefaultNamespace.Pokemon)">
+            <summary>  
+            Aplica el efecto de envenenar al Pokémon.  
+            Muestra un mensaje indicando que el Pokémon ha sido envenenado   
+            y aplica daño al Pokémon correspondiente.  
+            </summary>  
+            <param name="pokemon">El Pokémon que va a recibir el efecto de envenenamiento.</param>  
+        </member>
+        <member name="M:Library.Tipos.Paralizar.#ctor">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Tipos.Paralizar"/>.  
+            </summary>
+        </member>
+        <member name="M:Library.Tipos.Paralizar.Jugar(DefaultNamespace.Pokemon)">
+            <summary>  
+            Determina si el Pokémon puede atacar en su turno, teniendo en cuenta el efecto de paralización.  
+            Se genera un número aleatorio para simular la probabilidad de que el Pokémon pueda atacar.  
+            </summary>  
+            <param name="pokemon">El Pokémon que se está evaluando para determinar si puede atacar.</param>  
+            <returns>Verdadero si el Pokémon puede atacar, falso si no puede.</returns>  
+        </member>
+        <member name="M:Library.Tipos.Paralizar.HacerEfecto(DefaultNamespace.Pokemon)">
+            <summary>  
+            Aplica el efecto de paralización al Pokémon.  
+            Actualiza el estado del Pokémon para indicar si puede atacar o no durante su turno.  
+            </summary>  
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto de paralización.</param>  
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Library.Tipos.Quemar.#ctor" -->
+        <member name="M:Library.Tipos.Quemar.HacerEfecto(DefaultNamespace.Pokemon)">
+            <summary>  
+            Aplica el efecto de quemar al Pokémon.  
+            Muestra un mensaje indicando que el Pokémon ha sido quemado   
+            y aplica daño al Pokémon correspondiente.  
+            </summary>  
+            <param name="pokemon">El Pokémon al que se le aplicará el efecto de quemadura.</param>  
+        </member>
+        <member name="M:Library.Tipos.Tipo.#ctor(System.String)">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Tipos.Tipo"/> con un nombre específico.  
+            </summary>  
+            <param name="name">El nombre del tipo.</param>  
+        </member>
+        <member name="M:Library.Tipos.Tipo.CrearEfectividad(Library.Tipos.Tipo,System.Double)">
+            <summary>  
+            Agrega o actualiza la efectividad de este tipo respecto a otro tipo.  
+            </summary>  
+            <param name="tipo">El tipo al que se le está definiendo la efectividad.</param>  
+            <param name="efectividad">El valor de efectividad entre este tipo y el tipo especificado.</param>  
+        </member>
+        <member name="M:Library.Tipos.Tipo.DarEfectividad(Library.Tipos.Tipo)">
+            <summary>  
+            Devuelve la efectividad de este tipo contra otro tipo.  
+            Si la efectividad no está definida, se considera como neutro (1.0).  
+            </summary>  
+            <param name="tipo">El tipo al que se le quiere conocer la efectividad.</param>  
+            <returns>El valor de efectividad de este tipo contra el tipo especificado.</returns>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.#cctor">
+            <summary>  
+            Constructor estático que inicializa la Pokédex,  
+            configurando efectos, tipos, movimientos y Pokémon.  
+            </summary>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.MostrarCatalogo">
+            <summary>  
+            Muestra el catálogo de Pokémon disponibles en la Pokédex.  
+            </summary>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.EntregarPokemon(System.String)">
+            <summary>  
+            Entrega una copia de un Pokémon basado en su nombre.  
+            Si el Pokémon no se encuentra, se informa al usuario.  
+            </summary>  
+            <param name="nombrepokemon">El nombre del Pokémon a entregar.</param>  
+            <returns>Una copia del Pokémon correspondiente o null si no se encuentra.</returns>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.CrearCopia(DefaultNamespace.Pokemon)">
+            <summary>  
+            Crea una copia de un Pokémon, incluyendo sus movimientos.  
+            </summary>  
+            <param name="pokemon">El Pokémon del que se desea crear la copia.</param>  
+            <returns>Una nueva instancia del Pokémon con los mismos atributos.</returns>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.RegularEfectos">
+            <summary>  
+            Configura los efectos disponibles en la Pokédex.  
+            </summary>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.RegularTipos">
+            <summary>  
+            Configura los tipos disponibles en la Pokédex.  
+            (Este método debe ser implementado según los tipos necesarios.)  
+            </summary>  
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.CrearMovimientos">
+            <summary>  
+            Crea los movimientos disponibles en la Pokédex.  
+            (Este método debe ser implementado según los movimientos necesarios.)  
+            </summary> 
+        </member>
+        <member name="M:DefaultNamespace.Pokedex.CrearPokemones">
+            <summary>  
+            Crea los Pokémon disponibles en la Pokédex con todos sus datos correspondientes.  
+            (Este método debe ser implementado según los Pokémon necesarios.)  
+            </summary> 
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.#ctor(System.String,System.Collections.Generic.List{Ucu.Poo.Pokemon.IMovimiento},System.Collections.Generic.List{Library.Tipos.Tipo},System.Double,System.Double)">
+            <summary>
+            Constructor para crear un Pokémon con nombre, movimientos, tipos, vida y defensa.
+            </summary>
+            <param name="nombre">Nombre del Pokémon.</param>
+            <param name="movimientos">Lista de movimientos del Pokémon.</param>
+            <param name="tipos">Lista de tipos del Pokémon.</param>
+            <param name="vida">Vida total del Pokémon.</param>
+            <param name="defensa">Defensa del Pokémon.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.HacerEfectoPokemon(DefaultNamespace.Pokemon)">
+            <summary>
+            Aplica el efecto de un Pokémon a otro Pokémon.
+            </summary>
+            <param name="pokemon">El Pokémon objetivo al que se le aplicará el efecto.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetTipos">
+            <summary>
+            Obtiene la lista de tipos del Pokémon.
+            </summary>
+            <returns>Lista de tipos del Pokémon.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetIsAlive">
+            <summary>
+            Obtiene el estado de vida del Pokémon (si está vivo o no).
+            </summary>
+            <returns>Retorna <c>true</c> si el Pokémon está vivo, <c>false</c> si está muerto.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetName">
+            <summary>
+            Obtiene el nombre del Pokémon.
+            </summary>
+            <returns>Nombre del Pokémon.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetListaMovimientos">
+            <summary>
+            Obtiene la lista de movimientos del Pokémon.
+            </summary>
+            <returns>Lista de movimientos del Pokémon.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetVidaTotal">
+            <summary>
+            Obtiene la vida total del Pokémon.
+            </summary>
+            <returns>Vida total del Pokémon.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetVidaActual">
+            <summary>
+            Obtiene la vida actual del Pokémon.
+            </summary>
+            <returns>Vida actual del Pokémon.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:DefaultNamespace.Pokemon.UsarMovimiento(Ucu.Poo.Pokemon.IMovimiento)" -->
+        <member name="M:DefaultNamespace.Pokemon.RecibirAtaque(Ucu.Poo.Pokemon.IMovimientoAtaque)">
+            <summary>
+            Recibe un ataque de otro Pokémon.
+            </summary>
+            <param name="movimiento">Movimiento de ataque que inflige daño al Pokémon.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.RecibirDanioDeEfecto(System.Double)">
+            <summary>
+            Recibe daño de un efecto externo.
+            </summary>
+            <param name="numero">Valor de daño recibido.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.SetPuedeAtacar(System.Boolean)">
+            <summary>
+            Establece si el Pokémon puede atacar en su turno.
+            </summary>
+            <param name="valor">Valor que indica si el Pokémon puede atacar.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.AgregarEfecto(Library.Tipos.Efecto)">
+            <summary>
+            Agrega un efecto al Pokémon.
+            </summary>
+            <param name="efecto">El efecto a agregar al Pokémon.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.EliminarEfectoActual">
+            <summary>
+            Elimina el efecto actual del Pokémon.
+            </summary>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetEfecto">
+            <summary>
+            Obtiene el efecto actual que está aplicándose al Pokémon.
+            </summary>
+            <returns>El efecto actual del Pokémon.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.Curar(System.Int32)">
+            <summary>
+            Cura al Pokémon incrementando su vida actual.
+            </summary>
+            <param name="vidacurada">Cantidad de vida a curar.</param>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.ChangeIsAlive">
+            <summary>
+            Cambia el estado de vida del Pokémon. Si el Pokémon está muerto, lo revive; si está vivo, lo debilita.
+            </summary>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.Revivir">
+            <summary>
+            Revive al Pokémon, asignándole la mitad de su vida total.
+            </summary>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetPuedeAtacar">
+            <summary>
+            Obtiene si el Pokémon puede atacar en su turno.
+            </summary>
+            <returns><c>true</c> si el Pokémon puede atacar, <c>false</c> si no puede.</returns>
+        </member>
+        <member name="M:DefaultNamespace.Pokemon.GetDefensa">
+            <summary>
+            Obtiene el valor de defensa del Pokémon.
+            </summary>
+            <returns>Defensa del Pokémon.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimiento.GetName">
+            <summary>
+            Obtiene el nombre del movimiento.
+            </summary>
+            <returns>El nombre del movimiento.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimiento.GetTipo">
+            <summary>
+            Obtiene el tipo del movimiento.
+            </summary>
+            <returns>El tipo de movimiento como una instancia de <see cref="T:Library.Tipos.Tipo"/>.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimientoAtaque.GetAtaque">
+            <summary>
+            Obtiene el valor del ataque del movimiento.
+            </summary>
+            <returns>El valor de ataque del movimiento.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimientoAtaque.GetPrecision">
+            <summary>
+            Obtiene el valor de la precisión del movimiento.
+            </summary>
+            <returns>El valor de precisión del movimiento.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimientoDefensa.GetDefensa">
+            <summary>
+            Obtiene el valor de la defensa del movimiento.
+            </summary>
+            <returns>El valor de defensa del movimiento.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimientoEspecial.GetUsadoAnteriormente">
+            <summary>
+            Obtiene un valor que indica si el movimiento especial ha sido usado anteriormente.
+            </summary>
+            <returns><c>true</c> si el movimiento especial ha sido usado anteriormente, <c>false</c> en caso contrario.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimientoEspecial.UsadoAnteriormente(System.Boolean)">
+            <summary>
+            Establece si el movimiento especial ha sido usado anteriormente.
+            </summary>
+            <param name="valor"><c>true</c> si el movimiento ha sido usado anteriormente, <c>false</c> en caso contrario.</param>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.IMovimientoEspecial.GetEfecto">
+            <summary>
+            Obtiene el efecto asociado al movimiento especial.
+            </summary>
+            <returns>El efecto que se aplica cuando el movimiento especial es utilizado.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeAtaque.#ctor(System.String,System.Int32,Library.Tipos.Tipo,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Ucu.Poo.Pokemon.MovimientoDeAtaque"/>.
+            </summary>
+            <param name="name">Nombre del movimiento de ataque.</param>
+            <param name="ataque">Daño que causa el movimiento de ataque.</param>
+            <param name="tipo">Tipo del movimiento de ataque.</param>
+            <param name="precision">Precisión del movimiento de ataque.</param>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeAtaque.GetAtaque">
+            <summary>
+            Obtiene el daño que causa el movimiento de ataque.
+            </summary>
+            <returns>El valor del daño.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeAtaque.GetName">
+            <summary>
+            Obtiene el nombre del movimiento de ataque.
+            </summary>
+            <returns>El nombre del movimiento.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeAtaque.GetTipo">
+            <summary>
+            Obtiene el tipo del movimiento de ataque (e.g., Fuego, Agua, Planta, etc.).
+            </summary>
+            <returns>El tipo de movimiento de ataque.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeAtaque.GetPrecision">
+            <summary>
+            Obtiene la precisión del movimiento de ataque, es decir, la probabilidad de acertar el ataque.
+            </summary>
+            <returns>La precisión del movimiento.</returns>
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeDefensa.#ctor(System.String,System.Int32,Library.Tipos.Tipo,System.Boolean)">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Ucu.Poo.Pokemon.MovimientoDeDefensa"/>.  
+            </summary>  
+            <param name="name">El nombre del movimiento de defensa.</param>  
+            <param name="defensa">El valor numérico de defensa del movimiento.</param>  
+            <param name="tipo">El tipo asociado con el movimiento de defensa.</param>  
+            <param name="es_especial">Indica si el movimiento es especial (no se utiliza en este contexto).</param>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeDefensa.GetDefensa">
+            <summary>  
+            Obtiene el valor de defensa del movimiento.  
+            </summary>  
+            <returns>El valor de defensa del movimiento de defensa.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeDefensa.GetName">
+            <summary>  
+            Obtiene el nombre del movimiento de defensa.  
+            </summary>  
+            <returns>El nombre del movimiento de defensa.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoDeDefensa.GetTipo">
+            <summary>  
+            Obtiene el tipo del movimiento de defensa.  
+            </summary>  
+            <returns>El tipo asociado con el movimiento de defensa.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.#ctor(System.String,System.Int32,Library.Tipos.Tipo,System.Int32,Library.Tipos.Efecto)">
+            <summary>  
+            Inicializa una nueva instancia de la clase <see cref="T:Ucu.Poo.Pokemon.MovimientoEspecial"/>.  
+            </summary>  
+            <param name="name">El nombre del movimiento especial.</param>  
+            <param name="ataque">El valor numérico de ataque del movimiento.</param>  
+            <param name="tipo">El tipo asociado con el movimiento especial.</param>  
+            <param name="precision">La precisión del movimiento especial.</param>  
+            <param name="efecto">El efecto que produce el movimiento especial.</param>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.UsadoAnteriormente(System.Boolean)">
+            <summary>  
+            Establece si el movimiento especial ha sido usado anteriormente.  
+            </summary>  
+            <param name="valor">Valor a establecer: <c>true</c> si ha sido usado, <c>false</c> en caso contrario.</param>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.GetAtaque">
+            <summary>  
+            Obtiene el valor de ataque del movimiento especial.  
+            </summary>  
+            <returns>El valor de ataque del movimiento especial.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.GetUsadoAnteriormente">
+            <summary>  
+            Obtiene el estado de si el movimiento especial ha sido utilizado anteriormente.  
+            </summary>  
+            <returns><c>true</c> si ha sido utilizado, <c>false</c> en caso contrario.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.GetName">
+            <summary>  
+            Obtiene el nombre del movimiento especial.  
+            </summary>  
+            <returns>El nombre del movimiento especial.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.GetTipo">
+            <summary>  
+            Obtiene el tipo del movimiento especial.  
+            </summary>  
+            <returns>El tipo asociado con el movimiento especial.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.GetPrecision">
+            <summary>  
+            Obtiene la precisión del movimiento especial.  
+            </summary>  
+            <returns>La precisión del movimiento especial.</returns>  
+        </member>
+        <member name="M:Ucu.Poo.Pokemon.MovimientoEspecial.GetEfecto">
+            <summary>  
+            Obtiene el efecto del movimiento especial.  
+            </summary>  
+            <returns>El efecto asociado con el movimiento especial.</returns>  
+        </member>
         <member name="T:ClassLibrary.Train">
             <summary>
             Esta clase representa un tren muy básico.

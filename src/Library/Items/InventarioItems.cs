@@ -18,9 +18,9 @@ namespace Library.Combate;
 public class InventarioItems
 {
     private Dictionary<String, Item> items;
-    private SuperPocion superpocion;
+    private Superpocion superpocion;
     private Revivir revivir;
-    private CuraTotal curatotal;
+    private Curatotal curatotal;
     
     /// <summary>
     /// Constructor que inicializa el inventario con una lista de ítems predefinidos.
@@ -29,9 +29,9 @@ public class InventarioItems
     {
         items = new Dictionary<String, Item> //Crea un diccionario en el que registra cada item y cuanta cantidad hay de cada uno
         {
-            { "SuperPocion",  superpocion = new SuperPocion(4) },
+            { "Superpocion",  superpocion = new Superpocion(4) },
             { "Revivir", revivir = new Revivir(1) },
-            { "CuraTotal", curatotal = new CuraTotal(2) }
+            { "Curatotal", curatotal = new Curatotal(2) }
         };
     }
 

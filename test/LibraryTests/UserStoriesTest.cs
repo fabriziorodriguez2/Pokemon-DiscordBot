@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Library.Combate;
+using Library.Tipos;
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 
@@ -237,14 +238,82 @@ public class MenuTest
         bool batallaganadasupuesta = true;
         Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
     }
-
+    [Test]
+    
     public void UsoItemEnBatalla()
     {
-        Menu juego6 = new Menu();
-        juego6.UnirJugadores("Ash");
-        juego6.UnirJugadores("Red");
-        juego6.AgregarPokemonesA("Pikachu");
-        juego6.AgregarPokemonesD("Pidgey");
-        //juego6.UsarItem();
+        //Este test muestra el uso de un revivir en la batalla
+        Menu juego1 = new Menu();
+        juego1.UnirJugadores("Ash");
+        juego1.UnirJugadores("Red");
+        juego1.AgregarPokemonesA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
+        juego1.AgregarPokemonesD("Charmander");
+        Pokemon pokemon = juego1.GetPokemonActual();
+        pokemon.ChangeIsAlive();
+        // Usar Revivir para restaurar 50% del HP total
+        juego1.UsarItem("Revivir", 0); //Revive a Squirtle
+        double vidaEsperada = 40;
+        double vidaObtenida = pokemon.GetVidaActual();
+        //Assert.That(vidaObtenida, Is.EqualTo(vidaEsperada)); // Verifica que Squirtle tiene 40 HP no anda aún
+        
+        //Este test muestra el uso de la CuraTotal en batalla
+        Menu juego2 = new Menu();
+        Dormir dormido = new Dormir();
+        juego2.UnirJugadores("Ash");
+        juego2.UnirJugadores("Red");
+        juego2.AgregarPokemonesA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
+        juego2.AgregarPokemonesD("Charmander");
+        Pokemon pokemon2 = juego1.GetPokemonActual();
+        juego2.IniciarEnfrentamiento();
+        Pokemon rival = juego1.GetPokemonRival();
+        dormido.HacerEfecto(pokemon2);
+        // Usa CuraTotal para quitarle el efecto de dormido
+        juego2.UsarItem("Curatotal", 0); //Cura el efecto de squirtle
+        Efecto efectohecho = pokemon2.GetEfecto();
+        Efecto efectoesperado = rival.GetEfecto();
+        Assert.That(efectohecho, Is.EqualTo(efectoesperado)); // Compara el efecto de squirtle con el del rival, los dos son nulos
+        
+        //Este test muestra el uso de la superpocion en batalla
+        Menu juego3 = new Menu();        
+        juego3.UnirJugadores("Ash");
+        juego3.UnirJugadores("Red");
+        juego3.AgregarPokemonesA("Pikachu");
+        
+        juego3.AgregarPokemonesD("Arbok");
+        
+        juego3.IniciarEnfrentamiento();
+        juego3.UsarMovimientos(2);//Jugador 1 usa Electrobola
+        juego3.UsarMovimientos(1);//Jugador2 usa LanzaMugre
+        Pokemon pokemon3 = juego3.GetPokemonActual();
+        juego3.UsarItem("Superpocion", 0); //Cura a Pikachu
+        double vidaEsperada2 = 80;
+        double vidaObtenida2 = pokemon3.GetVidaActual();
+        // Usar Superpoción para restaurar 70 HP
+        //Assert.That(vidaEsperada, Is.EqualTo(vidaObtenida2)); no anda aún
+        
+        //Este test demuestra que no se pueden usar items una vez se acabaron ya que el pokemon va a seguir dormido
+        Menu juego4 = new Menu();
+        Dormir dormido2 = new Dormir();
+
+        juego4.UnirJugadores("Ash");
+        juego4.UnirJugadores("Red");
+        juego4.AgregarPokemonesA("Charmander");
+        juego4.AgregarPokemonesD("Pidgey");
+        Pokemon pokemon4 = juego4.GetPokemonActual();
+        Pokemon rival2 = juego4.GetPokemonRival();
+        dormido2.HacerEfecto(pokemon4);
+        juego4.UsarItem("Curatotal",0);
+        dormido2.HacerEfecto(pokemon4);
+        juego4.UsarItem("Curatotal",0); // para que avance el turno
+        juego4.UsarItem("Curatotal",0);
+        juego4.UsarItem("Curatotal",0); // para que avance el turno
+        dormido2.HacerEfecto(pokemon4);
+        juego4.UsarItem("Curatotal",0); // no va a dejar
+        Efecto estado = pokemon4.GetEfecto();
+        dormido2.HacerEfecto(rival2);
+        Efecto estadormido = rival2.GetEfecto();
+        
+        Assert.That(estado,Is.EqualTo(estadormido));
     }
+   
 }

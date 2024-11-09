@@ -33,6 +33,14 @@ namespace Library.Combate
         {
             return batallaActual.GetBatallaIniciada();
         }
+        /// <summary>
+        /// Obtiene el Pokémon actual del jugador rival.
+        /// </summary>
+        public Pokemon GetPokemonRival()
+        {
+            Jugador defensor = batallaActual.GetDefensor();
+            return defensor.GetPokemonEnTurno();
+        }
 
         public double GetHpDefensor()
         {

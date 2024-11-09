@@ -251,6 +251,21 @@ public class Pokemon
             vidaActual = vidaTotal;
         }
     }
+    /// <summary>
+    /// Cambia el estado de vida del Pokémon. Si el Pokémon está muerto, lo revive; si está vivo, lo debilita.
+    /// </summary>
+    public void ChangeIsAlive()
+    {
+        if (this.isAlive == false)
+        {
+            this.isAlive = true;
+        }
+        else
+        {
+            this.isAlive = false;
+            this.vidaActual = 0;
+        }
+    }
 
     /// <summary>
     /// Revive al Pokémon, asignándole la mitad de su vida total.
