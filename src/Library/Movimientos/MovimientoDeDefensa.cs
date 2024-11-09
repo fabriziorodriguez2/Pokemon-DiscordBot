@@ -25,22 +25,41 @@ public class MovimientoDeDefensa : IMovimientoDefensa
     private int defensa { get; set; }
     private Tipo tipo { get; set; }
     
+    /// <summary>  
+    /// Inicializa una nueva instancia de la clase <see cref="MovimientoDeDefensa"/>.  
+    /// </summary>  
+    /// <param name="name">El nombre del movimiento de defensa.</param>  
+    /// <param name="defensa">El valor numérico de defensa del movimiento.</param>  
+    /// <param name="tipo">El tipo asociado con el movimiento de defensa.</param>  
+    /// <param name="es_especial">Indica si el movimiento es especial (no se utiliza en este contexto).</param>  
     public MovimientoDeDefensa(string name, int defensa, Tipo tipo, bool es_especial)
     {
         this.name = name;
         this.defensa = defensa;
         this.tipo = tipo;
     }
-
+    /// <summary>  
+    /// Obtiene el valor de defensa del movimiento.  
+    /// </summary>  
+    /// <returns>El valor de defensa del movimiento de defensa.</returns>  
     public int GetDefensa()
     {
         return this.defensa;
     }
+    
+    /// <summary>  
+    /// Obtiene el nombre del movimiento de defensa.  
+    /// </summary>  
+    /// <returns>El nombre del movimiento de defensa.</returns>  
     public string GetName()
     {
         return this.name;
     }
 
+    /// <summary>  
+    /// Obtiene el tipo del movimiento de defensa.  
+    /// </summary>  
+    /// <returns>El tipo asociado con el movimiento de defensa.</returns>  
     public Tipo GetTipo()
     {
         return this.tipo;

@@ -8,6 +8,15 @@ namespace Ucu.Poo.Pokemon;
 
 public interface IMovimientoAtaque: IMovimiento
 {
+    /// <summary>
+    /// Obtiene el valor del ataque del movimiento.
+    /// </summary>
+    /// <returns>El valor de ataque del movimiento.</returns>
     int GetAtaque();
+    
+    /// <summary>
+    /// Obtiene el valor de la precisión del movimiento.
+    /// </summary>
+    /// <returns>El valor de precisión del movimiento.</returns>
     int GetPrecision();
 }

@@ -11,11 +11,20 @@ namespace Library.Tipos;
 
 public class Envenenar:Efecto
 {
+    /// <summary>  
+    /// Inicializa una nueva instancia de la clase <see cref="Envenenar"/>.  
+    /// </summary>  
     public Envenenar()
     {
         
     }
 
+    /// <summary>  
+    /// Aplica el efecto de envenenar al Pokémon.  
+    /// Muestra un mensaje indicando que el Pokémon ha sido envenenado   
+    /// y aplica daño al Pokémon correspondiente.  
+    /// </summary>  
+    /// <param name="pokemon">El Pokémon que va a recibir el efecto de envenenamiento.</param>  
     public override void HacerEfecto(Pokemon pokemon)
     {
         Console.WriteLine(pokemon.GetName()," ha sido envenenado");

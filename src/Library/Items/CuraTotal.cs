@@ -9,11 +9,18 @@ namespace Library.Combate;
 
 public class CuraTotal : Item
 {
-    
+    /// <summary>
+    /// Constructor de la clase `CuraTotal`.
+    /// Inicializa un nuevo objeto `CuraTotal` con una cantidad especificada.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de ítems disponibles.</param>
     public CuraTotal(int cantidad) : base( cantidad) { }
     
-    //La Cura total quita el efecto actual del Pokemon indicado, siempre y cuando el pokemon tenga un efecto y no este muerto
-
+    /// <summary>
+    /// Aplica el efecto de curación al Pokémon indicado, eliminando todos sus efectos de estado,
+    /// siempre que el Pokémon esté vivo y tenga algun efecto.
+    /// </summary>
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de curación.</param>
     public override void AplicarEfecto(Pokemon pokemon)
     {
         if (pokemon.GetIsAlive())

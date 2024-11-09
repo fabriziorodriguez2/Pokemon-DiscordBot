@@ -11,8 +11,17 @@ namespace Library.Combate;
 
 public class Revivir : Item
 {
+    /// <summary>
+    /// Inicializa una nueva instancia de la clase <see cref="Revivir"/> con la cantidad especificada.
+    /// </summary>
+    /// <param name="cantidad">La cantidad de ítems "Revivir" disponibles.</param>
     public Revivir(int cantidad) : base(cantidad) { }
 
+    
+    /// <summary>
+    /// Aplica el efecto de revivir a un Pokémon, restaurando la mitad de su HP.
+    /// </summary>
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de revivir.</param>
     public override void AplicarEfecto(Pokemon pokemon)
     {
         pokemon.Revivir();

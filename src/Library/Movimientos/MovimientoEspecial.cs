@@ -28,6 +28,15 @@ public class MovimientoEspecial : IMovimientoEspecial
     private Tipo tipo { get; set; }
     private int precision { get; set; }
     private bool usadoAnteriormente { get; set; }
+    
+    /// <summary>  
+    /// Inicializa una nueva instancia de la clase <see cref="MovimientoEspecial"/>.  
+    /// </summary>  
+    /// <param name="name">El nombre del movimiento especial.</param>  
+    /// <param name="ataque">El valor numérico de ataque del movimiento.</param>  
+    /// <param name="tipo">El tipo asociado con el movimiento especial.</param>  
+    /// <param name="precision">La precisión del movimiento especial.</param>  
+    /// <param name="efecto">El efecto que produce el movimiento especial.</param>  
     public MovimientoEspecial(string name, int ataque, Tipo tipo, int precision, Efecto efecto)
     {
         this.name = name;
@@ -36,33 +45,65 @@ public class MovimientoEspecial : IMovimientoEspecial
         this.precision = precision;
         this.efecto = efecto;
     }
+    
+    /// <summary>  
+    /// Establece si el movimiento especial ha sido usado anteriormente.  
+    /// </summary>  
+    /// <param name="valor">Valor a establecer: <c>true</c> si ha sido usado, <c>false</c> en caso contrario.</param>  
     public void UsadoAnteriormente(bool valor) //Setea el valor de los ataques especiales para saber si se pueden usar
     { 
         usadoAnteriormente = valor; 
     }
+    
+    /// <summary>  
+    /// Obtiene el valor de ataque del movimiento especial.  
+    /// </summary>  
+    /// <returns>El valor de ataque del movimiento especial.</returns>  
     public int GetAtaque()
     {
         return ataque;
     }
     
+    /// <summary>  
+    /// Obtiene el estado de si el movimiento especial ha sido utilizado anteriormente.  
+    /// </summary>  
+    /// <returns><c>true</c> si ha sido utilizado, <c>false</c> en caso contrario.</returns>  
     public bool GetUsadoAnteriormente()
     {
         return usadoAnteriormente;
     }
+    
+    /// <summary>  
+    /// Obtiene el nombre del movimiento especial.  
+    /// </summary>  
+    /// <returns>El nombre del movimiento especial.</returns>  
     public string GetName()
     {
         return name;
     }
 
+    /// <summary>  
+    /// Obtiene el tipo del movimiento especial.  
+    /// </summary>  
+    /// <returns>El tipo asociado con el movimiento especial.</returns>  
     public Tipo GetTipo()
     {
         return tipo;
     }
 
+    /// <summary>  
+    /// Obtiene la precisión del movimiento especial.  
+    /// </summary>  
+    /// <returns>La precisión del movimiento especial.</returns>  
     public int GetPrecision()
     {
         return precision;
     }
+    
+    /// <summary>  
+    /// Obtiene el efecto del movimiento especial.  
+    /// </summary>  
+    /// <returns>El efecto asociado con el movimiento especial.</returns>  
     public Efecto GetEfecto()
     {
         return efecto;

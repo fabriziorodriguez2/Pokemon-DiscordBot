@@ -17,12 +17,25 @@ namespace Library.Combate;
 public abstract class Item
 {
 
+    /// <summary>
+    /// Obtiene o establece la cantidad de este ítem disponible.
+    /// </summary>
+    /// <value>La cantidad de ítems disponibles.</value>
     public int Cantidad { get; set; }
 
+    /// <summary>
+    /// Inicializa una nueva instancia de la clase <see cref="Item"/> con la cantidad especificada.
+    /// </summary>
+    /// <param name="cantidad">La cantidad inicial del ítem.</param>
     protected Item(int cantidad)
     {
         this.Cantidad = cantidad;
     }
 
+    /// <summary>
+    /// Aplica el efecto del ítem sobre un Pokémon especificado.
+    /// Este método es abstracto y debe ser implementado en clases derivadas para aplicar el efecto específico de cada tipo de ítem.
+    /// </summary>
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto del ítem.</param>
     public abstract void AplicarEfecto(Pokemon pokemon);
 }

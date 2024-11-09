@@ -20,45 +20,74 @@ namespace Library.Combate
             batallaActual = new Batalla();
         }
 
+        /// <summary>
+        /// Une un jugador a la batalla actual.
+        /// </summary>
         public void UnirJugadores(string jugador)
         {
             batallaActual.AgregarJugador(new Jugador(jugador));
         }
 
+        /// <summary>
+        /// Obtiene la vida actual del defensor.
+        /// </summary>
         public double GetHpDefensor()
         {
             return batallaActual.GetHpDefensorB(); 
         }
+        
+        /// <summary>
+        /// Obtiene la vida actual del atacante.
+        /// </summary>
         public double GetHpAtacante()
         {
             return batallaActual.GetHpAtacanteB(); 
         }
 
+        /// <summary>
+        /// Obtiene el equipo de Pokémon del jugador atacante.
+        /// </summary>
         public List<Pokemon> GetEquipoA()
         {
             Jugador jugadorA = batallaActual.GetAtacante();
             return jugadorA.GetPokemons();
         }
+        
+        /// <summary>
+        /// Obtiene el Pokémon actual del jugador atacante.
+        /// </summary>
         public Pokemon GetPokemonActual()
         {
             return batallaActual.GetPokemonActualB();
         }
 
+        /// <summary>
+        /// Agrega un Pokémon al equipo del jugador atacante.
+        /// </summary>
         public void AgregarPokemonesA(string pokemon)
         {
             batallaActual.AgregarPokemonBA(pokemon); 
         }
 
+        /// <summary>
+        /// Agrega un Pokémon al equipo del jugador defensor.
+        /// </summary>
         public void AgregarPokemonesD(string pokemon)
         {
             batallaActual.AgregarPokemonBD(pokemon);
         }
 
+        /// <summary>
+        /// Inicia la batalla entre los jugadores.
+        /// </summary>
         public void IniciarEnfrentamiento()
         {
             batallaActual.IniciarBatalla();
         }
 
+        /// <summary>
+        /// Muestra el estado del equipo del defensor.
+        /// </summary>
         public void MostrarEstadoRival()
         {
             if (batallaActual.GetBatallaIniciada())
@@ -69,6 +98,9 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Muestra el estado del equipo del atacante.
+        /// </summary>
         public void MostrarEstadoEquipo()
         {
             if (batallaActual.GetBatallaIniciada())
@@ -79,6 +111,9 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Cambia el Pokémon actual del jugador atacante por otro Pokémon disponible.
+        /// </summary>
         public void CambiarPokemon(int numeroDePokemon)
         {
             if (batallaActual.GetBatallaIniciada())
@@ -109,6 +144,9 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Muestra los ataques disponibles para el Pokémon actual del atacante.
+        /// </summary>
         public void MostrarAtaquesDisponibles()
         {
             if (batallaActual.GetBatallaIniciada())
@@ -138,7 +176,10 @@ namespace Library.Combate
             }
         }
         
-
+        /// <summary>
+        /// Permite al jugador seleccionar un movimiento para usar durante su turno en la batalla.
+        /// </summary>
+        /// <param name="numDeMovimiento">Número del movimiento a usar (1 a 4).</param>
         public void UsarMovimientos(int numDeMovimiento)
         {
             if (batallaActual.GetBatallaTerminada())
@@ -194,6 +235,10 @@ namespace Library.Combate
                 Console.WriteLine("Movimiento inválido. Por favor, seleccione un movimiento entre 1 y 4, o uno que pueda usarse en este turno.");
             }
         }
+        
+        /// <summary>
+        /// Muestra los Pokémon disponibles para el jugador en la batalla con su índice.
+        /// </summary>
         public void MostrarNumPokemon()
         {
             if (batallaActual.GetBatallaIniciada())
@@ -206,8 +251,11 @@ namespace Library.Combate
                     Console.WriteLine($"{i}. {pokemon.GetName()}");
                 }
             }
-            
         }
+        
+        /// <summary>
+        /// Muestra los ítems disponibles para el jugador en la batalla.
+        /// </summary>
         public void MostrarItemsDisponibles() //Llama al método de jugador para mostrar los items
         {
             if (batallaActual.GetBatallaIniciada())
@@ -217,6 +265,11 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Permite al jugador usar un ítem en uno de sus Pokémon durante la batalla.
+        /// </summary>
+        /// <param name="item">Nombre del ítem a usar.</param>
+        /// <param name="numeroDePokemon">Número del Pokémon que recibirá el ítem.</param>
         public void UsarItem(string item, int numeroDePokemon) //Este método utiliza el item que le pases por string
         {
             if (batallaActual.GetBatallaIniciada())
