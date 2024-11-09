@@ -12,9 +12,20 @@ namespace Library.Tipos;
 public class Paralizar:Efecto
 {
     private Random random = new Random();
+    
+    /// <summary>  
+    /// Inicializa una nueva instancia de la clase <see cref="Paralizar"/>.  
+    /// </summary>
     public Paralizar()
     {
     }
+    
+    /// <summary>  
+    /// Determina si el Pokémon puede atacar en su turno, teniendo en cuenta el efecto de paralización.  
+    /// Se genera un número aleatorio para simular la probabilidad de que el Pokémon pueda atacar.  
+    /// </summary>  
+    /// <param name="pokemon">El Pokémon que se está evaluando para determinar si puede atacar.</param>  
+    /// <returns>Verdadero si el Pokémon puede atacar, falso si no puede.</returns>  
     private bool Jugar(Pokemon pokemon)
     {
         int numero= random.Next(1, 4);
@@ -27,6 +38,11 @@ public class Paralizar:Efecto
         return false;
     }
 
+    /// <summary>  
+    /// Aplica el efecto de paralización al Pokémon.  
+    /// Actualiza el estado del Pokémon para indicar si puede atacar o no durante su turno.  
+    /// </summary>  
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de paralización.</param>  
     public override void HacerEfecto(Pokemon pokemon)
     {
         pokemon.SetPuedeAtacar(Jugar(pokemon));

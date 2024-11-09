@@ -13,6 +13,7 @@ namespace DefaultNamespace;
 //Cumple con Expert porque tiene toda la informacion necesaria para sus tareas en sí misma.
 //Cumple con Creator ya que se encarga de crear instancias de la clase Pokemon, Efecto y Tipo.
 
+
 public static class Pokedex
 {
     private static List<Tipo> listatiposdisponibles = new List<Tipo>();
@@ -21,6 +22,10 @@ public static class Pokedex
     private static List<Efecto> listaEfectos = new List<Efecto>();
 
 
+    /// <summary>  
+    /// Constructor estático que inicializa la Pokédex,  
+    /// configurando efectos, tipos, movimientos y Pokémon.  
+    /// </summary>  
     static Pokedex()
     {
         RegularEfectos();
@@ -29,6 +34,9 @@ public static class Pokedex
         CrearPokemones();
     }
 
+    /// <summary>  
+    /// Muestra el catálogo de Pokémon disponibles en la Pokédex.  
+    /// </summary>  
     public static void MostrarCatalogo()
     {
         foreach (Pokemon pokemon in pokemonsdisponibles)
@@ -37,6 +45,12 @@ public static class Pokedex
         }
     }
 
+    /// <summary>  
+    /// Entrega una copia de un Pokémon basado en su nombre.  
+    /// Si el Pokémon no se encuentra, se informa al usuario.  
+    /// </summary>  
+    /// <param name="nombrepokemon">El nombre del Pokémon a entregar.</param>  
+    /// <returns>Una copia del Pokémon correspondiente o null si no se encuentra.</returns>  
     public static Pokemon EntregarPokemon(string nombrepokemon)
     {
         foreach (Pokemon pokemon in pokemonsdisponibles)
@@ -50,6 +64,11 @@ public static class Pokedex
         return null;
     }
 
+    /// <summary>  
+    /// Crea una copia de un Pokémon, incluyendo sus movimientos.  
+    /// </summary>  
+    /// <param name="pokemon">El Pokémon del que se desea crear la copia.</param>  
+    /// <returns>Una nueva instancia del Pokémon con los mismos atributos.</returns>  
     public static Pokemon CrearCopia(Pokemon pokemon)
     {
         List<IMovimiento> listaMovs = new List<IMovimiento>();
@@ -81,6 +100,9 @@ public static class Pokedex
         return pokemonCreado;
     }
 
+    /// <summary>  
+    /// Configura los efectos disponibles en la Pokédex.  
+    /// </summary>  
     private static void RegularEfectos()
     {
         Efecto dormir = new Dormir();
@@ -93,7 +115,10 @@ public static class Pokedex
         listaEfectos.Add(quemar);//3
     }
     
-
+    /// <summary>  
+    /// Configura los tipos disponibles en la Pokédex.  
+    /// (Este método debe ser implementado según los tipos necesarios.)  
+    /// </summary>  
     private static void RegularTipos()
     { 
         // Crear los tipos
@@ -240,6 +265,10 @@ public static class Pokedex
         listatiposdisponibles.Add(veneno);//14
     }
 
+    /// <summary>  
+    /// Crea los movimientos disponibles en la Pokédex.  
+    /// (Este método debe ser implementado según los movimientos necesarios.)  
+    /// </summary> 
     private static void CrearMovimientos()
     {
         // Movimientos de Pidgey 
@@ -368,6 +397,10 @@ public static class Pokedex
         
     }
 
+    /// <summary>  
+    /// Crea los Pokémon disponibles en la Pokédex con todos sus datos correspondientes.  
+    /// (Este método debe ser implementado según los Pokémon necesarios.)  
+    /// </summary> 
     private static void CrearPokemones()
     {
 

@@ -9,6 +9,10 @@ namespace Ucu.Poo.Pokemon
 
     public interface IMovimientoDefensa : IMovimiento
     {
+        /// <summary>
+        /// Obtiene el valor de la defensa del movimiento.
+        /// </summary>
+        /// <returns>El valor de defensa del movimiento.</returns>
         int GetDefensa();
     }
 }

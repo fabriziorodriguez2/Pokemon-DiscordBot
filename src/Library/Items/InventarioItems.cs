@@ -22,7 +22,9 @@ public class InventarioItems
     private Revivir revivir;
     private CuraTotal curatotal;
     
-
+    /// <summary>
+    /// Constructor que inicializa el inventario con una lista de ítems predefinidos.
+    /// </summary>
     public InventarioItems()
     {
         items = new Dictionary<String, Item> //Crea un diccionario en el que registra cada item y cuanta cantidad hay de cada uno
@@ -33,6 +35,9 @@ public class InventarioItems
         };
     }
 
+    /// <summary>
+    /// Muestra en consola los ítems disponibles en el inventario y su cantidad.
+    /// </summary>
     public void MostrarItems() //Imprime en pantalla cuales items y cuantos de cada uno le queda al jugador 
     {
         foreach (var item in items)
@@ -41,6 +46,11 @@ public class InventarioItems
         }
     }
 
+    /// <summary>
+    /// Utiliza un ítem del inventario para aplicar su efecto sobre el Pokémon.
+    /// </summary>
+    /// <param name="item">El nombre del ítem a usar.</param>
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto del ítem.</param>
     public void UsarItem(string item, Pokemon pokemon) //Busca el item que le pasaste, llama al AplicarEfecto para que haga su efecto y baja en 1 su cantidad
     {
         if (items.ContainsKey(item) && items[item].Cantidad > 0)

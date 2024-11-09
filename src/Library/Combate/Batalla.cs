@@ -20,6 +20,9 @@ namespace Library.Combate
         private bool batallaTerminada { get; set; }
         public bool batallaIniciada { get; set; }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase Batalla, estableciendo los valores iniciales.
+        /// </summary>
         public Batalla()
         {
             this.turnos = true;
@@ -27,12 +30,21 @@ namespace Library.Combate
             this.batallaIniciada = false;
         }
 
+        /// <summary>
+        /// Recibe un ataque y lo aplica al Pokémon defensor.
+        /// </summary>
+        /// <param name="ataque">El movimiento de ataque que se aplica al defensor.</param>
+
         public void RecibirAtaqueB(IMovimientoAtaque ataque)
         {
             jugadorDefensor.PokemonAtacado(ataque);
         }
         
 
+        /// <summary>
+        /// Agrega un jugador a la batalla, asignándolo como atacante o defensor.
+        /// </summary>
+        /// <param name="jugador">El jugador que se va a agregar a la batalla.</param>
         public void AgregarJugador(Jugador jugador)
         {
             if (jugadorDefensor != null && jugadorAtacante != null)
@@ -70,50 +82,88 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Obtiene el jugador atacante actual.
+        /// </summary>
+        /// <returns>El jugador que está atacando en la batalla.</returns>
         public Jugador GetAtacante()
         {
             return jugadorAtacante;
         }
 
+        /// <summary>
+        /// Agrega un Pokémon al equipo del jugador atacante.
+        /// </summary>
+        /// <param name="pokemon">El nombre del Pokémon que se agrega al equipo.</param>
         public void AgregarPokemonBA(string pokemon)
         {
             jugadorAtacante.AgregarAlEquipo(pokemon);
         }
         
+        /// <summary>
+        /// Agrega un Pokémon al equipo del jugador defensor.
+        /// </summary>
+        /// <param name="pokemon">El nombre del Pokémon que se agrega al equipo.</param>
         public void AgregarPokemonBD(string pokemon)
         {
             jugadorDefensor.AgregarAlEquipo(pokemon);
         }
 
+        /// <summary>
+        /// Obtiene el Pokémon actual del jugador atacante.
+        /// </summary>
+        /// <returns>El Pokémon en turno del jugador atacante.</returns>
         public Pokemon GetPokemonActualB()
         {
             return jugadorAtacante.GetPokemonEnTurno();
         }
         
-
+        /// <summary>
+        /// Obtiene el valor de vida del Pokémon defensor en turno.
+        /// </summary>
+        /// <returns>El valor de vida del Pokémon defensor.</returns>
         public double GetHpDefensorB()
         {
             return jugadorDefensor.HpPokemonEnTurno();
         }
 
+        /// <summary>
+        /// Obtiene el valor de vida del Pokémon atacante en turno.
+        /// </summary>
+        /// <returns>El valor de vida del Pokémon atacante.</returns>
         public double GetHpAtacanteB()
         {
             return jugadorAtacante.HpPokemonEnTurno();
         }
 
+        /// <summary>
+        /// Obtiene el jugador defensor actual.
+        /// </summary>
+        /// <returns>El jugador que está defendiendo en la batalla.</returns>
         public Jugador GetDefensor()
         {
             return jugadorDefensor;
         }
 
+        /// <summary>
+        /// Obtiene el estado de la batalla, indicando si está terminada o no.
+        /// </summary>
+        /// <returns>El estado de la batalla (terminada o no).</returns>
         public bool GetBatallaTerminada()
         {
             return batallaTerminada;
         }
+        /// <summary>
+        /// Obtiene el estado de la batalla, indicando si ha sido iniciada.
+        /// </summary>
+        /// <returns>El estado de la batalla (iniciada o no).</returns>
         public bool GetBatallaIniciada()
         {
             return batallaIniciada;
         }
+        /// <summary>
+        /// Inicia la batalla si ambos jugadores tienen Pokémon en sus equipos y la batalla no ha comenzado.
+        /// </summary>
         public void IniciarBatalla()
         {
             Console.WriteLine("..........");
@@ -129,6 +179,9 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Finaliza la batalla si alguno de los jugadores ha perdido todos sus Pokémon.
+        /// </summary>
         public void TerminarBatalla()
         {
             // Revisa si alguno de los equipos ha perdido, si ya ha perdido cambia el bool
@@ -146,6 +199,9 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Verifica si el Pokémon defensor está debilitado y cambia al siguiente Pokémon si es necesario.
+        /// </summary>
         private void VerificarPokemonDefensorDebilitado()
         {
             if (!jugadorDefensor.PokemonEnTurnoAlive())
@@ -165,6 +221,9 @@ namespace Library.Combate
             }
         }
 
+        /// <summary>
+        /// Avanza al siguiente turno de la batalla, alternando entre los jugadores y verificando si alguno de los equipos ha perdido.
+        /// </summary>
         public void AvanzarTurno()
         {
             
@@ -206,6 +265,9 @@ namespace Library.Combate
             
         }
 
+        /// <summary>
+        /// Cambia el turno entre el jugador atacante y el defensor. El atacante es el defensor y viceversa
+        /// </summary>
         private void CambiarTurno()
         {
             Jugador temporal = jugadorAtacante;
@@ -213,6 +275,5 @@ namespace Library.Combate
             jugadorDefensor = temporal;
             turnos = !turnos;
         }
-
     }
 }

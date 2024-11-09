@@ -14,8 +14,16 @@ namespace Library.Combate;
 
 public class SuperPocion : Item
 {
+    /// <summary>
+    /// Inicializa una nueva instancia de la clase <see cref="SuperPocion"/> con la cantidad especificada.
+    /// </summary>
+    /// <param name="cantidad">La cantidad de ítems "SuperPocion" disponibles.</param>
     public SuperPocion(int cantidad) : base(cantidad) { }
 
+    /// <summary>
+    /// Aplica el efecto de curar a un Pokémon, restaurando 70 puntos de vida.
+    /// </summary>
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto curativo.</param>
     public override void AplicarEfecto(Pokemon pokemon)
     {
         pokemon.Curar(70);

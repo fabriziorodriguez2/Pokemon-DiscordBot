@@ -221,7 +221,7 @@ public class MenuTest
         juego6.UsarMovimientos(3);
         juego6.UsarMovimientos(2);
         juego6.UsarMovimientos(2);
-        bool batallaganada = juego6.GetCombateIniciado() && juego6.GetCombateTerminado();
+        bool batallaganada = juego6.GetBatallaI() && juego6.GetBatallaT();
         bool batallaganadasupuesta = true;
         Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
     }

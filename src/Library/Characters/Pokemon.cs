@@ -25,7 +25,14 @@ public class Pokemon
     private Efecto estado;
     private bool puedeAtacar;
     
-
+    /// <summary>
+    /// Constructor para crear un Pokémon con nombre, movimientos, tipos, vida y defensa.
+    /// </summary>
+    /// <param name="nombre">Nombre del Pokémon.</param>
+    /// <param name="movimientos">Lista de movimientos del Pokémon.</param>
+    /// <param name="tipos">Lista de tipos del Pokémon.</param>
+    /// <param name="vida">Vida total del Pokémon.</param>
+    /// <param name="defensa">Defensa del Pokémon.</param>
     public Pokemon(string nombre, List<IMovimiento> movimientos, List<Tipo> tipos, double vida, double defensa)
     {
         name = nombre;
@@ -38,42 +45,73 @@ public class Pokemon
         puedeAtacar = true;
     }
 
+    /// <summary>
+    /// Aplica el efecto de un Pokémon a otro Pokémon.
+    /// </summary>
+    /// <param name="pokemon">El Pokémon objetivo al que se le aplicará el efecto.</param>
     public void HacerEfectoPokemon(Pokemon pokemon)
     {
         estado.HacerEfecto(pokemon);
     }
 
+    /// <summary>
+    /// Obtiene la lista de tipos del Pokémon.
+    /// </summary>
+    /// <returns>Lista de tipos del Pokémon.</returns>
     public List<Tipo> GetTipos()
     {
         return listaTipos;
     }
     
+    /// <summary>
+    /// Obtiene el estado de vida del Pokémon (si está vivo o no).
+    /// </summary>
+    /// <returns>Retorna <c>true</c> si el Pokémon está vivo, <c>false</c> si está muerto.</returns>
     public bool GetIsAlive()
     {
         return isAlive;
     }
 
+    /// <summary>
+    /// Obtiene el nombre del Pokémon.
+    /// </summary>
+    /// <returns>Nombre del Pokémon.</returns>
     public string GetName()
     {
         return name;
     }
     
+    /// <summary>
+    /// Obtiene la lista de movimientos del Pokémon.
+    /// </summary>
+    /// <returns>Lista de movimientos del Pokémon.</returns>
     public List<IMovimiento> GetListaMovimientos()
     {
         return listaMovimientos;
     }
 
+    /// <summary>
+    /// Obtiene la vida total del Pokémon.
+    /// </summary>
+    /// <returns>Vida total del Pokémon.</returns>
     public double GetVidaTotal()
     {
         return vidaTotal;
     }
 
+    /// <summary>
+    /// Obtiene la vida actual del Pokémon.
+    /// </summary>
+    /// <returns>Vida actual del Pokémon.</returns>
     public double GetVidaActual()
     {
         return vidaActual;
     }
 
-    // Método para usar un movimiento, incluyendo los de defensa
+    //// <summary>
+    /// Usa un movimiento del Pokémon (puede ser un movimiento de ataque o defensa).
+    /// </summary>
+    /// <param name="movimiento">Movimiento que se va a utilizar.</param>
     public void UsarMovimiento(IMovimiento movimiento)
     {
         if (isAlive)
@@ -103,6 +141,10 @@ public class Pokemon
         }
     }
     
+    /// <summary>
+    /// Recibe un ataque de otro Pokémon.
+    /// </summary>
+    /// <param name="movimiento">Movimiento de ataque que inflige daño al Pokémon.</param>
     public void RecibirAtaque(IMovimientoAtaque movimiento)
     {
         double efectividadTipo = 1.0;
@@ -147,6 +189,10 @@ public class Pokemon
         }
     }
 
+    /// <summary>
+    /// Recibe daño de un efecto externo.
+    /// </summary>
+    /// <param name="numero">Valor de daño recibido.</param>
     public void RecibirDanioDeEfecto(double numero)
     {
         double porcentaje = (numero *this.vidaTotal) / 100;
@@ -154,11 +200,19 @@ public class Pokemon
         Console.WriteLine($"{GetName()} ha recibido {porcentaje} de daño adicional");
     }
 
+    /// <summary>
+    /// Establece si el Pokémon puede atacar en su turno.
+    /// </summary>
+    /// <param name="valor">Valor que indica si el Pokémon puede atacar.</param>
     public void SetPuedeAtacar(bool valor) //Funciona para cambiar el valor dentro de los efectos de paralisis y de dormir
     {
         puedeAtacar = valor; 
     }
 
+    /// <summary>
+    /// Agrega un efecto al Pokémon.
+    /// </summary>
+    /// <param name="efecto">El efecto a agregar al Pokémon.</param>
     public void AgregarEfecto(Efecto efecto)
     {
         if (estado == null)
@@ -167,16 +221,28 @@ public class Pokemon
             Console.WriteLine($"{GetName()} caído bajo el efecto {efecto.GetType().Name}");
         }
     }
+    
+    /// <summary>
+    /// Elimina el efecto actual del Pokémon.
+    /// </summary>
     public void EliminarEfectoActual()
     {
         estado = null;
         // Acá iría el método para eliminar el cambio de estado del pokemon
     }
 
+    /// <summary>
+    /// Obtiene el efecto actual que está aplicándose al Pokémon.
+    /// </summary>
+    /// <returns>El efecto actual del Pokémon.</returns>
     public Efecto GetEfecto()
     {
         return estado;
     }
+    /// <summary>
+    /// Cura al Pokémon incrementando su vida actual.
+    /// </summary>
+    /// <param name="vidacurada">Cantidad de vida a curar.</param>
     public void Curar(int vidacurada)
     {
         this.vidaActual += vidacurada;
@@ -186,16 +252,27 @@ public class Pokemon
         }
     }
 
+    /// <summary>
+    /// Revive al Pokémon, asignándole la mitad de su vida total.
+    /// </summary>
     public void Revivir()
     {
         this.vidaActual = vidaTotal/2;
     }
 
+    /// <summary>
+    /// Obtiene si el Pokémon puede atacar en su turno.
+    /// </summary>
+    /// <returns><c>true</c> si el Pokémon puede atacar, <c>false</c> si no puede.</returns>
     public bool GetPuedeAtacar()
     {
         return puedeAtacar;
     }
 
+    /// <summary>
+    /// Obtiene el valor de defensa del Pokémon.
+    /// </summary>
+    /// <returns>Defensa del Pokémon.</returns>
     public double GetDefensa()
     {
         return this.defensa;

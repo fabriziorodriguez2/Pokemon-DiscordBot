@@ -11,11 +11,20 @@ namespace Library.Tipos;
 
 public class Quemar:Efecto
 {
+    // <summary>  
+    /// Inicializa una nueva instancia de la clase <see cref="Quemar"/>.  
+    /// </summary>  
     public Quemar()
     {
         
     }
 
+    /// <summary>  
+    /// Aplica el efecto de quemar al Pokémon.  
+    /// Muestra un mensaje indicando que el Pokémon ha sido quemado   
+    /// y aplica daño al Pokémon correspondiente.  
+    /// </summary>  
+    /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de quemadura.</param>  
     public override void HacerEfecto(Pokemon pokemon)
     {
         Console.WriteLine(pokemon.GetName()," ha sido Quemado");

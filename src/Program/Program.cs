@@ -20,7 +20,7 @@ namespace ConsoleApplication
         /// </summary>
         public static void Main()
         {
-           //Inserte su juego Xd
+           
         }
     }
 }

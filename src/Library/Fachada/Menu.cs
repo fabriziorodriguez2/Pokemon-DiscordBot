@@ -20,18 +20,18 @@ namespace Library.Combate
             batallaActual = new Batalla();
         }
 
-        public bool GetCombateTerminado()
-        {
-            return batallaActual.GetBatallaTerminada();
-        }
-        public bool GetCombateIniciado()
-        {
-            return batallaActual.GetBatallaIniciada();
-        }
-
         public void UnirJugadores(string jugador)
         {
             batallaActual.AgregarJugador(new Jugador(jugador));
+        }
+
+        public bool GetBatallaT()
+        {
+            return batallaActual.GetBatallaTerminada();
+        }
+        public bool GetBatallaI()
+        {
+            return batallaActual.GetBatallaIniciada();
         }
 
         public double GetHpDefensor()

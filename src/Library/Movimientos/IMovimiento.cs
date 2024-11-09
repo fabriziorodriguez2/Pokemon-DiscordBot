@@ -15,7 +15,16 @@ namespace Ucu.Poo.Pokemon;
 
 public interface IMovimiento
 { 
+    /// <summary>
+    /// Obtiene el nombre del movimiento.
+    /// </summary>
+    /// <returns>El nombre del movimiento.</returns>
     string GetName();
+    
+    /// <summary>
+    /// Obtiene el tipo del movimiento.
+    /// </summary>
+    /// <returns>El tipo de movimiento como una instancia de <see cref="Tipo"/>.</returns>
     Tipo GetTipo();
     
 }
