@@ -11,7 +11,14 @@ namespace Program.Tests.Combate;
 // [TestSubject(typeof(Menu))]
 public class MenuTest
 {
+    /// <summary>
+    /// Prueba de la clase <see cref="Menu"/>.
+    /// Estos test nos permiten verificar que las historias de usuarios están bien implementadas
+    /// </summary>
     [Test]
+    /// <summary>
+    /// Este test verifica la tercer historia de usuario
+    /// </summary>
     public void PikachuDañaAPidgey()
     {
         // 95 de daño del ataque rayo * efectividad (2) 
@@ -77,7 +84,10 @@ public class MenuTest
         Assert.That(vidatortugaEsperada,Is.EqualTo(menuPP.GetHpDefensor())); //Verifica que bulbasaur sigue intecto
     }
     [Test]
-    public void Especial() //En este test se puede ver que cuando eljugador 1 intenta usar el ataque especial de nuevo no puede hacerlo
+    /// <summary>
+    /// Este test verifica la segunda historia de usuario
+    /// </summary>
+    public void Especial() //En este test se puede ver que cuando el jugador 1 intenta usar el ataque especial de nuevo no puede hacerlo. 
     {
         Menu juego1 = new Menu();
         juego1.UnirJugadores("Ash");
@@ -87,6 +97,7 @@ public class MenuTest
         juego1.AgregarPokemonesD("Caterpie");
         
         juego1.IniciarEnfrentamiento();
+        juego1.MostrarAtaquesDisponibles();
         juego1.UsarMovimientos(1);//Jugador 1 usa Rayo(especial), vida del contrincante en 45
         juego1.UsarMovimientos(1);//Jugador2 usa picotazo cola
         juego1.UsarMovimientos(1);//Jugador 1 intenta usar el Rayo nuevamente pero no puede, vida del contrincante se mantiene
@@ -146,7 +157,10 @@ public class MenuTest
     }
 
     [Test]
-    public void Agrego6Pokemons()
+    /// <summary>
+    /// Este test verifica la primer historia de usuario
+    /// </summary>
+    public void Agrego6Pokemons()  
     {
         Menu juego4 = new Menu();
         juego4.UnirJugadores("Don Dimadon");
@@ -192,21 +206,7 @@ public class MenuTest
         string vidasdadas= $"{juego4.GetHpAtacante()}/{juego4.GetHpDefensor()}";
         string vidasesperadas = "85/80";
         Assert.That(vidasdadas, Is.EqualTo(vidasesperadas));
-        // Assert.AreEqual(vidasesperadas,vidasdadas);
     }
-
-    [Test]
-    public void VeoAtaquesDisponiblesDeMisPokemones()
-    {
-        Menu juego5 = new Menu();
-        juego5.UnirJugadores("Bombon");
-        juego5.UnirJugadores("Burbuja");
-        juego5.AgregarPokemonesA("Bulbasaur");
-        string textoEsperado =
-            $"El Pokémon Bulbasaur tiene los siguientes movimientos:\nLluevehojas\nBombaLodo\nGolpe Cuerpo\nProtección";
-        //Assert.That(juego5.MostrarAtaquesDisponibles(),Is.EqualTo(textoEsperado)); HAY QUE CAMBIAR EL METODO MOSTRAR ATAQUES A STRING PARA SER COMPARABLE
-    }
-
     [Test]
     public void GanoBatalla()
     {
@@ -215,9 +215,15 @@ public class MenuTest
         juego6.UnirJugadores("Red");
         juego6.AgregarPokemonesA("Pikachu");
         juego6.AgregarPokemonesD("Pidgey");
+        juego6.IniciarEnfrentamiento();
         juego6.UsarMovimientos(1); //Pikachu usa royo
         juego6.MostrarEstadoRival();
         juego6.UsarMovimientos(3);
+        juego6.UsarMovimientos(2);
+        juego6.UsarMovimientos(2);
+        bool batallaganada = juego6.GetCombateIniciado() && juego6.GetCombateTerminado();
+        bool batallaganadasupuesta = true;
+        Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
     }
 
     public void UsoItemEnBatalla()

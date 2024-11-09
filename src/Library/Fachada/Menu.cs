@@ -20,6 +20,15 @@ namespace Library.Combate
             batallaActual = new Batalla();
         }
 
+        public bool GetCombateTerminado()
+        {
+            return batallaActual.GetBatallaTerminada();
+        }
+        public bool GetCombateIniciado()
+        {
+            return batallaActual.GetBatallaIniciada();
+        }
+
         public void UnirJugadores(string jugador)
         {
             batallaActual.AgregarJugador(new Jugador(jugador));

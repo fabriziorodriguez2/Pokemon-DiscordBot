@@ -31,6 +31,7 @@ namespace Library.Combate
         {
             jugadorDefensor.PokemonAtacado(ataque);
         }
+        
 
         public void AgregarJugador(Jugador jugador)
         {
