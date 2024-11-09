@@ -167,13 +167,14 @@ public class MenuTest
 
     [Test]
     /// <summary>
-    /// Este test verifica la primer historia de usuario
+    /// Este test verifica la primer historia de usuario y verifica la historia de usuario que no suma a una lista a los usuarios que no pueden combatir
     /// </summary>
     public void Agrego6Pokemons()  
     {
         Menu juego4 = new Menu();
         juego4.UnirJugadores("Don Dimadon");
         juego4.UnirJugadores("Timmy Turner");
+        juego4.UnirJugadores("Jorge");
         juego4.AgregarPokemonesA("Charmander");
         juego4.AgregarPokemonesA("Squirtle");
         juego4.AgregarPokemonesA("Bulbasaur");
