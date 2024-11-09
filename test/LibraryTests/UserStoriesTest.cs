@@ -59,7 +59,11 @@ public class MenuTest
         Assert.That( menuPP.GetHpAtacante(),Is.EqualTo(vidaPidgeyEsperada)); //Verifica que pidgey sigue intecto
     }
     [Test]
-    //  REVISAR ESTOOOOOOO
+    /// <summary>
+    /// Este test verifica la cuarta historia de usuario ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
+    /// Además tambien cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
+    /// Además que el que comienza es squirtle y bulbasaur , para luego jugar pikachu repetando el orden del enfrentamiento
+    /// </summary>
     public void BulbasaurPorSquirtleParaAguantarAPikachu()
     {
         int dañoPorAtaque = 95 / 2 ;
@@ -125,7 +129,11 @@ public class MenuTest
     }
 
     [Test]
-    public void Defensa()//Demuestra que defensa nohace daño
+    /// <summary>
+    /// Este test verifica la quinta historia de usuario ya que pikachu siempre va a ser el pokemon atacante, es decir el que empiece
+    /// Junto a esto tenemos un Console.WriteLine que indica de quien es el turno (Tenemos pensado hacer un string builder que forme el mensaje para el usuario en cada turno)
+    /// </summary>
+    public void Defensa()//Demuestra que defensa no hace daño
     {
         Menu juego2 = new Menu();
         juego2.UnirJugadores("Ash");
@@ -208,6 +216,10 @@ public class MenuTest
         Assert.That(vidasdadas, Is.EqualTo(vidasesperadas));
     }
     [Test]
+    /// <summary>
+    /// Este test verifica la sexta historia de usuario ya que la batalla inicia y termina
+    /// El mensaje impreso en programa pasará a ser un string pasado al bot de discord
+    /// </summary>
     public void GanoBatalla()
     {
         Menu juego6 = new Menu();
