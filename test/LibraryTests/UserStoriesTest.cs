@@ -239,7 +239,9 @@ public class MenuTest
         Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
     }
     [Test]
-    
+    /// <summary>
+    /// Este test verifica la  historia de usuario que nos permite usar varios items
+    /// </summary>
     public void UsoItemEnBatalla()
     {
         //Este test muestra el uso de un revivir en la batalla
