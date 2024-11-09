@@ -167,13 +167,14 @@ public class MenuTest
 
     [Test]
     /// <summary>
-    /// Este test verifica la primer historia de usuario
+    /// Este test verifica la primer historia de usuario y verifica la historia de usuario que no suma a una lista a los usuarios que no pueden combatir
     /// </summary>
     public void Agrego6Pokemons()  
     {
         Menu juego4 = new Menu();
         juego4.UnirJugadores("Don Dimadon");
         juego4.UnirJugadores("Timmy Turner");
+        juego4.UnirJugadores("Jorge");
         juego4.AgregarPokemonesA("Charmander");
         juego4.AgregarPokemonesA("Squirtle");
         juego4.AgregarPokemonesA("Bulbasaur");
@@ -239,7 +240,9 @@ public class MenuTest
         Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
     }
     [Test]
-    
+    /// <summary>
+    /// Este test verifica la  historia de usuario que nos permite usar varios items
+    /// </summary>
     public void UsoItemEnBatalla()
     {
         //Este test muestra el uso de un revivir en la batalla
@@ -249,12 +252,13 @@ public class MenuTest
         juego1.AgregarPokemonesA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
         juego1.AgregarPokemonesD("Charmander");
         Pokemon pokemon = juego1.GetPokemonActual();
+        juego1.IniciarEnfrentamiento();
         pokemon.ChangeIsAlive();
         // Usar Revivir para restaurar 50% del HP total
         juego1.UsarItem("Revivir", 0); //Revive a Squirtle
         double vidaEsperada = 40;
         double vidaObtenida = pokemon.GetVidaActual();
-        //Assert.That(vidaObtenida, Is.EqualTo(vidaEsperada)); // Verifica que Squirtle tiene 40 HP no anda aún
+        Assert.That(vidaObtenida, Is.EqualTo(vidaEsperada)); // Verifica que Squirtle tiene 40 HP no anda aún
         
         //Este test muestra el uso de la CuraTotal en batalla
         Menu juego2 = new Menu();
@@ -284,12 +288,12 @@ public class MenuTest
         juego3.IniciarEnfrentamiento();
         juego3.UsarMovimientos(2);//Jugador 1 usa Electrobola
         juego3.UsarMovimientos(1);//Jugador2 usa LanzaMugre
-        Pokemon pokemon3 = juego3.GetPokemonActual();
         juego3.UsarItem("Superpocion", 0); //Cura a Pikachu
         double vidaEsperada2 = 80;
-        double vidaObtenida2 = pokemon3.GetVidaActual();
-        // Usar Superpoción para restaurar 70 HP
-        //Assert.That(vidaEsperada, Is.EqualTo(vidaObtenida2)); no anda aún
+        Pokemon pikachu = juego3.GetPokemonRival();
+        double vidaObtenida2 = pikachu.GetVidaActual();
+        // Usar Superpoción para restaurar 70 HP 
+        Assert.That(vidaEsperada2, Is.EqualTo(vidaObtenida2));
         
         //Este test demuestra que no se pueden usar items una vez se acabaron ya que el pokemon va a seguir dormido
         Menu juego4 = new Menu();

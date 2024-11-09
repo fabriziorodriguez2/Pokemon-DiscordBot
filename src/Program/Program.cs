@@ -6,6 +6,7 @@
 
 using System;
 using ClassLibrary;
+using DefaultNamespace;
 using Library.Combate;
 
 namespace ConsoleApplication
@@ -20,7 +21,7 @@ namespace ConsoleApplication
         /// </summary>
         public static void Main()
         {
-           
+            
         }
     }
 }
