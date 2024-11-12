@@ -563,7 +563,7 @@ public static class Pokedex
         };
 
         List<Tipo> tiposArbok = new List<Tipo> { listatiposdisponibles[14] };//Veneno
-        Pokemon Arbok = new Pokemon("Arbok", movimientosArbok, tiposArbok, 60, 695);
+        Pokemon Arbok = new Pokemon("Arbok", movimientosArbok, tiposArbok, 60, 195);
         pokemonsdisponibles.Add(Arbok);
     }
 }
