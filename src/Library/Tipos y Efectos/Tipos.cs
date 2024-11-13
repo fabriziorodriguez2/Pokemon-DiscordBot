@@ -55,10 +55,7 @@ namespace Library.Tipos
             {
                 return efectividades[tipo];
             }
-            else
-            {
-                return 1.0;  // Si no está definido, lo consideramos como neutro
-            }
+            return 1.0;  // Si no está definido, lo consideramos como neutro
         }
     }
 }

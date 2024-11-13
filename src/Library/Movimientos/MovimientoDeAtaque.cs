@@ -14,11 +14,11 @@ namespace Ucu.Poo.Pokemon;
 
 public class MovimientoDeAtaque: IMovimientoAtaque
 {
-    private string name { get; set; }
-    private int ataque { get; set; }
-    private Tipo tipo { get; set; }
+    private string Name { get; set; }
+    private int Ataque { get; set; }
+    private Tipo Tipo { get; set; }
     
-    private int precision { get; set; }
+    private int Precision { get; set; }
 
     /// <summary>
     /// Inicializa una nueva instancia de la clase <see cref="MovimientoDeAtaque"/>.
@@ -29,10 +29,10 @@ public class MovimientoDeAtaque: IMovimientoAtaque
     /// <param name="precision">Precisión del movimiento de ataque.</param>
     public MovimientoDeAtaque(string name, int ataque, Tipo tipo, int precision)
     {
-        this.name = name;
-        this.ataque = ataque;
-        this.tipo = tipo;
-        this.precision = precision;
+        this.Name = name;
+        this.Ataque = ataque;
+        this.Tipo = tipo;
+        this.Precision = precision;
     }
     
     /// <summary>
@@ -41,7 +41,7 @@ public class MovimientoDeAtaque: IMovimientoAtaque
     /// <returns>El valor del daño.</returns>
     public int GetAtaque()
     {
-        return ataque;
+        return Ataque;
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class MovimientoDeAtaque: IMovimientoAtaque
     /// <returns>El nombre del movimiento.</returns>
     public string GetName()
     {
-        return name;
+        return Name;
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class MovimientoDeAtaque: IMovimientoAtaque
     /// <returns>El tipo de movimiento de ataque.</returns>
     public Tipo GetTipo()
     {
-        return tipo;
+        return Tipo;
     }
 
     /// <summary>
@@ -68,6 +68,6 @@ public class MovimientoDeAtaque: IMovimientoAtaque
     /// <returns>La precisión del movimiento.</returns>
     public int GetPrecision()
     {
-        return precision;
+        return Precision;
     }
 }

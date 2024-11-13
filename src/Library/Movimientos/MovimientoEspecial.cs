@@ -22,12 +22,12 @@ namespace Ucu.Poo.Pokemon;
 
 public class MovimientoEspecial : IMovimientoEspecial
 {
-    private string name { get; set; }
-    private int ataque { get; set; }
-    private Efecto efecto { get; set; }
-    private Tipo tipo { get; set; }
-    private int precision { get; set; }
-    private bool usadoAnteriormente { get; set; }
+    private string Name { get; set; }
+    private int Ataque { get; set; }
+    private Efecto Efecto { get; set; }
+    private Tipo Tipo { get; set; }
+    private int Precision { get; set; }
+    private bool UsadoAnteriormentee { get; set; }
     
     /// <summary>  
     /// Inicializa una nueva instancia de la clase <see cref="MovimientoEspecial"/>.  
@@ -39,11 +39,11 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <param name="efecto">El efecto que produce el movimiento especial.</param>  
     public MovimientoEspecial(string name, int ataque, Tipo tipo, int precision, Efecto efecto)
     {
-        this.name = name;
-        this.ataque = ataque;
-        this.tipo = tipo;
-        this.precision = precision;
-        this.efecto = efecto;
+        this.Name = name;
+        this.Ataque = ataque;
+        this.Tipo = tipo;
+        this.Precision = precision;
+        this.Efecto = efecto;
     }
     
     /// <summary>  
@@ -52,7 +52,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <param name="valor">Valor a establecer: <c>true</c> si ha sido usado, <c>false</c> en caso contrario.</param>  
     public void UsadoAnteriormente(bool valor) //Setea el valor de los ataques especiales para saber si se pueden usar
     { 
-        usadoAnteriormente = valor; 
+        UsadoAnteriormentee = valor; 
     }
     
     /// <summary>  
@@ -61,7 +61,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <returns>El valor de ataque del movimiento especial.</returns>  
     public int GetAtaque()
     {
-        return ataque;
+        return Ataque;
     }
     
     /// <summary>  
@@ -70,7 +70,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <returns><c>true</c> si ha sido utilizado, <c>false</c> en caso contrario.</returns>  
     public bool GetUsadoAnteriormente()
     {
-        return usadoAnteriormente;
+        return UsadoAnteriormentee;
     }
     
     /// <summary>  
@@ -79,7 +79,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <returns>El nombre del movimiento especial.</returns>  
     public string GetName()
     {
-        return name;
+        return Name;
     }
 
     /// <summary>  
@@ -88,7 +88,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <returns>El tipo asociado con el movimiento especial.</returns>  
     public Tipo GetTipo()
     {
-        return tipo;
+        return Tipo;
     }
 
     /// <summary>  
@@ -97,7 +97,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <returns>La precisión del movimiento especial.</returns>  
     public int GetPrecision()
     {
-        return precision;
+        return Precision;
     }
     
     /// <summary>  
@@ -106,7 +106,7 @@ public class MovimientoEspecial : IMovimientoEspecial
     /// <returns>El efecto asociado con el movimiento especial.</returns>  
     public Efecto GetEfecto()
     {
-        return efecto;
+        return Efecto;
     }
     
 }

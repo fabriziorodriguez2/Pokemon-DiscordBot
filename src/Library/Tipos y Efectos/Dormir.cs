@@ -11,7 +11,7 @@ namespace Library.Tipos;
 
 public class Dormir:Efecto
 {
-    private int Turnos;
+    private int turnos;
     private Random random = new Random();
     
     /// <summary>  
@@ -20,7 +20,7 @@ public class Dormir:Efecto
     /// </summary>  
     public Dormir()
     {
-        this.Turnos = random.Next(1, 5);
+        this.turnos = random.Next(1, 5);
     }
     
     /// <summary>  
@@ -32,16 +32,16 @@ public class Dormir:Efecto
     public override void HacerEfecto(Pokemon pokemon)
     {
        
-        if (this.Turnos == 0)
+        if (this.turnos == 0)
         {
             pokemon.SetPuedeAtacar(true);
             pokemon.EliminarEfectoActual();
         }
         else
         {
-            Console.WriteLine($"{pokemon.GetName()} dormira durante {Turnos} turnos");
+            Console.WriteLine($"{pokemon.GetName()} dormira durante {turnos} turnos");
             pokemon.SetPuedeAtacar(false);
         }
-        this.Turnos -= 1;
+        this.turnos -= 1;
     }
 }

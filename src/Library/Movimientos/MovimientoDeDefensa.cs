@@ -21,9 +21,9 @@ namespace Ucu.Poo.Pokemon;
 
 public class MovimientoDeDefensa : IMovimientoDefensa
 {
-    private string name { get; set; }
-    private int defensa { get; set; }
-    private Tipo tipo { get; set; }
+    private string Name { get; set; }
+    private int Defensa { get; set; }
+    private Tipo Tipo { get; set; }
     
     /// <summary>  
     /// Inicializa una nueva instancia de la clase <see cref="MovimientoDeDefensa"/>.  
@@ -34,9 +34,9 @@ public class MovimientoDeDefensa : IMovimientoDefensa
     /// <param name="es_especial">Indica si el movimiento es especial (no se utiliza en este contexto).</param>  
     public MovimientoDeDefensa(string name, int defensa, Tipo tipo, bool es_especial)
     {
-        this.name = name;
-        this.defensa = defensa;
-        this.tipo = tipo;
+        this.Name = name;
+        this.Defensa = defensa;
+        this.Tipo = tipo;
     }
     /// <summary>  
     /// Obtiene el valor de defensa del movimiento.  
@@ -44,7 +44,7 @@ public class MovimientoDeDefensa : IMovimientoDefensa
     /// <returns>El valor de defensa del movimiento de defensa.</returns>  
     public int GetDefensa()
     {
-        return this.defensa;
+        return this.Defensa;
     }
     
     /// <summary>  
@@ -53,7 +53,7 @@ public class MovimientoDeDefensa : IMovimientoDefensa
     /// <returns>El nombre del movimiento de defensa.</returns>  
     public string GetName()
     {
-        return this.name;
+        return this.Name;
     }
 
     /// <summary>  
@@ -62,7 +62,7 @@ public class MovimientoDeDefensa : IMovimientoDefensa
     /// <returns>El tipo asociado con el movimiento de defensa.</returns>  
     public Tipo GetTipo()
     {
-        return this.tipo;
+        return this.Tipo;
     }
    
 }
