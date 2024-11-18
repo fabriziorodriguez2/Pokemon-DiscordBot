@@ -152,7 +152,7 @@ namespace Library.Combate
             Jugador jugadorAtacante = batallaActual.GetAtacante();
             List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
             
-            if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count )
+            if (numeroDePokemon > 0 && numeroDePokemon < pokemons.Count )
             {
                 Pokemon pokemonElegido = pokemons[numeroDePokemon];
                 
@@ -166,6 +166,11 @@ namespace Library.Combate
                 }
                 return $"El Pokémon {pokemonElegido.GetName()} está debilitado y no puede entrar en combate";
             } 
+            if (numeroDePokemon == 0)
+            {
+                return ("No puede cambiar al pokemon que ya está atacando");
+            }
+
             return "No tienes ese pokemon";
         }
         return "La batalla no ha iniciado";
