@@ -49,9 +49,9 @@ public class Pokemon
     /// Aplica el efecto de un Pokémon a otro Pokémon.
     /// </summary>
     /// <param name="pokemon">El Pokémon objetivo al que se le aplicará el efecto.</param>
-    public void HacerEfectoPokemon(Pokemon pokemon)
+    public string HacerEfectoPokemon(Pokemon pokemon)
     {
-        estado.HacerEfecto(pokemon);
+        return estado.HacerEfecto(pokemon);
     }
 
     /// <summary>
@@ -112,8 +112,9 @@ public class Pokemon
     /// Usa un movimiento del Pokémon (puede ser un movimiento de ataque o defensa).
     /// </summary>
     /// <param name="movimiento">Movimiento que se va a utilizar.</param>
-    public void UsarMovimiento(IMovimiento movimiento)
+    public string UsarMovimiento(IMovimiento movimiento)
     {
+        string texto = "";
         if (isAlive)
         {
             foreach (IMovimiento accion in listaMovimientos)
@@ -123,29 +124,34 @@ public class Pokemon
                 {
                     if (ataque is MovimientoDeAtaque) //Verifica si el movimiento usado en este momento Es de Ataque y no especial
                     {
-                        foreach (IMovimiento mov in listaMovimientos)//Recorre todoslos movimientos de lalista hasta dar con el especial
+                        foreach (IMovimiento mov in
+                                 listaMovimientos) //Recorre todoslos movimientos de lalista hasta dar con el especial
                         {
                             if (mov is IMovimientoEspecial movesp)
                             {
-                                movesp.UsadoAnteriormente(false);//Pone su estado de Uado anteriormente en false, ya que en este ataque se uso un movimiento comun y no uno especial
+                                movesp.UsadoAnteriormente(
+                                    false); //Pone su estado de Uado anteriormente en false, ya que en este ataque se uso un movimiento comun y no uno especial
                             }
                         }
                     }
                 }
+
                 if (movimiento is IMovimientoDefensa defensamovimiento)
                 {
                     defensa += defensamovimiento.GetDefensa();
-                    Console.WriteLine($"{GetName()} ha usado su {movimiento.GetName()} para subir su defensa {defensamovimiento.GetDefensa()} puntos");
+                    texto +=
+                        $"{GetName()} ha usado su {movimiento.GetName()} para subir su defensa {defensamovimiento.GetDefensa()} puntos";
                 }
             }
         }
+        return texto;
     }
-    
+
     /// <summary>
     /// Recibe un ataque de otro Pokémon.
     /// </summary>
     /// <param name="movimiento">Movimiento de ataque que inflige daño al Pokémon.</param>
-    public void RecibirAtaque(IMovimientoAtaque movimiento)
+    public string RecibirAtaque(IMovimientoAtaque movimiento)
     {
         double efectividadTipo = 1.0;
         Tipo tipoAtaque = movimiento.GetTipo();
@@ -155,19 +161,19 @@ public class Pokemon
             efectividadTipo *= tipoAtaque.DarEfectividad(tipoDefensor);
         }
 
+        string texto = "";
         double danio = (movimiento.GetAtaque() * efectividadTipo);
         int numero = new Random().Next(10);
         if (numero == 0)
         {
             danio *= 1.2;
-            Console.WriteLine($"Ha sido un ataque crítico");
+            texto += ", Además ha sido un ataque crítico";
         }
-        
         // Aplicar el daño a la defensa o vida o un poco y un poco
         if (defensa > danio)
         {
             defensa -= danio;
-            Console.WriteLine($"{GetName()} ha perdido {danio} de defensa, quedandose a {defensa} de defensa y {vidaActual} de vida");
+            texto += $"{GetName()} ha perdido {danio} de defensa, quedandose a {defensa} de defensa y {vidaActual} de vida";
         }
         else
         {
@@ -178,26 +184,27 @@ public class Pokemon
             {
                 isAlive = false;
                 vidaActual = 0;
-                Console.WriteLine($"El pokemon {name} se ha debilitado, por que no podrá combatir más");
-                return;
+                texto += ($"El pokemon {name} se ha debilitado, por que no podrá combatir más");
+                return texto;
             }
-            Console.WriteLine($"{GetName()} ha perdido toda su defensa y se ha quedado con {vidaActual}");
+            texto += ($"{GetName()} ha perdido toda su defensa y se ha quedado con {vidaActual}");
         }
         if (movimiento is IMovimientoEspecial movimientoEspecial)
         {
-            AgregarEfecto(movimientoEspecial.GetEfecto());
+            texto += AgregarEfecto(movimientoEspecial.GetEfecto());
         }
+        return texto;
     }
 
     /// <summary>
     /// Recibe daño de un efecto externo.
     /// </summary>
     /// <param name="numero">Valor de daño recibido.</param>
-    public void RecibirDanioDeEfecto(double numero)
+    public string RecibirDanioDeEfecto(double numero)
     {
         double porcentaje = (numero *this.vidaTotal) / 100;
         this.vidaActual -= porcentaje;
-        Console.WriteLine($"{GetName()} ha recibido {porcentaje} de daño adicional");
+        return $"{GetName()} ha recibido {porcentaje} de daño adicional";
     }
 
     /// <summary>
@@ -213,13 +220,15 @@ public class Pokemon
     /// Agrega un efecto al Pokémon.
     /// </summary>
     /// <param name="efecto">El efecto a agregar al Pokémon.</param>
-    public void AgregarEfecto(Efecto efecto)
+    public string AgregarEfecto(Efecto efecto)
     {
         if (estado == null)
         {
             estado = Efecto.CrearCopia(efecto.GetType()); // Usa el tipo del efecto para crear una nueva instancia
-            Console.WriteLine($"{GetName()} caído bajo el efecto {efecto.GetType().Name}");
+            return $"{GetName()} caído bajo el efecto {efecto.GetType().Name}\n";
         }
+
+        return "";
     }
     
     /// <summary>

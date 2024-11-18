@@ -31,10 +31,8 @@ public class Paralizar:Efecto
         int numero= random.Next(1, 4);
         if (numero == 1)
         {
-            Console.WriteLine($"El pokemon {pokemon.GetName()} puede atacar en este turno a pesar de estar paralizado");
             return true;
         }
-        Console.WriteLine($"El pokemon {pokemon.GetName()} no puede atacar, ha sido paralizado");
         return false;
     }
 
@@ -43,8 +41,14 @@ public class Paralizar:Efecto
     /// Actualiza el estado del Pokémon para indicar si puede atacar o no durante su turno.  
     /// </summary>  
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de paralización.</param>  
-    public override void HacerEfecto(Pokemon pokemon)
+    public override string HacerEfecto(Pokemon pokemon)
     {
         pokemon.SetPuedeAtacar(Jugar(pokemon));
+        if (Jugar(pokemon))
+        {
+            return $"El pokemon {pokemon.GetName()} puede atacar en este turno a pesar de estar paralizado";
+        }
+
+        return $"El pokemon {pokemon.GetName()} no puede atacar, ha sido paralizado";
     }
 }

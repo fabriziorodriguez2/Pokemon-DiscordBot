@@ -29,19 +29,17 @@ public class Dormir:Efecto
     /// De lo contrario, se indica que el Pokémon está dormido y no puede atacar.  
     /// </summary>  
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de dormir.</param>  
-    public override void HacerEfecto(Pokemon pokemon)
+    public override string HacerEfecto(Pokemon pokemon)
     {
        
         if (this.turnos == 0)
         {
             pokemon.SetPuedeAtacar(true);
             pokemon.EliminarEfectoActual();
+            return $"El pokemon {pokemon.GetName()} se la ha acabado el Efecto Dormir";
         }
-        else
-        {
-            Console.WriteLine($"{pokemon.GetName()} dormira durante {turnos} turnos");
-            pokemon.SetPuedeAtacar(false);
-        }
+        pokemon.SetPuedeAtacar(false);
         this.turnos -= 1;
+        return $"{pokemon.GetName()} dormira durante {turnos} turnos";
     }
 }

@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using DefaultNamespace;
 
 namespace Library.Tipos;
@@ -25,9 +26,10 @@ public class Quemar:Efecto
     /// y aplica daño al Pokémon correspondiente.  
     /// </summary>  
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de quemadura.</param>  
-    public override void HacerEfecto(Pokemon pokemon)
+    public override string HacerEfecto(Pokemon pokemon)
     {
-        Console.WriteLine(pokemon.GetName()," ha sido Quemado");
-        pokemon.RecibirDanioDeEfecto(10);
+        string texto = pokemon.RecibirDanioDeEfecto(10);
+        texto += $"\n{pokemon.GetName()}, ha sido Quemado";
+        return texto;
     }
 }

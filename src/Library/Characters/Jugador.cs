@@ -45,9 +45,9 @@ public class Jugador
     /// Aplica el efecto del Pokémon en turno sobre otro Pokémon.
     /// </summary>
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto.</param>
-    public void HacerEfectoPokemonEnTurno(Pokemon pokemon)
+    public string HacerEfectoPokemonEnTurno(Pokemon pokemon)
     {
-        pokemonEnTurno.HacerEfectoPokemon(pokemon);
+        return pokemonEnTurno.HacerEfectoPokemon(pokemon);
     }
     
     /// <summary>
@@ -63,9 +63,9 @@ public class Jugador
     /// Recibe un ataque hacia el Pokémon en turno.
     /// </summary>
     /// <param name="ataque">El movimiento de ataque que se va a recibir.</param>
-    public void PokemonAtacado(IMovimientoAtaque ataque)
+    public string PokemonAtacado(IMovimientoAtaque ataque)
     {
-        pokemonEnTurno.RecibirAtaque(ataque);
+        return pokemonEnTurno.RecibirAtaque(ataque);
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public class Jugador
     /// Agrega un Pokémon al equipo del jugador.
     /// </summary>
     /// <param name="nombre">El nombre del Pokémon que se quiere agregar al equipo.</param>
-    public void AgregarAlEquipo(string nombre)
+    public string AgregarAlEquipo(string nombre)
     {
         
         if (listaPokemons.Count < 6)
@@ -141,13 +141,12 @@ public class Jugador
                 {
                     pokemonEnTurno = pokemonencontrado;
                 }
-                Console.WriteLine($"Se añadió el pokemon {pokemonencontrado.GetName()} a tu equipo, ¿vas a seguir añadiendo más?");
+                return $"Se añadió el pokemon {pokemonencontrado.GetName()} a tu equipo, ¿vas a seguir añadiendo más?";
             }
+
+            return "Ese pokemon no existe";
         }
-        else
-        {
-            Console.WriteLine("Ya tienes 6 Pokemons!");
-        }
+        return "Ya tienes 6 Pokemons!";
     }
     
     /// <summary>
@@ -196,20 +195,22 @@ public class Jugador
     /// <summary>
     /// Muestra el estado de todos los Pokémon del equipo del jugador.
     /// </summary>
-    public void MostarEstadoEquipo()
+    public string MostarEstadoEquipo()
     {
-        Console.WriteLine($"El estado del equipo de {name} es:");
+        string texto = ($"El estado del equipo de {name} es:\n");
         foreach (Pokemon pokemon in listaPokemons)
         {
             if (pokemon.GetIsAlive())
             {
-                Console.WriteLine($"{pokemon.GetName()} {pokemon.GetVidaActual()}/{pokemon.GetVidaTotal()}");
+                texto += ($"{pokemon.GetName()} {pokemon.GetVidaActual()}/{pokemon.GetVidaTotal()}\n");
             }
             else
             {
-                Console.WriteLine($"{pokemon.GetName()} ha muerto");
+                texto += ($"{pokemon.GetName()} ha muerto\n");
             }
         }
+
+        return texto;
     }
 
     /// <summary>
@@ -217,21 +218,23 @@ public class Jugador
     /// </summary>
     /// <param name="item">El nombre del item a usar.</param>
     /// <param name="pokemon">El Pokémon sobre el que se va a usar el item.</param>
-    public void UsarItem(string item, Pokemon pokemon)
+    public string UsarItem(string item, Pokemon pokemon)
     {
         if (listaPokemons.Contains(pokemon))
         {
             int IndicePokemonAEfectuar = listaPokemons.IndexOf(pokemon);
             Pokemon PokemonAEfectuar = listaPokemons[IndicePokemonAEfectuar];
-            inventarioJugador.UsarItem(item, PokemonAEfectuar);
+            return inventarioJugador.UsarItem(item, PokemonAEfectuar);
         }
+
+        return "";
     }
 
     /// <summary>
     /// Muestra todos los items disponibles en el inventario del jugador.
     /// </summary>
-    public void Mostrar_items() //Este método llama al mostrar items de InventarioItems para mostrar los items disponibles que tiene el jugador
+    public string Mostrar_items() //Este método llama al mostrar items de InventarioItems para mostrar los items disponibles que tiene el jugador
     {
-        inventarioJugador.MostrarItems();
+        return inventarioJugador.MostrarItems();
     }
 }

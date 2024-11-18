@@ -37,12 +37,15 @@ public static class Pokedex
     /// <summary>  
     /// Muestra el catálogo de Pokémon disponibles en la Pokédex.  
     /// </summary>  
-    public static void MostrarCatalogo()
+    public static string MostrarCatalogo()
     {
+        string catalogo = "";
         foreach (Pokemon pokemon in pokemonsdisponibles)
         {
-            Console.WriteLine(pokemon.GetName());
+            catalogo += $"{pokemon.GetName()}\n";
         }
+
+        return catalogo;
     }
 
     /// <summary>  
@@ -60,7 +63,6 @@ public static class Pokedex
                 return CrearCopia(pokemon); //Genera una copia identica del pokemon de la pokedex y se lo entre al usaurio
             }
         }
-        Console.WriteLine("No se ha encontrado al pokemon");
         return null;
     }
 

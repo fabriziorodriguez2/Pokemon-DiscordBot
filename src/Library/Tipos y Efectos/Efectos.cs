@@ -31,9 +31,9 @@ public class Efecto
     /// Este método puede ser sobrescrito por las subclases para proporcionar una implementación específica.  
     /// </summary>  
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto.</param>  
-    public virtual void HacerEfecto(Pokemon pokemon)
+    public virtual string HacerEfecto(Pokemon pokemon)
     {
-        
+        return "";
     }
 
     /// <summary>  

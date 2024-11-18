@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using System.Net.Mime;
+using DefaultNamespace;
 using Ucu.Poo.Pokemon;
 
 namespace Library.Combate
@@ -28,9 +29,9 @@ namespace Library.Combate
     /// Une un jugador a la batalla.
     /// </summary>
     /// <param name="jugador">Nombre del jugador que se unirá.</param>
-    public void UnirJugadores(string jugador)
+    public string UnirJugadores(string jugador)
     {
-        batallaActual.AgregarJugador(new Jugador(jugador));
+        return batallaActual.AgregarJugador(new Jugador(jugador));
     }
 
     /// <summary>
@@ -94,55 +95,57 @@ namespace Library.Combate
     /// <summary>
     /// Agrega un Pokémon al equipo del atacante.
     /// </summary>
-    public void AgregarPokemonesA(string pokemon)
+    public string AgregarPokemonesA(string pokemon)
     {
-        batallaActual.AgregarPokemonBA(pokemon); 
+        return batallaActual.AgregarPokemonBA(pokemon); 
     }
 
     /// <summary>
     /// Agrega un Pokémon al equipo del defensor.
     /// </summary>
-    public void AgregarPokemonesD(string pokemon)
+    public string AgregarPokemonesD(string pokemon)
     {
-        batallaActual.AgregarPokemonBD(pokemon);
+        return batallaActual.AgregarPokemonBD(pokemon);
     }
 
     /// <summary>
     /// Inicia el enfrentamiento de batalla.
     /// </summary>
-    public void IniciarEnfrentamiento()
+    public string IniciarEnfrentamiento()
     {
-        batallaActual.IniciarBatalla();
+        return batallaActual.IniciarBatalla();
     }
 
     /// <summary>
     /// Muestra el estado del equipo del jugador rival.
     /// </summary>
-    public void MostrarEstadoRival()
+    public string MostrarEstadoRival()
     {
         if (batallaActual.GetBatallaIniciada())
         {
             Jugador defensor = batallaActual.GetDefensor();
-            defensor.MostarEstadoEquipo();
+            return defensor.MostarEstadoEquipo();
         }
+        return "La batalla no ha iniciado";
     }
 
     /// <summary>
     /// Muestra el estado del equipo del jugador actual.
     /// </summary>
-    public void MostrarEstadoEquipo()
+    public string MostrarEstadoEquipo()
     {
         if (batallaActual.GetBatallaIniciada())
         {
             Jugador atacante = batallaActual.GetAtacante();
-            atacante.MostarEstadoEquipo();
+            return atacante.MostarEstadoEquipo();
         }
+        return "La batalla no ha iniciado";
     }
 
     /// <summary>
     /// Cambia el Pokémon en turno del jugador atacante.
     /// </summary>
-    public void CambiarPokemon(int numeroDePokemon)
+    public string CambiarPokemon(int numeroDePokemon)
     {
         if (batallaActual.GetBatallaIniciada())
         {
@@ -157,61 +160,64 @@ namespace Library.Combate
                 {
                     Pokemon pokemon = jugadorAtacante.GetPokemonEnTurno();
                     jugadorAtacante.CambiarPokemon(pokemonElegido);
-                    Console.WriteLine($"El Pokémon {pokemonElegido.GetName()} ha entrado en combate y {pokemon.GetName()} ha sido guardado en su pokebola");
-                    batallaActual.AvanzarTurno();
+                    string texto = $"El Pokémon {pokemonElegido.GetName()} ha entrado en combate y {pokemon.GetName()} ha sido guardado en su pokebola";
+                    texto += batallaActual.AvanzarTurno();
+                    return texto;
                 }
-                else
-                {
-                    Console.WriteLine($"El Pokémon {pokemonElegido.GetName()} está debilitado y no puede entrar en combate");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No tienes ese pokemon");
-            }
+                return $"El Pokémon {pokemonElegido.GetName()} está debilitado y no puede entrar en combate";
+            } 
+            return "No tienes ese pokemon";
         }
+        return "La batalla no ha iniciado";
     }
 
     /// <summary>
     /// Muestra los movimientos disponibles del Pokémon en turno.
     /// </summary>
-    public void MostrarAtaquesDisponibles()
+    public string MostrarAtaquesDisponibles()
     {
         if (batallaActual.GetBatallaIniciada())
         {
+
             Jugador jugadorAtacante = batallaActual.GetAtacante();
             Pokemon pokemon = jugadorAtacante.GetPokemonEnTurno();
-            Console.WriteLine($"El Pokémon {pokemon.GetName()} tiene los siguientes movimientos:");
+            string texto = $"El Pokémon {pokemon.GetName()} tiene los siguientes movimientos:\n";
             foreach (IMovimiento movimiento in pokemon.GetListaMovimientos())
             {
                 if (movimiento is IMovimientoEspecial especial && especial.GetUsadoAnteriormente())
                 {
-                    Console.WriteLine($"{movimiento.GetName()}(especial) no puede ser usado en este turno");
+                    texto += $"{movimiento.GetName()}(especial) no puede ser usado en este turno\n";
                 }
-                else
+
+                if (movimiento is IMovimientoEspecial movimientoEspecial)
                 {
-                    Console.WriteLine(movimiento is IMovimientoEspecial ? $"{movimiento.GetName()} (especial)" : movimiento.GetName());
+                    texto += $"{movimientoEspecial.GetName()} (especial)\n";
                 }
+
+                texto += movimiento.GetName();
             }
+
+            return texto;
         }
+        return "La batalla no ha iniciado";
     }
 
     /// <summary>
     /// Usa un movimiento del Pokémon en turno.
     /// </summary>
-    public void UsarMovimientos(int numDeMovimiento)
+    public string UsarMovimientos(int numDeMovimiento)
     {
         if (batallaActual.GetBatallaTerminada())
         {
-            Console.WriteLine("La batalla ya ha terminado.");
-            return;
+            return "La batalla ya ha terminado.";
         }
 
         if (!batallaActual.GetBatallaIniciada())
         {   
-            Console.WriteLine("La batalla no ha iniciado");
-            return;
+            return "La batalla no ha iniciado";
         }
+
+        string texto = "";
         
         Jugador jugador = batallaActual.GetAtacante();
         Pokemon pokemonActual = jugador.GetPokemonEnTurno();
@@ -223,12 +229,12 @@ namespace Library.Combate
 
             if (movimiento is IMovimientoEspecial especial && especial.GetUsadoAnteriormente())
             {
-                Console.WriteLine($"El movimiento {movimiento.GetName()} es especial y ya fue usado anteriormente. Elija otro movimiento.");
+                texto += $"El movimiento {movimiento.GetName()} es especial y ya fue usado anteriormente. Elija otro movimiento.";
             }
             else
             {
-                pokemonActual.UsarMovimiento(movimiento);
-                Console.WriteLine($"{pokemonActual.GetName()} ha usado {movimiento.GetName()}.");
+                texto += pokemonActual.UsarMovimiento(movimiento);
+                texto += ($"{pokemonActual.GetName()} ha usado {movimiento.GetName()}.");
                 
                 if (movimiento is IMovimientoAtaque movimientoAtaque)
                 {
@@ -236,12 +242,12 @@ namespace Library.Combate
                     int numeroAleatorio = random.Next(1, 101);
                     if (numeroAleatorio <= movimientoAtaque.GetPrecision())
                     {
-                        Console.WriteLine($"{pokemonActual.GetName()} ha acertado su ataque");
-                        batallaActual.RecibirAtaqueB(movimientoAtaque);
+                        texto += "Y ha acertado";
+                        texto +=$"{batallaActual.RecibirAtaqueB(movimientoAtaque)}\n";
                     }
                     else
                     {
-                        Console.WriteLine($"El ataque {movimientoAtaque.GetName()} ha fallado");
+                        texto += ("Y ha fallado");
                     }
 
                     if (movimientoAtaque is IMovimientoEspecial movimientoEspecial)
@@ -249,20 +255,22 @@ namespace Library.Combate
                         movimientoEspecial.UsadoAnteriormente(true);
                     }
                 }
-                batallaActual.AvanzarTurno();
+                texto += batallaActual.AvanzarTurno();
             }
+
+            return texto;
         }
-        else
-        {
-            Console.WriteLine("Movimiento inválido. Por favor, seleccione un movimiento entre 1 y 4, o uno que pueda usarse en este turno.");
-        }
+
+        return
+            "Movimiento inválido. Por favor, seleccione un movimiento entre 1 y 4, o uno que pueda usarse en este turno.";
     }
 
     /// <summary>
     /// Muestra el número de Pokémon del equipo atacante.
     /// </summary>
-    public void MostrarNumPokemon()
+    public string MostrarNumPokemon()
     {
+        string texto = "";
         if (batallaActual.GetBatallaIniciada())
         {
             Jugador jugador = batallaActual.GetAtacante();
@@ -270,29 +278,33 @@ namespace Library.Combate
             for (int i = 0; i < listaPokemons.Count; i++)
             {
                 Pokemon pokemon = listaPokemons[i];
-                Console.WriteLine($"{i}. {pokemon.GetName()}");
+                texto+= ($"{i}. {pokemon.GetName()}");
             }
         }
+        return texto;
     }
 
     /// <summary>
     /// Muestra los ítems disponibles en el inventario del jugador atacante.
     /// </summary>
-    public void MostrarItemsDisponibles()
+    public string MostrarItemsDisponibles()
     {
         if (batallaActual.GetBatallaIniciada())
         {
             Jugador jugador = batallaActual.GetAtacante();
-            jugador.Mostrar_items();
+            return jugador.Mostrar_items();
         }
+
+        return "";
     }
 
     /// <summary>
     /// Usa un ítem específico en el Pokémon indicado.
     /// </summary>
 
-        public void UsarItem(string item, int numeroDePokemon) //Este método utiliza el item que le pases por string
+        public string UsarItem(string item, int numeroDePokemon) //Este método utiliza el item que le pases por string
         {
+            string texto = "";
             if (batallaActual.GetBatallaIniciada())
             {
                 Jugador jugadorAtacante = batallaActual.GetAtacante();
@@ -301,14 +313,12 @@ namespace Library.Combate
                 if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count)
                 {
                     Pokemon pokemonElegido = pokemons[numeroDePokemon];
-                    jugadorAtacante.UsarItem(item, pokemonElegido);
+                    texto += jugadorAtacante.UsarItem(item, pokemonElegido);
                     batallaActual.AvanzarTurno();
                 }
-                else
-                {
-                    Console.WriteLine("Seleccione el pokemon correctamente");
-                }
+                return "Seleccione el pokemon correctamente";
             }
+            return "La batalla no ha iniciado";
         }
     }
 }

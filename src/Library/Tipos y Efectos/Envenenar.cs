@@ -25,9 +25,8 @@ public class Envenenar:Efecto
     /// y aplica daño al Pokémon correspondiente.  
     /// </summary>  
     /// <param name="pokemon">El Pokémon que va a recibir el efecto de envenenamiento.</param>  
-    public override void HacerEfecto(Pokemon pokemon)
+    public override string HacerEfecto(Pokemon pokemon)
     {
-        Console.WriteLine(pokemon.GetName()," ha sido envenenado");
-        pokemon.RecibirDanioDeEfecto(5);
+        return $"{pokemon.GetName()} ha sido envenenado" + pokemon.RecibirDanioDeEfecto(5);
     }
 }
