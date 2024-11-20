@@ -5,7 +5,6 @@
 //--------------------------------------------------------------------------------
 
 using System;
-using ClassLibrary;
 using DefaultNamespace;
 using Library.Combate;
 
