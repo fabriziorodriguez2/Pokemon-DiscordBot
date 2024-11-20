@@ -103,9 +103,10 @@ public class UnitTest
         juego1.UnirJugadores("Red");
         juego1.AgregarPokemonesA("Pikachu");
         juego1.AgregarPokemonesD("Pidgey");
+        juego1.AgregarPokemonesA("Bulbasaur");
         juego1.IniciarEnfrentamiento();
         juego1.UsarMovimientos(1); //Jugador 1 usa Rayo y pidgey es debilitado
-        juego1.UsarItem("Superpocion", 0); //Trata de curar a Pidgey
+        juego1.UsarItem("Superpocion", 1); //Trata de curar a Pidgey
         double vidaEsperada2 = 0;
         Pokemon pidgey = juego1.GetPokemonActual();
         double vidaObtenida2 = pidgey.GetVidaActual();

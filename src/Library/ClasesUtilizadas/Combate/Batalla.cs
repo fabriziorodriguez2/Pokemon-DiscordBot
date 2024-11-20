@@ -179,12 +179,12 @@ namespace Library.Combate
             if (!JugadorAtacante.TeamIsAlive())
             {
                 texto += $"¡Ha ganado el jugador {JugadorDefensor.GetName()}!" + " \nLa batalla ha terminado";
-                this.BatallaTerminada = true;
+                BatallaTerminada = true;
             }
             else if (!JugadorDefensor.TeamIsAlive())
             {
                 texto += $"¡Ha ganado el jugador {JugadorAtacante.GetName()}!" + " \nLa batalla ha terminado";
-                this.BatallaTerminada = true;
+                BatallaTerminada = true;
             }
             return texto;
         }
@@ -192,7 +192,7 @@ namespace Library.Combate
         /// <summary>
         /// Verifica si el Pokémon defensor está debilitado y cambia al siguiente Pokémon si es necesario.
         /// </summary>
-        private void VerificarPokemonDefensorDebilitado()
+        private string VerificarPokemonDefensorDebilitado()
         {
             if (!JugadorDefensor.PokemonEnTurnoAlive())
             {
@@ -202,13 +202,12 @@ namespace Library.Combate
                     {
                         Pokemon pokemonDebilitado = JugadorDefensor.GetPokemonEnTurno();
                         JugadorDefensor.CambiarPokemon(pokemon);
-                        Console.WriteLine($"{pokemonDebilitado.GetName()} ha sido debilitado y cambiado por {JugadorDefensor.GetNamePokemonTurno()} automáticamente");
-                        return;
+                        return $"{pokemonDebilitado.GetName()} ha sido debilitado y cambiado por {JugadorDefensor.GetNamePokemonTurno()} automáticamente";
                     }
                 }
-                Console.WriteLine($"A {JugadorDefensor.GetName()} no le quedan más Pokémon en condiciones de combatir.");
-                TerminarBatalla();
+                return ($"A {JugadorDefensor.GetName()} no le quedan más Pokémon en condiciones de combatir.") +  TerminarBatalla();
             }
+            return "";
         }
 
         /// <summary>
@@ -217,7 +216,7 @@ namespace Library.Combate
         public string AvanzarTurno()
         {
             string texto = "";
-            VerificarPokemonDefensorDebilitado();
+            texto += VerificarPokemonDefensorDebilitado()+ "\n";
 
             if (BatallaTerminada)
             {
@@ -241,12 +240,12 @@ namespace Library.Combate
             {
                 JugadorDefensor.ActualizarEstadoEquipo();
                 JugadorAtacante.ActualizarEstadoEquipo();
-                return texto;
             }
             if (!JugadorAtacante.TeamIsAlive() || !JugadorDefensor.TeamIsAlive())
             {
                 TerminarBatalla();
                 texto += TerminarBatalla();
+                return texto;
             }
             else
             {
@@ -259,12 +258,13 @@ namespace Library.Combate
         /// <summary>
         /// Cambia el turno entre el jugador atacante y el defensor. El atacante es el defensor y viceversa
         /// </summary>
-        private void CambiarTurno()
+        private string CambiarTurno()
         {
             Jugador temporal = JugadorAtacante;
             JugadorAtacante = JugadorDefensor;
             JugadorDefensor = temporal;
             Turnos = !Turnos;
+            return $"Ahora es turno de {JugadorAtacante.GetName()} \n";
         }
     }
 }

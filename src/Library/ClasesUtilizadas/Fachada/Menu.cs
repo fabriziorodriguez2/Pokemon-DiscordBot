@@ -99,6 +99,13 @@ namespace Library.Combate
     {
         return batallaActual.AgregarPokemonBA(pokemon); 
     }
+    /// <summary>
+    /// Propiedad para obtener al jugador A
+    /// </summary>
+    public Jugador JugadorA()
+    {
+        return batallaActual.GetAtacante();
+    }
 
     /// <summary>
     /// Agrega un Pokémon al equipo del defensor.
@@ -106,6 +113,13 @@ namespace Library.Combate
     public string AgregarPokemonesD(string pokemon)
     {
         return batallaActual.AgregarPokemonBD(pokemon);
+    }
+    /// <summary>
+    /// Propiedad para obtener al jugador D
+    /// </summary>
+    public Jugador JugadorD()
+    {
+        return batallaActual.GetDefensor();
     }
 
     /// <summary>
@@ -247,12 +261,12 @@ namespace Library.Combate
                     int numeroAleatorio = random.Next(1, 101);
                     if (numeroAleatorio <= movimientoAtaque.GetPrecision())
                     {
-                        texto += "Y ha acertado";
-                        texto +=$"{batallaActual.RecibirAtaqueB(movimientoAtaque)}\n";
+                        texto += "Y ha acertado.";
+                        texto +=$"\n{batallaActual.RecibirAtaqueB(movimientoAtaque)}\n";
                     }
                     else
                     {
-                        texto += ("Y ha fallado");
+                        texto += ("Y ha fallado.\n");
                     }
 
                     if (movimientoAtaque is IMovimientoEspecial movimientoEspecial)
@@ -288,7 +302,13 @@ namespace Library.Combate
         }
         return texto;
     }
-
+    /// <summary>
+    /// Muestra el número de Pokémon del equipo atacante.
+    /// </summary>
+    public string MostrarCatalogo()
+    {
+        return Pokedex.MostrarCatalogo();
+    }
     /// <summary>
     /// Muestra los ítems disponibles en el inventario del jugador atacante.
     /// </summary>
@@ -297,7 +317,7 @@ namespace Library.Combate
         if (batallaActual.GetBatallaIniciada())
         {
             Jugador jugador = batallaActual.GetAtacante();
-            return jugador.Mostrar_items();
+            return jugador.MostrarItems();
         }
 
         return "";
