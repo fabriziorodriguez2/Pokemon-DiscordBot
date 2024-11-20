@@ -1,42 +1,33 @@
-﻿//--------------------------------------------------------------------------------
-// <copyright file="Program.cs" company="Universidad Católica del Uruguay">
-//     Copyright (c) Programación II. Derechos reservados.
-// </copyright>
-//--------------------------------------------------------------------------------
+﻿using Ucu.Poo.DiscordBot.Domain;
+using Ucu.Poo.DiscordBot.Services;
 
-using System;
-using ClassLibrary;
-using DefaultNamespace;
-using Library.Combate;
+namespace Program;
 
-namespace ConsoleApplication
+/// <summary>
+/// Un programa que implementa un bot de Discord.
+/// </summary>
+internal static class Program
 {
     /// <summary>
-    /// Programa de consola de demostración.
+    /// Punto de entrada al programa.
     /// </summary>
-    public static class Program
+    private static void Main()
     {
-        /// <summary>
-        /// Punto de entrada al programa principal.
-        /// </summary>
-        public static void Main()
-        {
-            double dañoPorAtaque = 65; // Daño de rayo
-            double defensaCharmander = 60; // Defensa de Charmander
-            double hpCharmander = 85; // Charmander arranca con 85 de vida
-            double vidaCharmanderRestanteEsperada = hpCharmander - (dañoPorAtaque - defensaCharmander); // Calculos de supuesta vida charmander
-            double vidaPidgeyEsperada = 60; // Pidgey debería iniciar con 60 de vida
+        //DemoFacade();
+        DemoBot();
+    }
 
-            Menu menuPP = new Menu();
-            menuPP.UnirJugadores("Ash");
-            menuPP.UnirJugadores("Red");
-            menuPP.AgregarPokemonesA("Pidgey"); 
-            menuPP.AgregarPokemonesD("Pikachu");
-            menuPP.AgregarPokemonesA("Charmander");
-            menuPP.IniciarEnfrentamiento();
-            menuPP.CambiarPokemon(1); // Cambia a Charmander
-            menuPP.UsarMovimientos(2);//Pikachu usa rayo, danio de rayo: 65, defensa de Charmander: vida 85, defensa: 60
-            Console.WriteLine(vidaCharmanderRestanteEsperada);
-        }
+    private static void DemoFacade()
+    {
+        Console.WriteLine(Facade.Instance.AddTrainerToWaitingList("player"));
+        Console.WriteLine(Facade.Instance.AddTrainerToWaitingList("opponent"));
+        Console.WriteLine(Facade.Instance.GetAllTrainersWaiting());
+        Console.WriteLine(Facade.Instance.StartBattle("player", "opponent"));
+        Console.WriteLine(Facade.Instance.GetAllTrainersWaiting());
+    }
+
+    private static void DemoBot()
+    {
+        BotLoader.LoadAsync().GetAwaiter().GetResult();
     }
 }
