@@ -6,21 +6,18 @@ using Ucu.Poo.DiscordBot.Domain;
 namespace Ucu.Poo.DiscordBot.Commands;
 
 /// <summary>
-/// Esta clase implementa el comando 'showplayerstatus' del bot.
-/// Permite al jugador obtener el estado actual de su equipo Pokémon.
+/// Esta clase implementa el comando 'name' del bot. Este comando retorna el
+/// nombre de un Pokémon dado su identificador.
 /// </summary>
 // ReSharper disable once UnusedType.Global
-public class PlayerStatusCommand : ModuleBase<SocketCommandContext>
+public class ShowNumCommand : ModuleBase<SocketCommandContext>
 {
     /// <summary>
     /// Implementa el comando 'Playerstatus'.
     /// </summary>
-    [Command("Playerstatus")]
+    [Command("ShowPokemonNum")]
     [Summary(
-        """
-        Muestra el estado actual del equipo Pokémon del jugador
-        que envía el comando.
-        """)]
+        """Muestra el equipo del ususario que realizó el usuario y qué número tiene cada pokemon""")]
     public async Task ExecuteAsync()
     {
         try
@@ -29,12 +26,13 @@ public class PlayerStatusCommand : ModuleBase<SocketCommandContext>
 
             if (userName == Facade.Instance.JugadorA())
             {
-                string status = Facade.Instance.ShowPlayerStatus();
+                string team = Facade.Instance.ShowPokemonNum();
 
-                await ReplyAsync(status);
+                await ReplyAsync(team);
             }
             else
             {
+                // El jugador no está en la batalla o no es su turno
                 await ReplyAsync("No estás actualmente en una batalla o no es tu turno master");
             }
         }
