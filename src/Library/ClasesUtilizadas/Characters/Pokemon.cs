@@ -139,8 +139,7 @@ public class Pokemon
                 if (movimiento is IMovimientoDefensa defensamovimiento)
                 {
                     defensa += defensamovimiento.GetDefensa();
-                    texto +=
-                        $"{GetName()} ha usado su {movimiento.GetName()} para subir su defensa {defensamovimiento.GetDefensa()} puntos";
+                    return  $"{GetName()} ha usado su {movimiento.GetName()} para subir su defensa {defensamovimiento.GetDefensa()} puntos";
                 }
             }
         }

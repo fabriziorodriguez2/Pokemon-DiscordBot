@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.Logging;
 using Discord.Commands;
 using Ucu.Poo.DiscordBot.Domain;
@@ -26,16 +27,18 @@ public class AddPokemonCommand : ModuleBase<SocketCommandContext>
             await ReplyAsync("Use: !addpokemon <nombrepokemon>");
             return;
         }
-
+        TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+        string resultado = textInfo.ToTitleCase(pokemonName.ToLower());
+        
         string userName = CommandHelper.GetDisplayName(Context);
         string result = "";
         if (userName == Facade.Instance.JugadorA())
         {
-            result += Facade.Instance.AddPokemosA(pokemonName);
+            result += Facade.Instance.AddPokemosA(resultado);
         }
         else if (userName == Facade.Instance.JugadorD())
         { 
-            result += Facade.Instance.AddPokemosD(pokemonName);
+            result += Facade.Instance.AddPokemosD(resultado);
         }
         else
         {
