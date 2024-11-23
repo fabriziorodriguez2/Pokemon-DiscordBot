@@ -28,11 +28,10 @@ public class HelpCommand : ModuleBase<SocketCommandContext>
         - `!leave`: Remueve al usuario que envía el mensaje de la lista de espera
         - `!opponentstatus`: Muestra el estado actual del equipo del oponente de quien mandó el mensaje. Solo se puede usar si es el turno del jugador
         - `!playerstatus`: Muestra el estado actual del equipo del jugador que mandó el mensaje. Solo se puede usar si es el turno del jugador
-        - `!showpokemonnum`: Muestra el equipo del usuario que realizó el usuario y qué número tiene cada pokemon
+        - `!ShowPokemonDisponibles`: Muestra el equipo del usuario que realizó el usuario y qué número tiene cada pokemon
         - `!showpokedex`: Muestra la lista de Pokémon disponibles
-        - `!showpokemons`: Muestra la lista de Pokémon disponibles
         - `!showitems`: Muestra los items disponibles del usuario que usó el comando. Solo se puede usar si es el turno del jugador
-        - `!showpokemonmoves`: Muestra los movimientos disponibles del pokemon combatiente
+        - `!ShowMov`: Muestra los movimientos disponibles del pokemon combatiente
         - `!usemov`: Usa un movimiento del pokemon en turno. Solo se puede usar si es el turno del jugador
         - `!useitem <nombre item> <num pokemon>`: Usa el item dado en el pokemon seleccionado. Solo se puede usar si es el turno del jugador
         - `!waitinglist`: Muestra la lista de espera actual
