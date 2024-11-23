@@ -532,7 +532,7 @@ public static class Pokedex
         List<IMovimiento> movimientosStufful = new List<IMovimiento>
         {
             listaMovimientos[31], //Punio Certero
-            listaMovimientos[31], //Demolicion
+            listaMovimientos[32], //Demolicion
             listaMovimientos[33], //Derribo
             listaMovimientos[18] //Proteccion
         };
@@ -545,7 +545,7 @@ public static class Pokedex
         List<IMovimiento> movimientosGardevoir = new List<IMovimiento>
         {
             listaMovimientos[34], //Premonicion
-            listaMovimientos[35], //Psico Carga
+            listaMovimientos[35], //Psico Carga!
             listaMovimientos[36], //Rapidez
             listaMovimientos[18] //Proteccion
         };

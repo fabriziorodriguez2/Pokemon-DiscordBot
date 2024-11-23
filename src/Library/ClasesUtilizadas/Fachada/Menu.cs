@@ -200,22 +200,26 @@ namespace Library.Combate
 
             Jugador jugadorAtacante = batallaActual.GetAtacante();
             Pokemon pokemon = jugadorAtacante.GetPokemonEnTurno();
-            string texto = $"El Pokémon {pokemon.GetName()} tiene los siguientes movimientos:\n";
-            foreach (IMovimiento movimiento in pokemon.GetListaMovimientos())
+            string texto = $"El Pokémon {pokemon.GetName()} tiene los siguientes movimientos y sus numeros para ser utilizados son los siguientes:\n";
+            List<IMovimiento> movimientos = pokemon.GetListaMovimientos();
+            for (int i = 0; i < movimientos.Count; i++)
             {
-                if (movimiento is IMovimientoEspecial especial && especial.GetUsadoAnteriormente())
+                
+                if (movimientos[i] is IMovimientoEspecial especial && especial.GetUsadoAnteriormente())
                 {
-                    texto += $"{movimiento.GetName()}(especial) no puede ser usado en este turno\n";
+                    texto += $"{i+1}.{movimientos[i].GetName()}(especial) no puede ser usado en este turno\n";
                 }
 
-                if (movimiento is IMovimientoEspecial movimientoEspecial)
+                else if (movimientos[i] is IMovimientoEspecial movimientoEspecial)
                 {
-                    texto += $"{movimientoEspecial.GetName()} (especial)\n";
+                    texto += $"{i+1}.{movimientoEspecial.GetName()} (especial)\n";
                 }
-
-                texto += movimiento.GetName();
+                else
+                {
+                    texto += $"{i+1}.{movimientos[i].GetName()}\n";
+                }
             }
-
+            texto += "Para usarlos, ingresa el número correspondiente a cada movimiento.\n";
             return texto;
         }
         return "La batalla no ha iniciado";
@@ -253,10 +257,10 @@ namespace Library.Combate
             else
             {
                 texto += pokemonActual.UsarMovimiento(movimiento);
-                texto += ($"{pokemonActual.GetName()} ha usado {movimiento.GetName()}.");
                 
                 if (movimiento is IMovimientoAtaque movimientoAtaque)
                 {
+                    texto += ($"{pokemonActual.GetName()} ha usado {movimiento.GetName()}.");
                     Random random = new Random();
                     int numeroAleatorio = random.Next(1, 101);
                     if (numeroAleatorio <= movimientoAtaque.GetPrecision())
@@ -294,10 +298,11 @@ namespace Library.Combate
         {
             Jugador jugador = batallaActual.GetAtacante();
             List<Pokemon> listaPokemons = jugador.GetPokemons();
-            for (int i = 0; i < listaPokemons.Count; i++)
+            texto += $"{listaPokemons[0].GetName()} está en turno\n ";
+            for (int i = 1; i < listaPokemons.Count; i++)
             {
                 Pokemon pokemon = listaPokemons[i];
-                texto+= ($"{i}. {pokemon.GetName()}");
+                texto+= $"el número {i} es {pokemon.GetName()} \n";
             }
         }
         return texto;
@@ -345,5 +350,16 @@ namespace Library.Combate
             }
             return "La batalla no ha iniciado";
         }
+
+    public string GetNamePokemonA()
+    {
+        return JugadorA().GetNamePokemonTurno();
+    }
+    
+    public string GetNamePokemonD()
+    {
+        return JugadorD().GetNamePokemonTurno();
+    }
+    
     }
 }

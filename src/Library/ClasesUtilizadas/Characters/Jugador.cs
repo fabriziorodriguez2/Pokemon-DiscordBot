@@ -135,15 +135,17 @@ public class Jugador
             Pokemon pokemonencontrado = Pokedex.EntregarPokemon(nombre);
             if (pokemonencontrado != null)
             {
-                
+                string texto = "";
                 listaPokemons.Add(pokemonencontrado);
+                texto += $"Se añadió el pokemon {pokemonencontrado.GetName()} a tu equipo siendo el pokemon {listaPokemons.Count}/6, ¿vas a seguir añadiendo más?\n";
                 if (listaPokemons.Count == 1)
                 {
                     pokemonEnTurno = pokemonencontrado;
+                    texto += $"{pokemonEnTurno.GetName()} será tu primer pokemon y tu pokemon en combate\n";
                 }
-                return $"Se añadió el pokemon {pokemonencontrado.GetName()} a tu equipo, ¿vas a seguir añadiendo más?";
-            }
 
+                return texto;
+            }
             return "Ese pokemon no existe";
         }
         return "Ya tienes 6 Pokemons!";

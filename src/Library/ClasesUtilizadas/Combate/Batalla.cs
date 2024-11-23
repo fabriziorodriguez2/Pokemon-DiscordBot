@@ -90,7 +90,12 @@ namespace Library.Combate
         /// <param name="pokemon">El nombre del Pokémon que se agrega al equipo.</param>
         public string AgregarPokemonBA(string pokemon)
         {
-            return JugadorAtacante.AgregarAlEquipo(pokemon);
+            if (!BatallaIniciada)
+            {
+                return JugadorAtacante.AgregarAlEquipo(pokemon);
+            }
+
+            return "La batalla ya ha iniciado";
         }
         
         /// <summary>
@@ -99,7 +104,12 @@ namespace Library.Combate
         /// <param name="pokemon">El nombre del Pokémon que se agrega al equipo.</param>
         public string AgregarPokemonBD(string pokemon)
         {
-            return JugadorDefensor.AgregarAlEquipo(pokemon);
+            if (!BatallaIniciada)
+            {
+                return JugadorDefensor.AgregarAlEquipo(pokemon);
+            }
+
+            return "La batalla ya ha iniciado";
         }
 
         /// <summary>

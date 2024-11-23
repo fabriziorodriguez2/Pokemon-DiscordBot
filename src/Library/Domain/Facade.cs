@@ -61,7 +61,6 @@ public class Facade
         {
             return $"{displayName} agregado a la lista de espera";
         }
-        
         return $"{displayName} ya está en la lista de espera";
     }
 
@@ -261,6 +260,14 @@ public class Facade
     {
         return this.Menu.UsarItem(item, numeroPokemon);
     }
-
+    public string ShowAtualPokemonA()
+    {
+        return Menu.GetNamePokemonA();
+    }
+    
+    public string ShowAtualPokemonD()
+    {
+        return Menu.GetNamePokemonD();
+    }
 
 }
