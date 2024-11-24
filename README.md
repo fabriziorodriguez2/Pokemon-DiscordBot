@@ -13,7 +13,7 @@ Lo que más se nos dificultó fue adaptarnos al uso del bot, ya que tenía un fo
 
 ### Qué cosas aprendieron enfrentándose al proyecto que no aprendieron en clase como parte de la currícula
 
-Aprendimos cómo realizar un adapter para poder utilizar el formato que necesitábamos y el patrón strategy para poder solucionar el problema con el random de la precisión y los críticos mientras creamos los tests. Y en general aprendimos los parámetros,atributos,operandos, etc necesarios para poder realizar los comandos del bot.
+Aprendimos cómo realizar un adapter para poder utilizar el formato que necesitábamos y el patrón strategy para poder solucionar el problema con el random de la precisión y los críticos mientras creamos los tests. Y en general aprendimos elementos necesarios para poder realizar los comandos del bot.
 
 ### Qué recursos (páginas web, libros, foros, etc) encontraron que les fueron valiosos para sortear los desafíos que encontraron
 Principalmente, youtube, materiales de clase y el sitio web https://refactoring.guru/es
