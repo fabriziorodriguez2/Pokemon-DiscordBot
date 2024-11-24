@@ -339,10 +339,10 @@ namespace Library.Combate
             {
                 Jugador jugadorAtacante = batallaActual.GetAtacante();
                 List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
+                Pokemon pokemonElegido = pokemons[numeroDePokemon];
 
-                if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count)
+                if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count && jugadorAtacante.MostrarItems().Contains(item.ToLower()))
                 {
-                    Pokemon pokemonElegido = pokemons[numeroDePokemon];
                     texto += jugadorAtacante.UsarItem(item, pokemonElegido);
                     texto+=batallaActual.AvanzarTurno();
                     return texto;

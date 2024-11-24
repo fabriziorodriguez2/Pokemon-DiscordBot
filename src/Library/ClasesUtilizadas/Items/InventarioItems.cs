@@ -29,9 +29,9 @@ public class InventarioItems
     {
         items = new Dictionary<String, Item> //Crea un diccionario en el que registra cada item y cuanta cantidad hay de cada uno
         {
-            { "Superpocion",  superpocion = new Superpocion(4) },
-            { "Revivir", revivir = new Revivir(1) },
-            { "Curatotal", curatotal = new Curatotal(2) }
+            { "superpocion",  superpocion = new Superpocion(4) },
+            { "revivir", revivir = new Revivir(1) },
+            { "curatotal", curatotal = new Curatotal(2) }
         };
     }
 
@@ -43,7 +43,7 @@ public class InventarioItems
         string texto = "";
         foreach (var item in items)
         {
-            texto += ($"{item.Key}: {item.Value.Cantidad} disponibles");
+            texto += ($"{item.Key}: {item.Value.Cantidad} disponibles\n");
         }
 
         if (texto == "")
@@ -61,19 +61,20 @@ public class InventarioItems
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto del ítem.</param>
     public string UsarItem(string item, Pokemon pokemon) //Busca el item que le pasaste, llama al AplicarEfecto para que haga su efecto y baja en 1 su cantidad
     {
-        if (items.ContainsKey(item) && items[item].Cantidad > 0)
+        
+        if (items.ContainsKey(item.ToLower()) && items[item].Cantidad > 0)
         {
-            if (item == "Superpocion") //Si escribiste Superpocion, llamará al curar del revivir
+            if (item == "superpocion") //Si escribiste Superpocion, llamará al curar del revivir
             {
                 items[item].Cantidad--;
                 return superpocion.AplicarEfecto(pokemon);
             }
-            if (item == "Revivir") //Si escribiste Revivir, llamará al revivir del jugador
+            if (item == "revivir") //Si escribiste Revivir, llamará al revivir del jugador
             {
                 items[item].Cantidad--;
                 return revivir.AplicarEfecto(pokemon);
             }
-            if (item == "Curatotal")//Si escribiste Curatotal, llamará al CurarEstado del jugador
+            if (item == "curatotal")//Si escribiste Curatotal, llamará al CurarEstado del jugador
             {
                 items[item].Cantidad--;
                 return curatotal.AplicarEfecto(pokemon);

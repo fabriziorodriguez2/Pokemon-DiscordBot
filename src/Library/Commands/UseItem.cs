@@ -20,7 +20,7 @@ public class UseItem: ModuleBase<SocketCommandContext>
             string nameplayer =  CommandHelper.GetDisplayName(Context);
             if (nameplayer == Facade.Instance.JugadorA())
             {
-                await ReplyAsync(Facade.Instance.UseItem(item, pokemon));
+                await ReplyAsync(Facade.Instance.UseItem(item.ToLower(), pokemon));
             }
             else
             {

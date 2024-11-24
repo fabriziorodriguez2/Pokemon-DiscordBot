@@ -48,12 +48,6 @@ namespace Library.Combate
         /// <param name="jugador">El jugador que se va a agregar a la batalla.</param>
         public string AgregarJugador(Jugador jugador)
         {
-            if (JugadorDefensor != null && JugadorAtacante != null)
-            {
-                return
-                    "No podemos agregar más jugadores pero se te va agregar a una lista de espera, ya hay 2 jugadores para jugar";
-            }
-
             if (JugadorDefensor == null && JugadorAtacante == null)
             {
                 // Asigna aleatoriamente al jugador como defensor o atacante si ambos están vacíos.

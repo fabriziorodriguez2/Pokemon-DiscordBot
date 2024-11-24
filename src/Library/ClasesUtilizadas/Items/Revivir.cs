@@ -24,7 +24,13 @@ public class Revivir : Item
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de revivir.</param>
     public override string AplicarEfecto(Pokemon pokemon)
     {
-        pokemon.Revivir();
-        return $"{pokemon.GetName()} ha revivido con la mitad de su HP.";
+        if (!pokemon.GetIsAlive())
+        {
+            pokemon.Revivir();
+            return $"{pokemon.GetName()} ha revivido con la mitad de su HP.";
+        }
+
+        return "El pokemon seleccionado no está debilitado";
+
     }
 }
