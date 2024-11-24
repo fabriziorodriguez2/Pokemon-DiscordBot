@@ -228,8 +228,7 @@ public class Jugador
             Pokemon PokemonAEfectuar = listaPokemons[IndicePokemonAEfectuar];
             return inventarioJugador.UsarItem(item, PokemonAEfectuar);
         }
-
-        return "";
+        return "No tenés a este pokemon";
     }
 
     /// <summary>
