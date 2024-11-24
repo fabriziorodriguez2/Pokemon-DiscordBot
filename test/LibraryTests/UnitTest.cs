@@ -25,142 +25,155 @@ public class UnitTest
     /// </summary>
     public void JugadorTrataDeUsarPokemonQueNoTiene()
     {
-        Menu Menu1 = new Menu();
-        Menu1.UnirJugadores("Ash");
-        Menu1.UnirJugadores("yo");
-        Menu1.AgregarPokemonesA("Arbok");
-        Menu1.AgregarPokemonesD("Squirtle");
-        Menu1.IniciarEnfrentamiento();
-        Menu1.UsarMovimientos(1);
-        double vidaesperadasquirtle = 60;
-        double vidadada = Menu1.GetHpDefensor();
-        Assert.That(vidaesperadasquirtle, Is.EqualTo(vidadada));
+        Menu menu = new Menu();
+        menu.UnirJugadores("Ash");
+        menu.UnirJugadores("yo");
+        menu.AgregarPokemonesA("Arbok"); // Solo Ash tiene este Pokémon.
+        menu.AgregarPokemonesD("Squirtle");
+        menu.IniciarEnfrentamiento();
+        
+        var resultado = menu.CambiarPokemon(1); // Intento de usar un Pokémon no disponible.
+        
+        Assert.That(resultado, Is.EqualTo("No tienes ese pokemon")); 
     }
 
     [Test]
     public void JugadorTrataDeCambiarAPokemonQueEstaPeleando()
     {
-
-        Menu juego3 = new Menu();
-        juego3.UnirJugadores("Ash");
-        juego3.UnirJugadores("Red");
-        juego3.AgregarPokemonesA("Squirtle"); //Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
-        juego3.AgregarPokemonesD("Charmander");
-        juego3.AgregarPokemonesA("Bulbasaur"); //Bulbasaur era el segundo pokemon del equipo
-        juego3.IniciarEnfrentamiento();
-        juego3.CambiarPokemon(0); //Trata de cambiar a Squirtle por Squirtle
-        string pokemonesperado = "Squirtle";
-        string pokemonobtenido = juego3.GetPokemonActual().GetName(); //Si hubiese salido bien, sería el turno del otro jugador porque hubiese avanzado un turno
-        Assert.That(pokemonesperado, Is.EqualTo(pokemonobtenido));
-
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Squirtle"); // Squirtle es el Pokémon actual al inicio.
+        juego.AgregarPokemonesD("Charmander");
+        juego.AgregarPokemonesA("Bulbasaur"); // Bulbasaur es el segundo Pokémon del equipo.
+        juego.IniciarEnfrentamiento();
+        
+        juego.CambiarPokemon(0); // Intenta cambiar Squirtle por sí mismo.
+        
+        // Verifica que el Pokémon actual sigue siendo Squirtle.
+        string pokemonEsperado = "Squirtle";
+        string pokemonObtenido = juego.GetPokemonActual().GetName();
+        Assert.That(pokemonEsperado, Is.EqualTo(pokemonObtenido));
     }
 
     [Test]
     public void JugadorTrataDeCambiarAPokemonDebilitado()
     {
-
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
-        juego1.AgregarPokemonesA("Pikachu");
-        juego1.AgregarPokemonesD("Pidgey");
-        juego1.AgregarPokemonesD("Bulbasaur"); //Bulbasaur era el segundo pokemon del equipo
-        juego1.IniciarEnfrentamiento();
-        juego1.UsarMovimientos(1); //Jugador 1 usa Rayo y pidgey es debilitado
-        juego1.CambiarPokemon(1); //Trata de cambiar a Pidgey
-        string pokemonesperado = "Bulbasaur";
-        string
-            pokemonobtenido =
-                juego1.GetPokemonActual()
-                    .GetName(); //Si hubiese salido bien, el entrenador ahora tendría a Pidgey en combate, pero no se puede
-        Assert.That(pokemonobtenido, Is.EqualTo(pokemonesperado));
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Pikachu");
+        juego.AgregarPokemonesD("Pidgey");
+        juego.AgregarPokemonesD("Bulbasaur");
+        juego.IniciarEnfrentamiento();
+        
+        juego.UsarMovimientos(1); // Pikachu usa Rayo y Pidgey es derrotado.
+        juego.CambiarPokemon(1); // Intenta cambiar a Pidgey (debilitado).
+        
+        // Verifica que Bulbasaur es ahora el Pokémon actual.
+        string pokemonEsperado = "Bulbasaur";
+        string pokemonObtenido = juego.GetPokemonActual().GetName();
+        Assert.That(pokemonObtenido, Is.EqualTo(pokemonEsperado));
     }
 
     [Test]
     public void PokemonParalizado()
     {
-        Paralizar paralizado = new Paralizar();
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
-        juego1.AgregarPokemonesA("Pikachu");
-        juego1.AgregarPokemonesD("Bulbasaur"); //Bulbasaur era el segundo pokemon del equipo
-        juego1.IniciarEnfrentamiento();
-        juego1.UsarMovimientos(1); //Jugador 1 usa Rayo y bulbasaur es paralizado
-        Pokemon pokemon = juego1.GetPokemonActual();
-        Pokemon rival = juego1.GetPokemonRival();
-        juego1.UsarMovimientos(4);
-        rival.AgregarEfecto(paralizado);
-        Efecto efectohecho = rival.GetEfecto();
-        Efecto efectoesperado = pokemon.GetEfecto();
-        Assert.That(efectohecho.GetType(), Is.EqualTo(efectoesperado.GetType()));
+        Paralizar paralizadoEsperado = new Paralizar();
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Pikachu");
+        juego.AgregarPokemonesD("Bulbasaur");
+        juego.IniciarEnfrentamiento();
+        
+        // Pikachu usa un movimiento que paraliza al rival (Bulbasaur).
+        juego.UsarMovimientos(1);
+
+        // Obtiene el Pokémon rival y su efecto después del movimiento.
+        Pokemon rival = juego.GetPokemonRival();
+        Efecto efectoAplicado = rival.GetEfecto();
+        
+        // Verifica que el tipo de efecto aplicado es del mismo tipo que 'Paralizar'.
+        Assert.That(efectoAplicado.GetType(), Is.EqualTo(paralizadoEsperado.GetType()));
     }
     [Test]
     public void TrataDeUsarSuperPocionEnPokemonDebilitado()
     {
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
-        juego1.AgregarPokemonesA("Pikachu");
-        juego1.AgregarPokemonesD("Pidgey");
-        juego1.AgregarPokemonesA("Bulbasaur");
-        juego1.IniciarEnfrentamiento();
-        juego1.UsarMovimientos(1); //Jugador 1 usa Rayo y pidgey es debilitado
-        juego1.UsarItem("Superpocion", 1); //Trata de curar a Pidgey
-        double vidaEsperada2 = 0;
-        Pokemon pidgey = juego1.GetPokemonActual();
-        double vidaObtenida2 = pidgey.GetVidaActual();
-        // Usar Superpoción para restaurar 70 HP 
-        Assert.That(vidaObtenida2, Is.EqualTo(vidaEsperada2));
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Pikachu");
+        juego.AgregarPokemonesD("Pidgey");
+        juego.AgregarPokemonesA("Bulbasaur");
+        juego.IniciarEnfrentamiento();
+        juego.UsarMovimientos(1); //Jugador 1 usa Rayo y pidgey es debilitado
+        juego.UsarItem("Superpocion", 1); //Trata de curar a Pidgey
+        
+        //Verifica que la vida de Pidgey es 0 aun siendo curado con pocion después de ser debilitado 
+        Assert.That(juego.GetPokemonActual().GetVidaActual(), Is.EqualTo(0));
     }
     
 
     [Test]
     public void PokemonQuemado()
     {
+        Menu menu = new Menu();
+        menu.UnirJugadores("yo");
+        menu.UnirJugadores("diego");
+        menu.AgregarPokemonesA("Charmander");
+        menu.AgregarPokemonesD("Squirtle");
+        menu.IniciarEnfrentamiento();
+        
+        menu.UsarMovimientos(2); // Charmander usa Lanzallamas (quema al rival).
+        menu.UsarMovimientos(4); // Squirtle usa Protección.
+        
+        // Verificar que Squirtle tiene el HP esperado después de usar Protección.
+        int hpEsperado = 72; 
+        Assert.That(menu.GetHpDefensor(), Is.EqualTo(hpEsperado));
 
-        Menu Menu1 = new Menu();
-        Menu1.UnirJugadores("Ansu");
-        Menu1.UnirJugadores("Cima");
-        Menu1.AgregarPokemonesA("Charmander");
-        Menu1.AgregarPokemonesD("Squirtle");
-        Menu1.IniciarEnfrentamiento();
-        Menu1.UsarMovimientos(2); //El charmander hace lanzallamas al squirtle, no le hace daño pero lo quema
-        Menu1.UsarMovimientos(4); // El squirtle hace protección
-        double vidaesperadasquirtle = 72;
-        double vidadada = Menu1.GetHpDefensor();
-        Assert.That(vidaesperadasquirtle, Is.EqualTo(vidadada));
+        // Verificar que Squirtle está quemado.
+        Pokemon defensor = menu.GetPokemonRival();
+        Assert.That(defensor.GetEfecto().GetType(), Is.EqualTo(typeof(Quemar)));
     }
 
     [Test]
-
     public void PokemonDormido()
     {
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Stufful");
+        juego.AgregarPokemonesD("Squirtle");
+        juego.IniciarEnfrentamiento();
+        
+        // Pikachu usa un movimiento que paraliza al rival (Bulbasaur).
+        juego.UsarMovimientos(1);
 
-        Menu Menu1 = new Menu();
-        Menu1.UnirJugadores("Ansu");
-        Menu1.UnirJugadores("Cima");
-        Menu1.AgregarPokemonesA("Pidgey");
-        Menu1.AgregarPokemonesD("Squirtle");
-        Menu1.IniciarEnfrentamiento();
-        Menu1.UsarMovimientos(1); //El Pidgey hace vendaval y lo duerme
-        Menu1.UsarMovimientos(1); // El squirtle trata de usar hidropulso pero no lo consigue, la vida del pidgey se mantiene intacta
-        double vidaesperadasquirtle = 80;
-        double vidadada = Menu1.GetHpDefensor();
-        Assert.That(vidaesperadasquirtle, Is.EqualTo(vidadada));
-
+        // Obtiene el Pokémon rival y su efecto después del movimiento.
+        Pokemon rival = juego.GetPokemonRival();
+        
+        // Verifica que el tipo de efecto aplicado es del mismo tipo que 'Dormir'.
+        Assert.That(rival.GetEfecto().GetType(), Is.EqualTo(typeof(Dormir)));
     }
 
     [Test]
     public void TratoDeAtacarSinIniciarBatalla() //Verificacion Cambio de Pokemon de Turno
     {
-        Menu juego3 = new Menu();
-        juego3.UnirJugadores("Ash");
-        juego3.UnirJugadores("Red");
-        juego3.AgregarPokemonesA("Squirtle"); //Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
-        juego3.AgregarPokemonesD("Charmander");
-        juego3.UsarMovimientos(1);
-        Assert.That(juego3.GetHpDefensor(),Is.EqualTo(85));
+        Menu juego= new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Squirtle"); //Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
+        juego.AgregarPokemonesD("Charmander");
+        
+        juego.UsarMovimientos(1);
+        
+        // Verifica que la batalla no fue iniciada y no uso el movimiento
+        Assert.That(juego.UsarMovimientos(1),Is.EqualTo("La batalla no ha iniciado"));
+        
+        // Verifica que la vida de Charmander esta completa
+        Assert.That(juego.GetHpDefensor(),Is.EqualTo(85));
+        
     }
 
     [Test]
@@ -169,28 +182,29 @@ public class UnitTest
     /// </summary>
     public void NoAgregoPokemons()
     {
-        Menu juego4 = new Menu();
-        juego4.UnirJugadores("Don Dimadon");
-        juego4.UnirJugadores("Timmy Turner");
-        juego4.AgregarPokemonesD("Squirtle");
-        juego4.IniciarEnfrentamiento();
-        juego4.UsarMovimientos(1);
-        double vidaDefensor = juego4.GetHpDefensor();
-        Assert.That(vidaDefensor,Is.EqualTo(80));
+        Menu juego = new Menu();
+        juego.UnirJugadores("Don Dimadon");
+        juego.UnirJugadores("Timmy Turner");
+        juego.AgregarPokemonesD("Squirtle");
+        juego.IniciarEnfrentamiento();
+        
+        // Verifica que devuelve un mensaje avisando que no tiene pokemons un jugador 
+        Assert.That(juego.IniciarEnfrentamiento(),Is.EqualTo("La batalla ya ha comenzado o uno de los jugadores no tiene Pokémon."));
     }
 
     [Test]
-    
-
     public void JugadorUsaPocionParaPokemonConVidaCompleta()
     {
-        Menu juego4 = new Menu();
-        juego4.UnirJugadores("Don Dimadon");
-        juego4.UnirJugadores("Bellota");
-        juego4.AgregarPokemonesA("Charmander"); //85
-        juego4.UsarItem("Superpocion", 1);
+        Menu juego = new Menu();
+        juego.UnirJugadores("Don Dimadon");
+        juego.UnirJugadores("Bellota");
+        juego.AgregarPokemonesA("Charmander"); //85
+        juego.UsarItem("Superpocion", 1);
+        
         int vidatotalCharmander = 85;
-        Assert.That(vidatotalCharmander, Is.EqualTo(juego4.GetHpAtacante()));
+        
+        // Verifica que la superpocion no le agrego vida de mas
+        Assert.That(vidatotalCharmander, Is.EqualTo(juego.GetHpAtacante()));
     }
 
     [Test]
@@ -200,17 +214,18 @@ public class UnitTest
     /// </summary>
     public void PierdoBatalla()
     {
-        Menu juego6 = new Menu();
-        juego6.UnirJugadores("Ash");
-        juego6.UnirJugadores("Red");
-        juego6.AgregarPokemonesA("Pikachu");
-        juego6.AgregarPokemonesD("Pidgey");
-        juego6.IniciarEnfrentamiento();
-        juego6.UsarMovimientos(1); //Pikachu usa royo
-        juego6.MostrarEstadoEquipo();
-        bool batallaperdida = juego6.GetBatallaI() && juego6.GetBatallaT();
-        bool batallaperdidasupuesta = true;
-        Assert.That(batallaperdida, Is.EqualTo(batallaperdidasupuesta));
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Pikachu");
+        juego.AgregarPokemonesD("Pidgey");
+        juego.IniciarEnfrentamiento();
+        juego.UsarMovimientos(1); //Pikachu usa royo
+       
+        bool batallaperdida = juego.GetBatallaI() && juego.GetBatallaT();
+        
+        // Verifica que la batalla fue terminada al perder un jugador
+        Assert.That(batallaperdida, Is.EqualTo(true));
     }
 
     [Test]
@@ -222,24 +237,40 @@ public class UnitTest
         StringWriter consoleOutput = new StringWriter();
         Console.SetOut(consoleOutput);
 
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
 
-        juego1.AgregarPokemonesA("Squirtle");
-        juego1.AgregarPokemonesA("Pidgey");
-        juego1.AgregarPokemonesA("Larvitar");
-        juego1.AgregarPokemonesA("Caterpie");
-        juego1.AgregarPokemonesA("Charmander");
-        juego1.AgregarPokemonesA("Dratini");
-        juego1.AgregarPokemonesA("Gengar");
+        juego.AgregarPokemonesA("Squirtle");
+        juego.AgregarPokemonesA("Pidgey");
+        juego.AgregarPokemonesA("Larvitar");
+        juego.AgregarPokemonesA("Caterpie");
+        juego.AgregarPokemonesA("Charmander");
+        juego.AgregarPokemonesA("Dratini");
+        juego.AgregarPokemonesA("Gengar");
 
-        List<Pokemon> listapokemonsatacante = juego1.GetEquipoA();
+        List<Pokemon> listapokemonsatacante = juego.GetEquipoA();
         int numero = listapokemonsatacante.Count;
-
+        
+        // Verifica que agrego los pokemones al jugador correctamente
         Assert.That(6, Is.EqualTo(numero));
 
     }
-
+    [Test]
+    public void UsoDeEnvenenamiento()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("quien");
+        menu.UnirJugadores("yo");
+        menu.AgregarPokemonesA("Arbok");
+        menu.AgregarPokemonesD("Squirtle");
+        menu.IniciarEnfrentamiento();
+        menu.UsarMovimientos(1);
+        
+        Pokemon rival = menu.GetPokemonActual();
+        
+        //Verifica que el pokemon rival esta envenenado
+        Assert.That(rival.GetEfecto().GetType(),Is.EqualTo(typeof(Envenenar)));
+    }
 }
 
