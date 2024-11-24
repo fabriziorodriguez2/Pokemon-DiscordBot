@@ -14,15 +14,10 @@ public class UnitTest
 {
     /// <summary>
     /// Prueba de la clase <see cref="Menu"/>.
-    /// Estos test nos permiten verificar que las historias de usuarios están bien implementadas
+    /// Estos test nos permiten verificar que fragmentos del codigo anden bien detectando errores tempranamente.
     /// </summary>
 
     [Test]
-    /// <summary>
-    /// Este test verifica la cuarta historia de usuario ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
-    /// Además tambien cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
-    /// Además que el que comienza es squirtle y bulbasaur , para luego jugar pikachu repetando el orden del enfrentamiento
-    /// </summary>
     public void JugadorTrataDeUsarPokemonQueNoTiene()
     {
         Menu menu = new Menu();
