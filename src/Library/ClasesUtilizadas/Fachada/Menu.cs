@@ -344,7 +344,8 @@ namespace Library.Combate
                 {
                     Pokemon pokemonElegido = pokemons[numeroDePokemon];
                     texto += jugadorAtacante.UsarItem(item, pokemonElegido);
-                    batallaActual.AvanzarTurno();
+                    texto+=batallaActual.AvanzarTurno();
+                    return texto;
                 }
                 return "Seleccione el pokemon correctamente";
             }
