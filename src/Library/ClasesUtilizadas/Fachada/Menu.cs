@@ -338,16 +338,20 @@ namespace Library.Combate
             if (batallaActual.GetBatallaIniciada())
             {
                 Jugador jugadorAtacante = batallaActual.GetAtacante();
-                List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
-
-                if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count)
+                if (jugadorAtacante.ItemInInventory(item))
                 {
-                    Pokemon pokemonElegido = pokemons[numeroDePokemon];
-                    texto += jugadorAtacante.UsarItem(item, pokemonElegido);
-                    texto+=batallaActual.AvanzarTurno();
-                    return texto;
+                    List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
+                    if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count)
+                    {
+                        Pokemon pokemonElegido = pokemons[numeroDePokemon];
+                        texto += jugadorAtacante.UsarItem(item, pokemonElegido);
+                        texto += batallaActual.AvanzarTurno();
+                        return texto;
+                    }
+
+                    return "Seleccione el pokemon correctamente";
                 }
-                return "Seleccione el pokemon correctamente";
+                return "Item no disponible o cantidad insuficiente";
             }
             return "La batalla no ha iniciado";
         }

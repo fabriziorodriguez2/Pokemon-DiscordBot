@@ -35,6 +35,11 @@ public class InventarioItems
         };
     }
 
+    public Dictionary<String,Item> GetItemsInventory()
+    {
+        return this.items;
+    }
+
     /// <summary>
     /// Muestra en consola los ítems disponibles en el inventario y su cantidad.
     /// </summary>
@@ -43,7 +48,7 @@ public class InventarioItems
         string texto = "";
         foreach (var item in items)
         {
-            texto += ($"{item.Key}: {item.Value.Cantidad} disponibles");
+            texto += ($"{item.Key}: {item.Value.GetCantidad} disponibles");
         }
 
         if (texto == "")
@@ -61,26 +66,23 @@ public class InventarioItems
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto del ítem.</param>
     public string UsarItem(string item, Pokemon pokemon) //Busca el item que le pasaste, llama al AplicarEfecto para que haga su efecto y baja en 1 su cantidad
     {
-        if (items.ContainsKey(item) && items[item].Cantidad > 0)
-        {
+        Item it = items[item];
             if (item == "Superpocion") //Si escribiste Superpocion, llamará al curar del revivir
             {
-                items[item].Cantidad--;
+                it.SetCantidad();
                 return superpocion.AplicarEfecto(pokemon);
             }
             if (item == "Revivir") //Si escribiste Revivir, llamará al revivir del jugador
             {
-                items[item].Cantidad--;
+                it.SetCantidad();
                 return revivir.AplicarEfecto(pokemon);
             }
             if (item == "Curatotal")//Si escribiste Curatotal, llamará al CurarEstado del jugador
             {
-                items[item].Cantidad--;
+                it.SetCantidad();
                 return curatotal.AplicarEfecto(pokemon);
                 
             }
-            return "Seleccione una opcion correcta por favor, 'SuperPocion' para usar una superposión, 'Revivir' para usar un revivir o 'CuraTotal' para usar un curatotal";
-        }
-        return "Ítem no disponible o cantidad insuficiente.";
+            return "Seleccione una opcion correcta por favor, 'SuperPocion', 'Revivir' o 'Curatotal'";
     }
 }

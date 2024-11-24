@@ -41,6 +41,24 @@ public class Jugador
     {
         return pokemonEnTurno.GetPuedeAtacar();
     }
+
+    public bool ItemInInventory(string item)
+    {
+        Item ite = inventarioJugador.GetItemsInventory()[item];
+        if (ite.GetCantidad()>0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool PokemonNumAlive(int numpokemon)
+    {
+        Pokemon pokemon = listaPokemons[numpokemon];
+        return pokemon.GetIsAlive();
+    }
+    
     /// <summary>
     /// Aplica el efecto del Pokémon en turno sobre otro Pokémon.
     /// </summary>
@@ -224,9 +242,15 @@ public class Jugador
     {
         if (listaPokemons.Contains(pokemon))
         {
-            int IndicePokemonAEfectuar = listaPokemons.IndexOf(pokemon);
-            Pokemon PokemonAEfectuar = listaPokemons[IndicePokemonAEfectuar];
-            return inventarioJugador.UsarItem(item, PokemonAEfectuar);
+            Item it = inventarioJugador.GetItemsInventory()[item];
+            if (it is Curatotal && !pokemon.GetIsAlive() || it is not Curatotal)
+            {
+                    int IndicePokemonAEfectuar = listaPokemons.IndexOf(pokemon);
+                    Pokemon PokemonAEfectuar = listaPokemons[IndicePokemonAEfectuar];
+                    return inventarioJugador.UsarItem(item, PokemonAEfectuar);
+            }
+
+            return "El pokemon no esta debilitado";
         }
         return "No tenés a este pokemon";
     }

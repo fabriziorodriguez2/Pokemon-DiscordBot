@@ -21,7 +21,7 @@ public abstract class Item
     /// Obtiene o establece la cantidad de este ítem disponible.
     /// </summary>
     /// <value>La cantidad de ítems disponibles.</value>
-    public int Cantidad { get; set; }
+    private int Cantidad { get; set; }
 
     /// <summary>
     /// Inicializa una nueva instancia de la clase <see cref="Item"/> con la cantidad especificada.
@@ -30,6 +30,19 @@ public abstract class Item
     protected Item(int cantidad)
     {
         this.Cantidad = cantidad;
+    }
+
+    public void SetCantidad()
+    {
+        if (this.Cantidad > 0)
+        {
+            this.Cantidad -= 1;
+        }
+    }
+
+    public int GetCantidad()
+    {
+        return this.Cantidad;
     }
 
     /// <summary>
