@@ -5,185 +5,28 @@ using Library.Combate;
 using Library.Tipos;
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using Ucu.Poo.DiscordBot.Domain;
 
 namespace Program.Tests.Combate;
 
 [TestFixture]
-// [TestSubject(typeof(Menu))]
-public class MenuTest
+public class UserStoriesTests
 {
-    /// <summary>
-    /// Prueba de la clase <see cref="Menu"/>.
-    /// Estos test nos permiten verificar que las historias de usuarios están bien implementadas
-    /// </summary>
-    [Test]
-    /// <summary>
-    /// Este test verifica la tercer historia de usuario
-    /// </summary>
-    public void PikachuDañaAPidgey()
-    {
-        // 95 de daño del ataque rayo * efectividad (2) 
-        int vidaesperada = 0; // tiene 60 de vida y 40 de defensa así que aguantría un golpe de 99 de daño como mucho 
-        Menu menuPP = new Menu();
-        menuPP.UnirJugadores("Ash");
-        menuPP.UnirJugadores("Red");
-        menuPP.AgregarPokemonesA("Pikachu");
-        menuPP.AgregarPokemonesD("Pidgey");
-        menuPP.IniciarEnfrentamiento();
-        menuPP.UsarMovimientos(1); //Pikachu usa royo
-        Assert.That(vidaesperada,Is.EqualTo(menuPP.GetHpAtacante())); // Verificar que la vida de Pidgey es 0
-        Assert.That(80,Is.EqualTo(menuPP.GetHpDefensor())); // Verificar que Pikachu mantiene su HP
-    }
-    [Test]
-    public void PidgeyPorCharmanderParaAguantarAPikachu()
-    {
-        // Arrange
-        double dañoPorAtaque = 65; // Daño de rayo
-        double defensaCharmander = 60; // Defensa de Charmander
-        double hpCharmander = 85; // Charmander arranca con 85 de vida
-        double vidaCharmanderRestanteEsperada = hpCharmander - (dañoPorAtaque - defensaCharmander); // Calculos de supuesta vida charmander
-        double vidaPidgeyEsperada = 60; // Pidgey debería iniciar con 60 de vida
-
-        Menu menuPP = new Menu();
-        menuPP.UnirJugadores("Ash");
-        menuPP.UnirJugadores("Red");
-        menuPP.AgregarPokemonesA("Pidgey"); 
-        menuPP.AgregarPokemonesD("Pikachu");
-        menuPP.AgregarPokemonesA("Charmander");
-        menuPP.IniciarEnfrentamiento();
-        menuPP.CambiarPokemon(1); // Cambia a Charmander
-        menuPP.UsarMovimientos(2);//Pikachu usa rayo, danio de rayo: 65, defensa de Charmander: vida 85, defensa: 60
-        
-        Assert.That(vidaCharmanderRestanteEsperada,Is.EqualTo(menuPP.GetHpAtacante())); // Verificar que la vida de Charmander es la esperada
-        menuPP.CambiarPokemon(1);//Cambio a Pidgey, pasa a ser defensor al usar su turno
-        menuPP.UsarMovimientos(4);//Pikachu usa proteccion
-        Assert.That( menuPP.GetHpAtacante(),Is.EqualTo(vidaPidgeyEsperada)); //Verifica que pidgey sigue intecto
-    }
-    [Test]
-    /// <summary>
-    /// Este test verifica la cuarta historia de usuario ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
-    /// Además tambien cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
-    /// Además que el que comienza es squirtle y bulbasaur , para luego jugar pikachu repetando el orden del enfrentamiento
-    /// </summary>
-    public void BulbasaurPorSquirtleParaAguantarAPikachu()
-    {
-        int dañoPorAtaque = 95 / 2 ;
-        int defensaBulbasaur = 70; 
-        int hpBulbasaurEsperado = 90;
-        int vidabulbasaurRestanteEsperada = 90; // Sabemos que no alzcanza para romper su defensa
-        int vidatortugaEsperada = 80; 
-
-        Menu menuPP = new Menu();
-        menuPP.UnirJugadores("Ash");
-        menuPP.UnirJugadores("Red");
-        menuPP.AgregarPokemonesA("Squirtle"); 
-        menuPP.AgregarPokemonesD("Pikachu"); 
-        menuPP.AgregarPokemonesA("Bulbasaur"); 
-        menuPP.IniciarEnfrentamiento();
-        menuPP.CambiarPokemon(1); // Cambia a bulbasaur
-        menuPP.UsarMovimientos(2); // Pikachu usa rayo, daño de 65/2 = 32,5 
-            
-            
-        Assert.That(vidabulbasaurRestanteEsperada,Is.EqualTo(menuPP.GetHpAtacante())); // Verificar que la vida de bulbasour es la esperada
-        menuPP.CambiarPokemon(1); // Cambiar a Squirtle
-        Assert.That(vidatortugaEsperada,Is.EqualTo(menuPP.GetHpDefensor())); //Verifica que bulbasaur sigue intecto
-    }
-    [Test]
-    /// <summary>
-    /// Este test verifica la segunda historia de usuario
-    /// </summary>
-    public void Especial() //En este test se puede ver que cuando el jugador 1 intenta usar el ataque especial de nuevo no puede hacerlo. 
-    {
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
-        juego1.AgregarPokemonesA("Pikachu");
-        
-        juego1.AgregarPokemonesD("Caterpie");
-        
-        juego1.IniciarEnfrentamiento();
-        juego1.MostrarAtaquesDisponibles();
-        juego1.UsarMovimientos(1);//Jugador 1 usa Rayo(especial), vida del contrincante en 45
-        juego1.UsarMovimientos(1);//Jugador2 usa picotazo cola
-        juego1.UsarMovimientos(1);//Jugador 1 intenta usar el Rayo nuevamente pero no puede, vida del contrincante se mantiene
-        int vidaesperadadefensor = 5;
-        double vidaObtenidaDefensor = juego1.GetHpDefensor();
-        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
-    }
-    
-    [Test]
-    public void Inmune() //En este test se puede ver que cuando un Pokemon que es inmune a otro es atacado, su vida no se ve afectada
-    {
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
-        juego1.AgregarPokemonesA("Pikachu");
-        //Usamos a pikachu porque electrico es inmune a electrico y el ataque Rayo es de tipo electrico
-        juego1.AgregarPokemonesD("Pikachu");
-        
-        juego1.IniciarEnfrentamiento();
-        juego1.UsarMovimientos(1);//Jugador 1 usa Rayo(electrico)
-        juego1.UsarMovimientos(1);//Jugador2 usa Rayo(electrico)
-        int vidaesperadadefensor = 80;
-        double vidaObtenidaDefensor = juego1.GetHpDefensor();
-        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
-    }
-
-    [Test]
-    /// <summary>
-    /// Este test verifica la quinta historia de usuario ya que pikachu siempre va a ser el pokemon atacante, es decir el que empiece
-    /// Junto a esto tenemos un Console.WriteLine que indica de quien es el turno (Tenemos pensado hacer un string builder que forme el mensaje para el usuario en cada turno)
-    /// </summary>
-    public void Defensa()//Demuestra que defensa no hace daño
-    {
-        Menu juego2 = new Menu();
-        juego2.UnirJugadores("Ash");
-        juego2.UnirJugadores("Red");
-        juego2.AgregarPokemonesA("Pikachu");
-        juego2.AgregarPokemonesD("Charmander");
-        juego2.IniciarEnfrentamiento();
-        juego2.UsarMovimientos(4);//El movimiento 4 siempre es de defensa, por lo que no provoca daño al contrincante
-        double vidaesperadadefensor = 80;
-        double vidaObtenidaDefensor = juego2.GetHpDefensor();
-        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
-    }
-
-    [Test]
-    public void CambioPokemon()//Verificacion Cambio de Pokemon de Turno
-    {
-        Menu juego3 = new Menu();
-        juego3.UnirJugadores("Ash");
-        juego3.UnirJugadores("Red");
-        juego3.AgregarPokemonesA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
-        juego3.AgregarPokemonesD("Charmander");
-        juego3.AgregarPokemonesA("Bulbasaur");//Bulbasaur era el segundo pokemon del equipo
-        juego3.IniciarEnfrentamiento();
-        juego3.CambiarPokemon(1);//Bulbasaur para a ser el Pokemon en Turno
-        juego3.UsarMovimientos(1);
-        string pokemonesperado = "Bulbasaur";
-        string pokemonobtenido = juego3.GetPokemonActual().GetName();
-        Assert.That(pokemonesperado,Is.EqualTo(pokemonobtenido));
-    }
-
-    [Test]
     /// <summary>
     /// Este test verifica la primer historia de usuario y verifica la historia de usuario que no suma a una lista a los usuarios que no pueden combatir
     /// </summary>
+    [Test]
     public void Agrego6Pokemons()  
     {
-        Menu juego4 = new Menu();
-        juego4.UnirJugadores("Don Dimadon");
-        juego4.UnirJugadores("Timmy Turner");
-    
-        juego4.AgregarPokemonesA("Charmander");
-        juego4.AgregarPokemonesA("Squirtle");
-        juego4.AgregarPokemonesA("Bulbasaur");
-        juego4.AgregarPokemonesA("Dratini");
-        juego4.AgregarPokemonesA("Arbok");
-        juego4.AgregarPokemonesA("Charmander");
-        //List<Pokemon> listadada = juego4.(); falta getear el equipo del atacantes
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Charmander");
+        Facade.Instance.AddPokemosA("Squirtle");
+        Facade.Instance.AddPokemosA("Bulbasaur");
+        Facade.Instance.AddPokemosA("Dratini");
+        Facade.Instance.AddPokemosA("Arbok");
+        Facade.Instance.AddPokemosA("Charmander");
         List<string> listadadaAstring = new List<string>();
-        foreach (Pokemon pokemon in juego4.GetEquipoA())
+        foreach (var pokemon in Facade.Instance.Menu.GetEquipoA())
         {
             listadadaAstring.Add(pokemon.GetName());
         }
@@ -202,136 +45,250 @@ public class MenuTest
             Assert.That(listadadaAstring, Does.Contain(nombre));
         }
         
-        // CollectionAssert.AreEqual(listaesperada,listadadaAstring);
     }
-
+    /// <summary>
+    /// Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catalogo de movmientos
+    /// </summary>
     [Test]
-    public void VeoHPDeMisPokemonsYPokemonsOponentes()
+    public void VerAtaquesDisponiblesDeMisPokemons() //En este test se puede ver que cuando el jugador 1 intenta usar el ataque especial de nuevo no puede hacerlo. 
     {
-        Menu juego4 = new Menu();
-        juego4.UnirJugadores("Don Dimadon");
-        juego4.UnirJugadores("Bellota");
-        juego4.AgregarPokemonesA("Charmander");//85
-        juego4.AgregarPokemonesD("Squirtle");//80
-        string vidasdadas= $"{juego4.GetHpAtacante()}/{juego4.GetHpDefensor()}";
-        string vidasesperadas = "85/80";
-        Assert.That(vidasdadas, Is.EqualTo(vidasesperadas));
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Pikachu");
+        Facade.Instance.AddPokemosD("Caterpie");
+        Facade.Instance.InitializeBattle();
+        
+        Assert.That(Facade.Instance.ShowAvailableMoves(),Is.EqualTo("El Pokémon Pikachu tiene los siguientes movimientos y sus numeros para ser utilizados son los siguientes:\n" +
+                                                                    "1.Rayo (especial)\n"+
+                                                                    "2.Electro Bola\n"+
+                                                                    "3.Ataque Rápido\n"+
+                                                                    "4.Protección\n"+
+                                                                    "Para usarlos, ingresa el número correspondiente a cada movimiento.\n"));
     }
+    /// <summary>
+    /// Este test verifica la tercer historia de usuario que comprueba que las vidas se actualizan despues de un ataque
+    /// </summary>
     [Test]
+    public void PikachuDañaAPidgey()
+    {
+        // 95 de daño del ataque rayo * efectividad (2) 
+        int vidaesperada = 0; // tiene 60 de vida y 40 de defensa así que aguantría un golpe de 99 de daño como mucho 
+        Facade.Instance.StartBattle("Ash","joshua");
+        Facade.Instance.AddPokemosA("Pikachu");
+        Facade.Instance.AddPokemosD("Pidgey");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(1); //Pikachu usa royo
+        
+        Assert.That(vidaesperada,Is.EqualTo(Facade.Instance.Menu.GetHpAtacante())); // Verificar que la vida de Pidgey es 0
+        Assert.That(80,Is.EqualTo(Facade.Instance.Menu.GetHpDefensor())); // Verificar que Pikachu mantiene su HP
+    }
+    /// <summary>
+    /// Este test verifica la cuarta historia de usuario ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
+    /// Además tambien cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
+    /// Además que el que comienza es squirtle y bulbasaur , para luego jugar pikachu repetando el orden del enfrentamiento
+    /// </summary>
+    [Test]
+    public void BulbasaurPorSquirtleParaAguantarAPikachu()
+    {
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Squirtle");
+        Facade.Instance.AddPokemosA("Bulbasaur");
+        Facade.Instance.AddPokemosD("Pikachu");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.ChangePokemon(1); // Cambia a bulbasaur
+        Facade.Instance.UsePokemonMove(2); // Pikachu usa rayo, daño de 65/2 = 32,5 
+        
+        int dañoPorAtaque = 95 / 2 ;
+        int defensaBulbasaur = 70; 
+        int hpBulbasaurEsperado = 90;
+        int vidabulbasaurRestanteEsperada = 90; // Sabemos que no alzcanza para romper su defensa
+        int vidatortugaEsperada = 80;
+            
+        Assert.That(vidabulbasaurRestanteEsperada,Is.EqualTo(Facade.Instance.Menu.GetHpAtacante())); // Verificar que la vida de bulbasour es la esperada
+        Facade.Instance.ChangePokemon(1); // Cambiar a Squirtle
+        Assert.That(vidatortugaEsperada,Is.EqualTo(Facade.Instance.Menu.GetHpDefensor())); //Verifica que bulbasaur sigue intacto
+    }
+    /// <summary>
+    /// Este test verifica la quinta historia de usuario ya que pikachu siempre va a ser el pokemon atacante, es decir el que empiece
+    /// Junto a esto tenemos un Console.WriteLine que indica de quien es el turno (Tenemos pensado hacer un string builder que forme el mensaje para el usuario en cada turno)
+    /// </summary>
+    [Test]
+    public void Defensa()//Demuestra que defensa no hace daño
+    {
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Pikachu");
+        Facade.Instance.AddPokemosD("Charmander");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(4);//El movimiento 4 siempre es de defensa, por lo que no provoca daño al contrincante
+        double vidaesperadadefensor = 80;
+        double vidaObtenidaDefensor = Facade.Instance.Menu.GetHpDefensor();
+        
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
     /// <summary>
     /// Este test verifica la sexta historia de usuario ya que la batalla inicia y termina
     /// El mensaje impreso en programa pasará a ser un string pasado al bot de discord
     /// </summary>
+    [Test]
     public void GanoBatalla()
     {
-        Menu juego6 = new Menu();
-        juego6.UnirJugadores("Ash");
-        juego6.UnirJugadores("Red");
-        juego6.AgregarPokemonesA("Pikachu");
-        juego6.AgregarPokemonesD("Pidgey");
-        juego6.IniciarEnfrentamiento();
-        juego6.UsarMovimientos(1); //Pikachu usa royo
-        juego6.MostrarEstadoRival();
-        juego6.UsarMovimientos(3);
-        juego6.UsarMovimientos(2);
-        juego6.UsarMovimientos(2);
-        bool batallaganada = juego6.GetBatallaI() && juego6.GetBatallaT();
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Pikachu");
+        Facade.Instance.AddPokemosD("Pidgey");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(1); //Pikachu usa royo
+        Facade.Instance.ShowOpponentStatus();
+        Facade.Instance.UsePokemonMove(3);
+        Facade.Instance.UsePokemonMove(2);
+        Facade.Instance.UsePokemonMove(2);
+        bool batallaganada = Facade.Instance.IsBattleOngoing();
         bool batallaganadasupuesta = true;
+        
         Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
     }
-    [Test]
     /// <summary>
-    /// Este test verifica la  historia de usuario que nos permite usar varios items
+    /// Este test verifica la septima historia de usuario ya que podes cambiar correctamente
+    /// de Pokemon durante la batalla
     /// </summary>
+    [Test]
+    public void CambioPokemon()//Verificacion Cambio de Pokemon de Turno
+    {
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
+        Facade.Instance.AddPokemosD("Charmander");
+        Facade.Instance.AddPokemosA("Bulbasaur");//Bulbasaur era el segundo pokemon del equipo
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.ChangePokemon(1);//Bulbasaur para a ser el Pokemon en Turno
+        Facade.Instance.UsePokemonMove(1);
+        string pokemonesperado = "Bulbasaur";
+        string pokemonobtenido = Facade.Instance.Menu.GetPokemonActual().GetName();
+        Assert.That(pokemonesperado,Is.EqualTo(pokemonobtenido));
+    }
+    /// <summary>
+    /// Este test verifica la octava historia de usuario que nos permite usar varios items
+    /// </summary>
+    [Test]
     public void UsoItemEnBatalla()
     {
         //Este test muestra el uso de un revivir en la batalla
-        Menu juego1 = new Menu();
-        juego1.UnirJugadores("Ash");
-        juego1.UnirJugadores("Red");
-        juego1.AgregarPokemonesA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
-        juego1.AgregarPokemonesD("Charmander");
-        Pokemon pokemon = juego1.GetPokemonActual();
-        juego1.IniciarEnfrentamiento();
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
+        Facade.Instance.AddPokemosD("Charmander");
+        var pokemon = Facade.Instance.Menu.GetPokemonActual();
+        Facade.Instance.InitializeBattle();
         pokemon.ChangeIsAlive();
         // Usar Revivir para restaurar 50% del HP total
-        juego1.UsarItem("Revivir", 0); //Revive a Squirtle
+        Facade.Instance.UseItem("Revivir", 0); //Revive a Squirtle
         double vidaEsperada = 40;
         double vidaObtenida = pokemon.GetVidaActual();
         Assert.That(vidaObtenida, Is.EqualTo(vidaEsperada)); // Verifica que Squirtle tiene 40 HP no anda aún
+    }
+
+    /// <summary>
+    /// Este test verifica la novena historia de usuario que nos permite unirnos a la lista
+    /// de jugaodes esperando por un oponente
+    /// </summary>
+    [Test]
+    public void AgregarJugadorAListaDeEspera()
+    {
         
+    }
+
+    [Test]
+    public void PidgeyPorCharmanderParaAguantarAPikachu()
+    {
+        // Arrange
+        double dañoPorAtaque = 65; // Daño de rayo
+        double defensaCharmander = 60; // Defensa de Charmander
+        double hpCharmander = 85; // Charmander arranca con 85 de vida
+        double vidaCharmanderRestanteEsperada = hpCharmander - (dañoPorAtaque - defensaCharmander); // Calculos de supuesta vida charmander
+        double vidaPidgeyEsperada = 60; // Pidgey debería iniciar con 60 de vida
+
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Pidgey"); 
+        Facade.Instance.AddPokemosD("Pikachu");
+        Facade.Instance.AddPokemosA("Charmander");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.ChangePokemon(1); // Cambia a Charmander
+        Facade.Instance.UsePokemonMove(2);//Pikachu usa rayo, danio de rayo: 65, defensa de Charmander: vida 85, defensa: 60
+        
+        Assert.That(vidaCharmanderRestanteEsperada,Is.EqualTo(Facade.Instance.Menu.GetHpAtacante())); // Verificar que la vida de Charmander es la esperada
+        Facade.Instance.ChangePokemon(1);//Cambio a Pidgey, pasa a ser defensor al usar su turno
+        Facade.Instance.UsePokemonMove(4);//Pikachu usa proteccion
+        Assert.That( Facade.Instance.Menu.GetHpAtacante(),Is.EqualTo(vidaPidgeyEsperada)); //Verifica que pidgey sigue intecto
+    }
+    [Test]
+    public void UsoItemEnBatalla2()
+    {
         //Este test muestra el uso de la CuraTotal en batalla
-        Menu juego2 = new Menu();
         Dormir dormido = new Dormir();
-        juego2.UnirJugadores("Ash");
-        juego2.UnirJugadores("Red");
-        juego2.AgregarPokemonesA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
-        juego2.AgregarPokemonesD("Charmander");
-        Pokemon pokemon2 = juego1.GetPokemonActual();
-        juego2.IniciarEnfrentamiento();
-        Pokemon rival = juego1.GetPokemonRival();
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
+        Facade.Instance.AddPokemosD("Charmander");
+        Pokemon pokemon2 = Facade.Instance.Menu.GetPokemonActual();
+        Facade.Instance.InitializeBattle();
+        Pokemon rival = Facade.Instance.Menu.GetPokemonRival();
         dormido.HacerEfecto(pokemon2);
         // Usa CuraTotal para quitarle el efecto de dormido
-        juego2.UsarItem("Curatotal", 0); //Cura el efecto de squirtle
+        Facade.Instance.UseItem("Curatotal", 0); //Cura el efecto de squirtle
         Efecto efectohecho = pokemon2.GetEfecto();
         Efecto efectoesperado = rival.GetEfecto();
         Assert.That(efectohecho, Is.EqualTo(efectoesperado)); // Compara el efecto de squirtle con el del rival, los dos son nulos
-        
+    }
+
+    [Test]
+    public void UsoItemEnBatalla3()
+    {
         //Este test muestra el uso de la superpocion en batalla
-        Menu juego3 = new Menu();        
-        juego3.UnirJugadores("Ash");
-        juego3.UnirJugadores("Red");
-        juego3.AgregarPokemonesA("Pikachu");
-        
-        juego3.AgregarPokemonesD("Arbok");
-        
-        juego3.IniciarEnfrentamiento();
-        juego3.UsarMovimientos(2);//Jugador 1 usa Electrobola
-        juego3.UsarMovimientos(1);//Jugador2 usa LanzaMugre
-        juego3.UsarItem("Superpocion", 0); //Cura a Pikachu
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Pikachu");
+        Facade.Instance.AddPokemosD("Arbok");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(2);//Jugador 1 usa Electrobola
+        Facade.Instance.UsePokemonMove(1);//Jugador2 usa LanzaMugre
+        Facade.Instance.UseItem("Superpocion", 0); //Cura a Pikachu
         double vidaEsperada2 = 80;
-        Pokemon pikachu = juego3.GetPokemonRival();
+        Pokemon pikachu = Facade.Instance.Menu.GetPokemonRival();
         double vidaObtenida2 = pikachu.GetVidaActual();
         // Usar Superpoción para restaurar 70 HP 
         Assert.That(vidaEsperada2, Is.EqualTo(vidaObtenida2));
-        
-        //Este test demuestra que no se pueden usar items una vez se acabaron ya que el pokemon va a seguir dormido
-        Menu juego4 = new Menu();
-        Dormir dormido2 = new Dormir();
+    }
 
-        juego4.UnirJugadores("Ash");
-        juego4.UnirJugadores("Red");
-        juego4.AgregarPokemonesA("Charmander");
-        juego4.AgregarPokemonesD("Pidgey");
-        Pokemon pokemon4 = juego4.GetPokemonActual();
-        Pokemon rival2 = juego4.GetPokemonRival();
+    [Test]
+    public void UsoItemEnBatalla4()
+    {
+        //Este test demuestra que no se pueden usar items una vez se acabaron ya que el pokemon va a seguir dormido
+        Dormir dormido2 = new Dormir();
+        Facade.Instance.StartBattle("Ash", "Red");
+        Facade.Instance.AddPokemosA("Charmander");
+        Facade.Instance.AddPokemosD("Pidgey");
+        Pokemon pokemon4 = Facade.Instance.Menu.GetPokemonActual();
+        Pokemon rival2 = Facade.Instance.Menu.GetPokemonRival();
         dormido2.HacerEfecto(pokemon4);
-        juego4.UsarItem("Curatotal",0);
+        Facade.Instance.UseItem("Curatotal",0);
         dormido2.HacerEfecto(pokemon4);
-        juego4.UsarItem("Curatotal",0); // para que avance el turno
-        juego4.UsarItem("Curatotal",0);
-        juego4.UsarItem("Curatotal",0); // para que avance el turno
+        Facade.Instance.UseItem("Curatotal",0); // para que avance el turno
+        Facade.Instance.UseItem("Curatotal",0);
+        Facade.Instance.UseItem("Curatotal",0); // para que avance el turno
         dormido2.HacerEfecto(pokemon4);
-        juego4.UsarItem("Curatotal",0); // no va a dejar
+        Facade.Instance.UseItem("Curatotal",0); // no va a dejar
         Efecto estado = pokemon4.GetEfecto();
         dormido2.HacerEfecto(rival2);
         Efecto estadormido = rival2.GetEfecto();
         
         Assert.That(estado,Is.EqualTo(estadormido));
     }
+    
     [Test]
     public void UsoDeEnvenenamiento()
     {
-        Menu Menu1 = new Menu();
-        Menu1.UnirJugadores("Ansu");
-        Menu1.UnirJugadores("Cima");
-        Menu1.AgregarPokemonesA("Arbok");
-        Menu1.AgregarPokemonesD("Squirtle");
-        Menu1.IniciarEnfrentamiento();
-        Menu1.UsarMovimientos(1);
+        //Este test muestra como un pokemon envenena a otro
+        Facade.Instance.StartBattle("qcy", "manu¿");
+        Facade.Instance.AddPokemosA("Arbok");
+        Facade.Instance.AddPokemosD("Squirtle");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(1);
         double vidaesperadasquirtle = 60;
-        double vidadada = Menu1.GetHpDefensor();
+        double vidadada = Facade.Instance.Menu.GetHpDefensor();
         Assert.That(vidaesperadasquirtle,Is.EqualTo(vidadada));
     }
-   
 }

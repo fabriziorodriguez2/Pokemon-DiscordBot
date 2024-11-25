@@ -48,7 +48,7 @@ public class Facade
     private WaitingList WaitingList { get; }
     
     private BattlesList BattlesList { get; }
-    private Menu Menu { get; }
+    public Menu Menu { get; }
 
     /// <summary>
     /// Agrega un jugador a la lista de espera.
