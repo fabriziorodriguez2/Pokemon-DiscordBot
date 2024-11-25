@@ -1,4 +1,3 @@
-using AdapterNamespace;
 using Library.Combate;
 
 namespace Ucu.Poo.DiscordBot.Domain;
@@ -19,7 +18,7 @@ public class Facade
     {
         this.WaitingList = new WaitingList();
         this.BattlesList = new BattlesList();
-        this.menu = new Menu();
+        this.Menu = new Menu();
     }
 
     /// <summary>
@@ -49,8 +48,7 @@ public class Facade
     private WaitingList WaitingList { get; }
     
     private BattlesList BattlesList { get; }
-
-    private Menu menu { get;}
+    public Menu Menu { get; }
 
     /// <summary>
     /// Agrega un jugador a la lista de espera.
@@ -128,8 +126,6 @@ public class Facade
         this.WaitingList.RemoveTrainer(playerDisplayName);
         this.WaitingList.RemoveTrainer(opponentDisplayName);
         
-
-        
         BattlesList.AddBattle(playerDisplayName, opponentDisplayName);
         return $"Comienza {playerDisplayName} vs {opponentDisplayName}";
     }
@@ -143,8 +139,8 @@ public class Facade
     public string StartBattle(string playerDisplayName, string? opponentDisplayName)
     {
         //Une a los jugadores a la partida de manera aleatoria
-        string result = this.menu.UnirJugadores(playerDisplayName);
-        result += "\n" + this.menu.UnirJugadores(opponentDisplayName);
+        string result = this.Menu.UnirJugadores(playerDisplayName);
+        result += "\n" + this.Menu.UnirJugadores(opponentDisplayName);
         // El símbolo ? luego de Trainer indica que la variable opponent puede
         // referenciar una instancia de Trainer o ser null.
         Trainer? opponent;
@@ -196,82 +192,82 @@ public class Facade
     }
     public string InitializeBattle()
     {
-        return this.menu.IniciarEnfrentamiento();
+        return this.Menu.IniciarEnfrentamiento();
     }
 
     public string UsePokemonMove(int moveIndex)
     {
-        return this.menu.UsarMovimientos(moveIndex);
+        return this.Menu.UsarMovimientos(moveIndex);
     }
 
     public string ShowAvailableMoves()
     {
-        return this.menu.MostrarAtaquesDisponibles();
+        return this.Menu.MostrarAtaquesDisponibles();
     }
 
     public string ChangePokemon(int pokemonIndex)
     {
-        return this.menu.CambiarPokemon(pokemonIndex);
+        return this.Menu.CambiarPokemon(pokemonIndex);
     }
 
     public string ShowPlayerStatus()
     {
-        return this.menu.MostrarEstadoEquipo();
+        return this.Menu.MostrarEstadoEquipo();
     }
 
     public string ShowOpponentStatus()
     {
-        return this.menu.MostrarEstadoRival();
+        return this.Menu.MostrarEstadoRival();
     }
 
     public bool IsBattleOngoing()
     {
-        return this.menu.GetBatallaI() && !this.menu.GetBatallaT();
+        return this.Menu.GetBatallaI() && !this.Menu.GetBatallaT();
     }
     public string AddPokemosA(string pokemon)
     {
-        return this.menu.AgregarPokemonesA(pokemon);
+        return this.Menu.AgregarPokemonesA(pokemon);
     }
     public string JugadorA()
     {
-        return menu.JugadorA().GetName();
+        return Menu.JugadorA().GetName();
     }
     public string AddPokemosD(string pokemon)
     {
-        return this.menu.AgregarPokemonesD(pokemon);
+        return this.Menu.AgregarPokemonesD(pokemon);
     }
     public string JugadorD()
     {
-        return menu.JugadorD().GetName();
+        return Menu.JugadorD().GetName();
     }
     
     public string ShowPokemonNum()
     {
-        return this.menu.MostrarNumPokemon();
+        return this.Menu.MostrarNumPokemon();
     }
 
     public string ShowAviableItems()
     {
-        return this.menu.MostrarItemsDisponibles();
+        return this.Menu.MostrarItemsDisponibles();
     }
 
     public string ShowCatolog()
     {
-        return menu.MostrarCatalogo();
+        return Menu.MostrarCatalogo();
     }
 
     public string UseItem(string item, int numeroPokemon)
     {
-        return this.menu.UsarItem(item, numeroPokemon);
+        return this.Menu.UsarItem(item, numeroPokemon);
     }
     public string ShowAtualPokemonA()
     {
-        return menu.GetNamePokemonA();
+        return Menu.GetNamePokemonA();
     }
     
     public string ShowAtualPokemonD()
     {
-        return menu.GetNamePokemonD();
+        return Menu.GetNamePokemonD();
     }
 
 }

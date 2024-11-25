@@ -267,5 +267,22 @@ public class UnitTest
         //Verifica que el pokemon rival esta envenenado
         Assert.That(rival.GetEfecto().GetType(),Is.EqualTo(typeof(Envenenar)));
     }
+    [Test]
+    public void Inmune() //En este test se puede ver que cuando un Pokemon que es inmune a otro es atacado, su vida no se ve afectada
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pikachu");
+        //Usamos a pikachu porque electrico es inmune a electrico y el ataque Rayo es de tipo electrico
+        menu.AgregarPokemonesD("Pikachu");
+        menu.IniciarEnfrentamiento();
+        menu.UsarMovimientos(1);//Jugador 1 usa Rayo(electrico)
+        menu.UsarMovimientos(1);//Jugador2 usa Rayo(electrico)
+        int vidaesperadadefensor = 80;
+        double vidaObtenidaDefensor = menu.GetHpDefensor();
+        
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
 }
 
