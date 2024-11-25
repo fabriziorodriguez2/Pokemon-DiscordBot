@@ -266,7 +266,7 @@ namespace Library.Combate
                     if (numeroAleatorio <= movimientoAtaque.GetPrecision())
                     {
                         texto += "Y ha acertado.";
-                        texto +=$"\n{batallaActual.RecibirAtaqueB(movimientoAtaque)}\n";
+                        texto +=$"{batallaActual.RecibirAtaqueB(movimientoAtaque)}\n";
                     }
                     else
                     {
