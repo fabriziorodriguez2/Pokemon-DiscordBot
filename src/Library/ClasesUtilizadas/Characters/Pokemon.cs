@@ -1,5 +1,6 @@
 ﻿using Library.Combate;
 using Library.Tipos;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.Pokemon;
 
 namespace DefaultNamespace;
@@ -24,6 +25,7 @@ public class Pokemon
     private bool isAlive;
     private Efecto estado;
     private bool puedeAtacar;
+    private IAtaqueDanioStrategy ataquedanio;
     
     /// <summary>
     /// Constructor para crear un Pokémon con nombre, movimientos, tipos, vida y defensa.
@@ -43,6 +45,12 @@ public class Pokemon
         isAlive = true;
         this.defensa = defensa;
         puedeAtacar = true;
+        this.ataquedanio = new AtaqueRandom();
+    }
+
+    public void SetStrategy(IAtaqueDanioStrategy ataque)
+    {
+        this.ataquedanio = ataque;
     }
 
     /// <summary>
@@ -162,7 +170,7 @@ public class Pokemon
 
         string texto = "";
         double danio = (movimiento.GetAtaque() * efectividadTipo);
-        int numero = new Random().Next(10);
+        int numero = ataquedanio.GetNumero();
         if (numero == 0)
         {
             danio *= 1.2;
