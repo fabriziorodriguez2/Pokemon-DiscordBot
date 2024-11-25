@@ -44,12 +44,11 @@ public class Jugador
 
     public bool ItemInInventory(string item)
     {
-        Item ite = inventarioJugador.GetItemsInventory()[item];
+        Item ite = inventarioJugador.GetItemInInventory()[item];
         if (ite.GetCantidad()>0)
         {
             return true;
         }
-
         return false;
     }
 
