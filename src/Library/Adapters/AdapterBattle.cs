@@ -20,6 +20,7 @@ namespace AdapterNamespace
             _batalla = new Batalla();
             _batalla.AgregarJugador(new Jugador(player1));
             _batalla.AgregarJugador(new Jugador(player2));
+            
         }
 
         /// <summary>

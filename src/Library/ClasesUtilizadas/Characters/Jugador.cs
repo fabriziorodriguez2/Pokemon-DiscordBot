@@ -240,19 +240,7 @@ public class Jugador
     /// <param name="pokemon">El Pokémon sobre el que se va a usar el item.</param>
     public string UsarItem(string item, Pokemon pokemon)
     {
-        if (listaPokemons.Contains(pokemon))
-        {
-            Item it = inventarioJugador.GetItemsInventory()[item];
-            if (it is Curatotal && !pokemon.GetIsAlive() || it is not Curatotal)
-            {
-                    int IndicePokemonAEfectuar = listaPokemons.IndexOf(pokemon);
-                    Pokemon PokemonAEfectuar = listaPokemons[IndicePokemonAEfectuar];
-                    return inventarioJugador.UsarItem(item, PokemonAEfectuar);
-            }
-
-            return "El pokemon no esta debilitado";
-        }
-        return "No tenés a este pokemon";
+        return inventarioJugador.UsarItem(item, pokemon);
     }
 
     /// <summary>

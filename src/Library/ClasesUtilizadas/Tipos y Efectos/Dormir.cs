@@ -36,10 +36,10 @@ public class Dormir:Efecto
         {
             pokemon.SetPuedeAtacar(true);
             pokemon.EliminarEfectoActual();
-            return $"El pokemon {pokemon.GetName()} se la ha acabado el Efecto Dormir";
+            return $"El pokemon {pokemon.GetName()} se la ha acabado el Efecto Dormir.";
         }
         pokemon.SetPuedeAtacar(false);
         this.turnos -= 1;
-        return $"{pokemon.GetName()} dormira durante {turnos} turnos";
+        return $"{pokemon.GetName()} dormira durante {turnos} turnos.";
     }
 }

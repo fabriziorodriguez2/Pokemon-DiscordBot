@@ -36,11 +36,11 @@ public class AddPokemonCommand : ModuleBase<SocketCommandContext>
         {
             result += Facade.Instance.AddPokemosA(resultado);
         }
-        else if (userName == Facade.Instance.JugadorD())
+        if (userName == Facade.Instance.JugadorD())
         { 
             result += Facade.Instance.AddPokemosD(resultado);
         }
-        else
+        if (result == "")
         {
             result += "No es tu turno ni estás en la batalla, quedate quieto";
         }

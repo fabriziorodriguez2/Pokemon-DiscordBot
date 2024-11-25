@@ -332,29 +332,55 @@ namespace Library.Combate
     /// Usa un ítem específico en el Pokémon indicado.
     /// </summary>
 
-        public string UsarItem(string item, int numeroDePokemon) //Este método utiliza el item que le pases por string
+    public string UsarItem(string item, int numeroDePokemon)
+    {
+        string texto = "";
+    
+        if (!batallaActual.GetBatallaIniciada())
         {
-            string texto = "";
-            if (batallaActual.GetBatallaIniciada())
-            {
-                Jugador jugadorAtacante = batallaActual.GetAtacante();
-                if (jugadorAtacante.ItemInInventory(item))
-                {
-                    List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
-                    if (numeroDePokemon >= 0 && numeroDePokemon < pokemons.Count)
-                    {
-                        Pokemon pokemonElegido = pokemons[numeroDePokemon];
-                        texto += jugadorAtacante.UsarItem(item, pokemonElegido);
-                        texto += batallaActual.AvanzarTurno();
-                        return texto;
-                    }
-
-                    return "Seleccione el pokemon correctamente";
-                }
-                return "Item no disponible o cantidad insuficiente";
-            }
             return "La batalla no ha iniciado";
         }
+    
+        Jugador jugadorAtacante = batallaActual.GetAtacante();
+    
+        if (!jugadorAtacante.ItemInInventory(item))
+        {
+            return "Item no disponible o cantidad insuficiente, porfavor revisar inventario";
+        }
+    
+        List<Pokemon> pokemons = jugadorAtacante.GetPokemons();
+    
+        if (numeroDePokemon < 0 || numeroDePokemon >= pokemons.Count)
+        {
+            return "Seleccione el Pokémon correctamente";
+        }
+    
+        Pokemon pokemonElegido = pokemons[numeroDePokemon];
+    
+        try
+        {
+            texto += jugadorAtacante.UsarItem(item, pokemonElegido); //intenta utilizar el item
+            texto += batallaActual.AvanzarTurno();
+        }
+        catch (ReviveException e) //Si no se pudo se catchea si es por no poder revivirlo
+        {
+            return "No se puede revivir a un Pokémon que no está debilitado.";
+        }
+        catch (CureException e) //Se revisa si es porque no se puede curar
+        {
+            return "No se puede curar a un Pokémon debilitado.";
+        }
+        catch (OverflowException e) //Si no se pudo se catchea si es por no poder revivirlo
+        {
+            return "No deberías de curar a un pokemon que ya tiene toda su vida.";
+        }
+        catch (NullReferenceException e) //Se revisa si es porque no se puede curar
+        {
+            return "El pokemon no está bajo ningún efecto, no hay porque usar un curatotal";
+        }
+    
+        return texto;
+    }
 
     public string GetNamePokemonA()
     {

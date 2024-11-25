@@ -243,7 +243,7 @@ namespace Library.Combate
 
             if (!JugadorAtacante.GetPokemonEnTurnoAtaca())
             {
-                texto += $"{JugadorAtacante.GetName()} no puede atacar este turno.";
+                texto += $"{JugadorAtacante.GetName()} no puede atacar este turno.\n";
                 AvanzarTurno();
             }
             else
