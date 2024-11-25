@@ -1,4 +1,6 @@
-﻿using Library.Combate;
+﻿using DefaultNamespace;
+using Library.Combate;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.DiscordBot.Domain;
 using Ucu.Poo.DiscordBot.Services;
 
@@ -17,10 +19,11 @@ internal static class Program
         Console.WriteLine(Facade.Instance.StartBattle("qcy", "manu¿"));
         Console.WriteLine(Facade.Instance.AddPokemosA("Charmander"));
         Console.WriteLine(Facade.Instance.AddPokemosD("Squirtle"));
-        Console.WriteLine(Facade.Instance.InitializeBattle());
+        Facade.Instance.InitializeBattle();
+        Pokemon squirtle = Facade.Instance.Menu.GetPokemonRival();
+        squirtle.SetStrategy(new AtaqueCritico());
         Console.WriteLine(Facade.Instance.UsePokemonMove(2)); //usa un ataque especial que hace 70/2 de daño
-        Console.WriteLine(Facade.Instance.UsePokemonMove(4));
-        Console.WriteLine(Facade.Instance.UsePokemonMove(2));
+        
         //DemoFacade();
         //DemoBot();
     }

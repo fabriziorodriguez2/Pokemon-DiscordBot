@@ -5,6 +5,7 @@ using Library.Combate;
 using Library.Tipos;
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 
 namespace Program.Tests.Combate;
 
@@ -282,6 +283,39 @@ public class UnitTest
         int vidaesperadadefensor = 80;
         double vidaObtenidaDefensor = menu.GetHpDefensor();
         
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
+    [Test]
+    public void DanioCritico() //En este test se puede ver que un ataque crítico hace el daño que le corresponde
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Gengar");
+        menu.AgregarPokemonesD("Charmander"); // 85 vida, 60 def 
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueCritico());
+        string retorno = menu.UsarMovimientos(3); //daño 80 * 1.2 = 96
+        int vidaesperadadefensor = 85 - 36 ;
+        double vidaObtenidaDefensor = menu.GetHpAtacante();
+        Assert.That(retorno, Does.Contain("Además ha sido un ataque crítico"));
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
+    [Test]
+    public void DanioNoCritico() //En este test se puede ver que el ataque no resulta ser critico
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Gengar");
+        menu.AgregarPokemonesD("Charmander"); // 85 vida, 60 def 
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueNoCritico());
+        menu.UsarMovimientos(3); //daño 80 * 1.2 = 96
+        int vidaesperadadefensor = 85 - 20 ;
+        double vidaObtenidaDefensor = menu.GetHpAtacante();
         Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
     }
 }
