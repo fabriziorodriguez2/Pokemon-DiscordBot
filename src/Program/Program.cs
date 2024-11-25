@@ -14,8 +14,15 @@ internal static class Program
     /// </summary>
     private static void Main()
     {
+        Console.WriteLine(Facade.Instance.StartBattle("qcy", "manu¿"));
+        Console.WriteLine(Facade.Instance.AddPokemosA("Charmander"));
+        Console.WriteLine(Facade.Instance.AddPokemosD("Squirtle"));
+        Console.WriteLine(Facade.Instance.InitializeBattle());
+        Console.WriteLine(Facade.Instance.UsePokemonMove(2)); //usa un ataque especial que hace 70/2 de daño
+        Console.WriteLine(Facade.Instance.UsePokemonMove(4));
+        Console.WriteLine(Facade.Instance.UsePokemonMove(2));
         //DemoFacade();
-        DemoBot();
+        //DemoBot();
     }
 
     private static void DemoFacade()

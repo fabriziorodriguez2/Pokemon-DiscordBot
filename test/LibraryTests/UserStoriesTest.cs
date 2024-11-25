@@ -18,6 +18,7 @@ public class UserStoriesTests
     [Test]
     public void Agrego6Pokemons()  
     {
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Charmander");
         Facade.Instance.AddPokemosA("Squirtle");
@@ -47,11 +48,27 @@ public class UserStoriesTests
         
     }
     /// <summary>
+    /// Este test verifica la primera historia de usuario mostrando los pokemones del catálogo
+    /// </summary>
+    [Test]
+    public void MostarCatalogo()  
+    {
+        Facade.Reset();
+        Facade.Instance.StartBattle("Ash", "Red");
+        string catalogo = Facade.Instance.ShowCatolog();
+        string catalogoesperado =
+            "Los pokemones disponibles son:\nPikachu \nPidgey \nLarvitar \nBulbasaur \nCharmander \nSquirtle \nCaterpie " +
+            "\nDratini \nGengar \nRegice \nStufful \nGardevoir \nArbok \n";
+        Assert.That(catalogo, Is.EqualTo(catalogoesperado));
+    }
+
+    /// <summary>
     /// Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catalogo de movmientos
     /// </summary>
     [Test]
     public void VerAtaquesDisponiblesDeMisPokemons() //En este test se puede ver que cuando el jugador 1 intenta usar el ataque especial de nuevo no puede hacerlo. 
     {
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Pikachu");
         Facade.Instance.AddPokemosD("Caterpie");
@@ -65,11 +82,33 @@ public class UserStoriesTests
                                                                     "Para usarlos, ingresa el número correspondiente a cada movimiento.\n"));
     }
     /// <summary>
+    /// Este test verifica la segunda historia de usuario que comprueba que el pokemon no pueda usar su mismo ataque especial 2 veces seguidas
+    /// </summary>
+    [Test]
+    public void RepticionEspecial()
+    {
+        Facade.Reset();
+        //Este test muestra como un pokemon envenena a otro
+        Facade.Instance.StartBattle("qcy", "manu¿");
+        Facade.Instance.AddPokemosA("Charmander");
+        Facade.Instance.AddPokemosD("Squirtle");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(2); //usa un ataque especial que hace 70/2 de daño
+        Facade.Instance.UsePokemonMove(4);
+        Facade.Instance.UsePokemonMove(2);
+        string nombrepokemonactual = Facade.Instance.ShowAtualPokemonA();
+        double vidaesperadasquirtle = 72 ; //no toca su vida porque tiene 60 de defensa pero el efecto de quemar lo daña
+        double vidadada = Facade.Instance.Menu.GetHpDefensor();
+        Assert.That(vidaesperadasquirtle,Is.EqualTo(vidadada));
+        Assert.That(nombrepokemonactual, Is.EqualTo("Charmander"));
+    }
+    /// <summary>
     /// Este test verifica la tercer historia de usuario que comprueba que las vidas se actualizan despues de un ataque
     /// </summary>
     [Test]
     public void PikachuDañaAPidgey()
     {
+        Facade.Reset();
         // 95 de daño del ataque rayo * efectividad (2) 
         int vidaesperada = 0; // tiene 60 de vida y 40 de defensa así que aguantría un golpe de 99 de daño como mucho 
         Facade.Instance.StartBattle("Ash","joshua");
@@ -89,6 +128,7 @@ public class UserStoriesTests
     [Test]
     public void BulbasaurPorSquirtleParaAguantarAPikachu()
     {
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Squirtle");
         Facade.Instance.AddPokemosA("Bulbasaur");
@@ -114,6 +154,7 @@ public class UserStoriesTests
     [Test]
     public void Defensa()//Demuestra que defensa no hace daño
     {
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Pikachu");
         Facade.Instance.AddPokemosD("Charmander");
@@ -131,6 +172,7 @@ public class UserStoriesTests
     [Test]
     public void GanoBatalla()
     {
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Pikachu");
         Facade.Instance.AddPokemosD("Pidgey");
@@ -140,10 +182,10 @@ public class UserStoriesTests
         Facade.Instance.UsePokemonMove(3);
         Facade.Instance.UsePokemonMove(2);
         Facade.Instance.UsePokemonMove(2);
-        bool batallaganada = Facade.Instance.IsBattleOngoing();
-        bool batallaganadasupuesta = true;
+        bool batallasigue = Facade.Instance.IsBattleOngoing();
+        bool estadobattallasupuesto = false; //Is going da false porque ya terminó la batalla al haber ganado alguien
         
-        Assert.That(batallaganada, Is.EqualTo(batallaganadasupuesta));
+        Assert.That(batallasigue, Is.EqualTo(estadobattallasupuesto));
     }
     /// <summary>
     /// Este test verifica la septima historia de usuario ya que podes cambiar correctamente
@@ -152,6 +194,7 @@ public class UserStoriesTests
     [Test]
     public void CambioPokemon()//Verificacion Cambio de Pokemon de Turno
     {
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
         Facade.Instance.AddPokemosD("Charmander");
@@ -169,6 +212,7 @@ public class UserStoriesTests
     [Test]
     public void UsoItemEnBatalla()
     {
+        Facade.Reset();
         //Este test muestra el uso de un revivir en la batalla
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
@@ -177,7 +221,7 @@ public class UserStoriesTests
         Facade.Instance.InitializeBattle();
         pokemon.ChangeIsAlive();
         // Usar Revivir para restaurar 50% del HP total
-        Facade.Instance.UseItem("Revivir", 0); //Revive a Squirtle
+        Facade.Instance.UseItem("revivir", 0); //Revive a Squirtle
         double vidaEsperada = 40;
         double vidaObtenida = pokemon.GetVidaActual();
         Assert.That(vidaObtenida, Is.EqualTo(vidaEsperada)); // Verifica que Squirtle tiene 40 HP no anda aún
@@ -189,7 +233,7 @@ public class UserStoriesTests
     [Test]
     public void AgregarJugadorAListaDeEspera()
     {
-        
+        Facade.Reset();
         Facade.Instance.StartBattle("Ash","red");
         Facade.Instance.AddPokemosA("Squirtle");
         Facade.Instance.AddPokemosD("Charmander");
@@ -211,8 +255,9 @@ public class UserStoriesTests
         Assert.That(Facade.Instance.GetAllTrainersWaiting(),Is.EqualTo("Esperan: Ash; "));
 
         Facade.Instance.RemoveTrainerFromWaitingList("Ash");
+        string texto = Facade.Instance.GetAllTrainersWaiting();
         
-        Assert.That(Facade.Instance.GetAllTrainersWaiting(),Is.EqualTo("No hay nadie esperando"));
+        Assert.That(texto,Is.EqualTo("No hay nadie esperando"));
     }
 
     /// <summary>
@@ -232,7 +277,7 @@ public class UserStoriesTests
     [Test]
     public void PidgeyPorCharmanderParaAguantarAPikachu()
     {
-        // Arrange
+        Facade.Reset();
         double dañoPorAtaque = 65; // Daño de rayo
         double defensaCharmander = 60; // Defensa de Charmander
         double hpCharmander = 85; // Charmander arranca con 85 de vida
@@ -255,17 +300,18 @@ public class UserStoriesTests
     [Test]
     public void UsoItemEnBatalla2()
     {
+        Facade.Reset();
         //Este test muestra el uso de la CuraTotal en batalla
-        Dormir dormido = new Dormir();
+        Quemar quemar = new Quemar();
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Squirtle");//Squirtle era el Pokemon en Turno al inicio porque fue agregado primero
         Facade.Instance.AddPokemosD("Charmander");
         Pokemon pokemon2 = Facade.Instance.Menu.GetPokemonActual();
         Facade.Instance.InitializeBattle();
         Pokemon rival = Facade.Instance.Menu.GetPokemonRival();
-        dormido.HacerEfecto(pokemon2);
+        quemar.HacerEfecto(pokemon2);
         // Usa CuraTotal para quitarle el efecto de dormido
-        Facade.Instance.UseItem("Curatotal", 0); //Cura el efecto de squirtle
+        Facade.Instance.UseItem("curatotal", 0); //Cura el efecto de squirtle
         Efecto efectohecho = pokemon2.GetEfecto();
         Efecto efectoesperado = rival.GetEfecto();
         Assert.That(efectohecho, Is.EqualTo(efectoesperado)); // Compara el efecto de squirtle con el del rival, los dos son nulos
@@ -274,6 +320,7 @@ public class UserStoriesTests
     [Test]
     public void UsoItemEnBatalla3()
     {
+        Facade.Reset();
         //Este test muestra el uso de la superpocion en batalla
         Facade.Instance.StartBattle("Ash", "Red");
         Facade.Instance.AddPokemosA("Pikachu");
@@ -281,7 +328,7 @@ public class UserStoriesTests
         Facade.Instance.InitializeBattle();
         Facade.Instance.UsePokemonMove(2);//Jugador 1 usa Electrobola
         Facade.Instance.UsePokemonMove(1);//Jugador2 usa LanzaMugre
-        Facade.Instance.UseItem("Superpocion", 0); //Cura a Pikachu
+        Facade.Instance.UseItem("superpocion", 0); //Cura a Pikachu
         double vidaEsperada2 = 60;
         Pokemon pikachu = Facade.Instance.Menu.GetPokemonActual();
         double vidaObtenida2 = pikachu.GetVidaActual();
@@ -292,6 +339,7 @@ public class UserStoriesTests
     [Test]
     public void UsoItemEnBatalla4()
     {
+        Facade.Reset();
         //Este test demuestra que no se pueden usar items una vez se acabaron ya que el pokemon va a seguir dormido
         Dormir dormido2 = new Dormir();
         Facade.Instance.StartBattle("Ash", "Red");
@@ -300,13 +348,13 @@ public class UserStoriesTests
         Pokemon pokemon4 = Facade.Instance.Menu.GetPokemonActual();
         Pokemon rival2 = Facade.Instance.Menu.GetPokemonRival();
         dormido2.HacerEfecto(pokemon4);
-        Facade.Instance.UseItem("Curatotal",0);
+        Facade.Instance.UseItem("curatotal",0);
         dormido2.HacerEfecto(pokemon4);
-        Facade.Instance.UseItem("Curatotal",0); // para que avance el turno
-        Facade.Instance.UseItem("Curatotal",0);
-        Facade.Instance.UseItem("Curatotal",0); // para que avance el turno
+        Facade.Instance.UsePokemonMove(4); // para que avance el turno
+        Facade.Instance.UseItem("curatotal",0);
+        Facade.Instance.UsePokemonMove(4); // para que avance el turno
         dormido2.HacerEfecto(pokemon4);
-        Facade.Instance.UseItem("Curatotal",0); // no va a dejar
+        Facade.Instance.UseItem("curatotal",0); // no va a dejar
         Efecto estado = pokemon4.GetEfecto();
         dormido2.HacerEfecto(rival2);
         Efecto estadormido = rival2.GetEfecto();
@@ -317,6 +365,7 @@ public class UserStoriesTests
     [Test]
     public void UsoDeEnvenenamiento()
     {
+        Facade.Reset();
         //Este test muestra como un pokemon envenena a otro
         Facade.Instance.StartBattle("qcy", "manu¿");
         Facade.Instance.AddPokemosA("Arbok");

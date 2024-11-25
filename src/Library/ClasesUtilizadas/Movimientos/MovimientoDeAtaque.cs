@@ -14,11 +14,11 @@ namespace Ucu.Poo.Pokemon;
 
 public class MovimientoDeAtaque: IMovimientoAtaque
 {
-    private string Name { get; set; }
-    private int Ataque { get; set; }
-    private Tipo Tipo { get; set; }
+    private string Name { get; }
+    private int Ataque { get; }
+    private Tipo Tipo { get;}
     
-    private int Precision { get; set; }
+    private int Precision { get; }
 
     /// <summary>
     /// Inicializa una nueva instancia de la clase <see cref="MovimientoDeAtaque"/>.
