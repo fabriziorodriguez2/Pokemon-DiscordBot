@@ -41,6 +41,24 @@ public class Jugador
     {
         return pokemonEnTurno.GetPuedeAtacar();
     }
+
+    public bool ItemInInventory(string item)
+    {
+        Item ite = inventarioJugador.GetItemsInventory()[item];
+        if (ite.GetCantidad()>0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool PokemonNumAlive(int numpokemon)
+    {
+        Pokemon pokemon = listaPokemons[numpokemon];
+        return pokemon.GetIsAlive();
+    }
+    
     /// <summary>
     /// Aplica el efecto del Pokémon en turno sobre otro Pokémon.
     /// </summary>
@@ -222,13 +240,7 @@ public class Jugador
     /// <param name="pokemon">El Pokémon sobre el que se va a usar el item.</param>
     public string UsarItem(string item, Pokemon pokemon)
     {
-        if (listaPokemons.Contains(pokemon))
-        {
-            int IndicePokemonAEfectuar = listaPokemons.IndexOf(pokemon);
-            Pokemon PokemonAEfectuar = listaPokemons[IndicePokemonAEfectuar];
-            return inventarioJugador.UsarItem(item, PokemonAEfectuar);
-        }
-        return "No tenés a este pokemon";
+        return inventarioJugador.UsarItem(item, pokemon);
     }
 
     /// <summary>

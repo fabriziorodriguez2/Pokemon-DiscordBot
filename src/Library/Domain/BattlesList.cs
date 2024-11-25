@@ -8,6 +8,7 @@ namespace Ucu.Poo.DiscordBot.Domain;
 public class BattlesList
 {
     private List<BattleAdapter> battles = new List<BattleAdapter>();
+    
 
     /// <summary>
     /// Crea una nueva batalla entre dos jugadores.

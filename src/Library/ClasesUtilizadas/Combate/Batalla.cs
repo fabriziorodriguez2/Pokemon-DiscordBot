@@ -158,6 +158,11 @@ namespace Library.Combate
         {
             return BatallaIniciada;
         }
+
+        public List<Pokemon> GetTeamPokemonA()
+        {
+            return JugadorAtacante.GetPokemons();
+        }
         /// <summary>
         /// Inicia la batalla si ambos jugadores tienen Pokémon en sus equipos y la batalla no ha comenzado.
         /// </summary>
@@ -237,7 +242,7 @@ namespace Library.Combate
 
             if (!JugadorAtacante.GetPokemonEnTurnoAtaca())
             {
-                texto += $"{JugadorAtacante.GetName()} no puede atacar este turno.";
+                texto += $"{JugadorAtacante.GetName()} no puede atacar este turno.\n";
                 AvanzarTurno();
             }
             else

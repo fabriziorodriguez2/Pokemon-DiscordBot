@@ -7,7 +7,7 @@
         <member name="M:Program.Tests.Combate.UnitTest.JugadorTrataDeUsarPokemonQueNoTiene">
             <summary>
             Prueba de la clase <see cref="T:Library.Combate.Menu"/>.
-            Estos test nos permiten verificar que las historias de usuarios están bien implementadas
+            Estos test nos permiten verificar que fragmentos del codigo anden bien detectando errores tempranamente.
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.MenuTest.PikachuDañaAPidgey">

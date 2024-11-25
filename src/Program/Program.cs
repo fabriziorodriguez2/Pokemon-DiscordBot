@@ -1,4 +1,5 @@
-﻿using Ucu.Poo.DiscordBot.Domain;
+﻿using Library.Combate;
+using Ucu.Poo.DiscordBot.Domain;
 using Ucu.Poo.DiscordBot.Services;
 
 namespace Program;

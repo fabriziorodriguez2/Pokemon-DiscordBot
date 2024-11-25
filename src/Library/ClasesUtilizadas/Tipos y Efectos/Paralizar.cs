@@ -46,9 +46,9 @@ public class Paralizar:Efecto
         pokemon.SetPuedeAtacar(Jugar(pokemon));
         if (Jugar(pokemon))
         {
-            return $"El pokemon {pokemon.GetName()} puede atacar en este turno a pesar de estar paralizado";
+            return $"El pokemon {pokemon.GetName()} puede atacar en este turno a pesar de estar paralizado.";
         }
 
-        return $"El pokemon {pokemon.GetName()} no puede atacar, ha sido paralizado";
+        return $"El pokemon {pokemon.GetName()} no puede atacar, ha sido paralizado.";
     }
 }
