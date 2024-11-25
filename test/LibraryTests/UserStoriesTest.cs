@@ -340,4 +340,18 @@ public class UserStoriesTests
         double vidadada = Facade.Instance.Menu.GetHpAtacante();
         Assert.That(vidaesperadasquirtle,Is.EqualTo(vidadada));
     }
+    [Test]
+    public void Inmune() //En este test se puede ver que cuando un Pokemon que es inmune a otro es atacado, su vida no se ve afectada
+    {
+        Facade.Instance.StartBattle("ash", "red");
+        Facade.Instance.AddPokemosA("Pikachu");
+        Facade.Instance.AddPokemosD("Pikachu");
+        //Usamos a pikachu porque electrico es inmune a electrico y el ataque Rayo es de tipo electrico
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(2); 
+        Facade.Instance.UsePokemonMove(2); 
+        int vidaesperadadefensor = 80;
+        double vidaObtenidaDefensor = Facade.Instance.Menu.GetHpDefensor();
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
 }
