@@ -164,6 +164,11 @@ namespace Library.Combate
         {
             return BatallaIniciada;
         }
+
+        public List<Pokemon> GetTeamPokemonA()
+        {
+            return JugadorAtacante.GetPokemons();
+        }
         /// <summary>
         /// Inicia la batalla si ambos jugadores tienen Pokémon en sus equipos y la batalla no ha comenzado.
         /// </summary>

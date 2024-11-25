@@ -42,6 +42,11 @@ namespace Library.Combate
         return batallaActual.GetBatallaTerminada();
     }
 
+    public List<Pokemon> GetListaPokemons()
+    {
+        return batallaActual.GetTeamPokemonA();
+    }
+
     /// <summary>
     /// Verifica si la batalla ha iniciado.
     /// </summary>
