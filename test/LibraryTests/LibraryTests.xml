@@ -12,7 +12,7 @@
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.Agrego6Pokemons">
             <summary>
-            Este test verifica la primera historia de usuario agregandose y eligiendose 6 pokemones para combatir
+            Este test verifica la primer historia de usuario y verifica la historia de usuario que no suma a una lista a los usuarios que no pueden combatir
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.MostarCatalogo">
@@ -22,7 +22,7 @@
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.VerAtaquesDisponiblesDeMisPokemons">
             <summary>
-            Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catálogo de movmientos
+            Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catalogo de movmientos
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.RepticionEspecial">
@@ -32,31 +32,31 @@
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.PikachuDañaAPidgey">
             <summary>
-            Este test verifica la tercera historia de usuario que comprueba que las vidas se actualizan después de un ataque
+            Este test verifica la tercer historia de usuario que comprueba que las vidas se actualizan despues de un ataque
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.BulbasaurPorSquirtleParaAguantarAPikachu">
             <summary>
-            Este test verifica la cuarta historia de usuario, ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
-            Además también cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
-            Además que el que comienza es squirtle y bulbasaur, para luego jugar pikachu repetando el orden del enfrentamiento
+            Este test verifica la cuarta historia de usuario ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
+            Además tambien cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
+            Además que el que comienza es squirtle y bulbasaur , para luego jugar pikachu repetando el orden del enfrentamiento
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.Defensa">
             <summary>
-            Este test verifica la quinta historia de usuario, ya que pikachu siempre va a ser el pokemon atacante, es decir el que empiece
-            Junto a esto tenemos un Console WriteLine que indica de quien es el turno (Tenemos pensado hacer un string builder que forme el mensaje para el usuario en cada turno)
+            Este test verifica la quinta historia de usuario ya que pikachu siempre va a ser el pokemon atacante, es decir el que empiece
+            Junto a esto tenemos un Console.WriteLine que indica de quien es el turno (Tenemos pensado hacer un string builder que forme el mensaje para el usuario en cada turno)
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.GanoBatalla">
             <summary>
-            Este test verifica la sexta historia de usuario, ya que la batalla inicia y termina
+            Este test verifica la sexta historia de usuario ya que la batalla inicia y termina
             El mensaje impreso en programa pasará a ser un string pasado al bot de discord
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.CambioPokemon">
             <summary>
-            Este test verifica la septima historia de usuario, ya que se puede cambiar correctamente
+            Este test verifica la septima historia de usuario ya que podes cambiar correctamente
             de Pokemon durante la batalla
             </summary>
         </member>
@@ -79,8 +79,8 @@
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.IniciarBatallaConJugadorQueEstaEsperandoPorOponente">
             <summary>
-            Este test verifica la onceava historia de usuario que nos permite
-            iniciar una batalla con un jugador que está esperando por un oponente
+            Este test verifica la decimo uno historia de usuarioque nos permite
+            iniciar una batalla con un jugador que esta esperando por un oponente
             </summary>
         </member>
     </members>

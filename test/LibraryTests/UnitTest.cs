@@ -103,7 +103,7 @@ public class UnitTest
         juego.AgregarPokemonesA("Bulbasaur");
         juego.IniciarEnfrentamiento();
         juego.UsarMovimientos(1); //Jugador 1 usa Rayo y pidgey es debilitado
-        juego.UsarItem("Superpocion", 1); //Trata de curar a Pidgey
+        juego.UsarItem("superpocion", 1); //Trata de curar a Pidgey
         
         //Verifica que la vida de Pidgey es 0 aun siendo curado con pocion después de ser debilitado 
         Assert.That(juego.GetPokemonActual().GetVidaActual(), Is.EqualTo(0));
