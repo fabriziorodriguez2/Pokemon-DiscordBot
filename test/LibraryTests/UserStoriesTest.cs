@@ -182,17 +182,53 @@ public class UserStoriesTests
         double vidaObtenida = pokemon.GetVidaActual();
         Assert.That(vidaObtenida, Is.EqualTo(vidaEsperada)); // Verifica que Squirtle tiene 40 HP no anda aún
     }
-
     /// <summary>
     /// Este test verifica la novena historia de usuario que nos permite unirnos a la lista
-    /// de jugaodes esperando por un oponente
+    /// de jugadores esperando por un oponente
     /// </summary>
     [Test]
     public void AgregarJugadorAListaDeEspera()
     {
         
+        Facade.Instance.StartBattle("Ash","red");
+        Facade.Instance.AddPokemosA("Squirtle");
+        Facade.Instance.AddPokemosD("Charmander");
+
+        Assert.That(Facade.Instance.AddTrainerToWaitingList("Ash"),Is.EqualTo("Ash agregado a la lista de espera"));
+    }
+    /// <summary>
+    /// Este test verifica la decima historia de usuario que nos permite ver qué jugadores
+    /// están en la lista esperando por un oponente cuando hay oponentes y cuando no hay
+    /// </summary>
+    [Test]
+    public void VerListaDeJugadoresEsperandoUnOponente()
+    {
+        Facade.Instance.StartBattle("Ash","red");
+        Facade.Instance.AddPokemosA("Squirtle");
+        Facade.Instance.AddPokemosD("Charmander");
+        Facade.Instance.AddTrainerToWaitingList("Ash");
+        
+        Assert.That(Facade.Instance.GetAllTrainersWaiting(),Is.EqualTo("Esperan: Ash; "));
+
+        Facade.Instance.RemoveTrainerFromWaitingList("Ash");
+        
+        Assert.That(Facade.Instance.GetAllTrainersWaiting(),Is.EqualTo("No hay nadie esperando"));
     }
 
+    /// <summary>
+    /// Este test verifica la decimo uno historia de usuarioque nos permite
+    /// iniciar una batalla con un jugador que esta esperando por un oponente
+    /// </summary>
+    [Test]
+    public void IniciarBatallaConJugadorQueEstaEsperandoPorOponente()
+    {
+        Facade.Instance.StartBattle("Ash","red");
+        Facade.Instance.AddPokemosA("Squirtle");
+        Facade.Instance.AddPokemosD("Charmander");
+        Facade.Instance.AddTrainerToWaitingList("red");
+        
+        Assert.That(Facade.Instance.StartBattle("Ash", ""),Is.EqualTo("Comienza Ash vs red"));
+    }
     [Test]
     public void PidgeyPorCharmanderParaAguantarAPikachu()
     {
@@ -246,8 +282,8 @@ public class UserStoriesTests
         Facade.Instance.UsePokemonMove(2);//Jugador 1 usa Electrobola
         Facade.Instance.UsePokemonMove(1);//Jugador2 usa LanzaMugre
         Facade.Instance.UseItem("Superpocion", 0); //Cura a Pikachu
-        double vidaEsperada2 = 80;
-        Pokemon pikachu = Facade.Instance.Menu.GetPokemonRival();
+        double vidaEsperada2 = 60;
+        Pokemon pikachu = Facade.Instance.Menu.GetPokemonActual();
         double vidaObtenida2 = pikachu.GetVidaActual();
         // Usar Superpoción para restaurar 70 HP 
         Assert.That(vidaEsperada2, Is.EqualTo(vidaObtenida2));
@@ -287,8 +323,8 @@ public class UserStoriesTests
         Facade.Instance.AddPokemosD("Squirtle");
         Facade.Instance.InitializeBattle();
         Facade.Instance.UsePokemonMove(1);
-        double vidaesperadasquirtle = 60;
-        double vidadada = Facade.Instance.Menu.GetHpDefensor();
+        double vidaesperadasquirtle = 66;
+        double vidadada = Facade.Instance.Menu.GetHpAtacante();
         Assert.That(vidaesperadasquirtle,Is.EqualTo(vidadada));
     }
 }

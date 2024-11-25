@@ -55,10 +55,22 @@
             Este test verifica la octava historia de usuario que nos permite usar varios items
             </summary>
         </member>
-        <member name="M:Program.Tests.Combate.UserStoriesTests.PidgeyPorCharmanderParaAguantarAPikachu">
+        <member name="M:Program.Tests.Combate.UserStoriesTests.AgregarJugadorAListaDeEspera">
             <summary>
             Este test verifica la novena historia de usuario que nos permite unirnos a la lista
-            de jugaodes esperando por un oponente
+            de jugadores esperando por un oponente
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.VerListaDeJugadoresEsperandoUnOponente">
+            <summary>
+            Este test verifica la decima historia de usuario que nos permite ver qué jugadores
+            están en la lista esperando por un oponente cuando hay oponentes y cuando no hay
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.IniciarBatallaConJugadorQueEstaEsperandoPorOponente">
+            <summary>
+            Este test verifica la decimo uno historia de usuarioque nos permite
+            iniciar una batalla con un jugador que esta esperando por un oponente
             </summary>
         </member>
     </members>

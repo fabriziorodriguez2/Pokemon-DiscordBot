@@ -36,7 +36,7 @@ public class Facade
             return _instance;
         }
     }
-
+    
     /// <summary>
     /// Inicializa este singleton. Es necesario solo en los tests.
     /// </summary>
