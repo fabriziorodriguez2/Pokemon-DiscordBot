@@ -1,6 +1,11 @@
-﻿using Library.Combate;
+﻿using System.Security.Cryptography;
+using DefaultNamespace;
+using Library.Combate;
+using Library.Tipos.Paralisis_Strategy;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.DiscordBot.Domain;
 using Ucu.Poo.DiscordBot.Services;
+using Ucu.Poo.Pokemon;
 
 namespace Program;
 
@@ -15,7 +20,23 @@ internal static class Program
     private static void Main()
     {
         //DemoFacade();
-        DemoBot();
+        //DemoBot();
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueNoCritico());
+        Pokemon pikachu = menu.GetPokemonActual();
+        IMovimiento rayo = pikachu.GetListaMovimientos()[0];
+        if (rayo is IMovimientoEspecial especial)
+        {
+            especial.SetStrategyParalisis(new EfectoParalisisTrue());
+            string mensaje= menu.UsarMovimientos(1);
+            Console.WriteLine(mensaje);
+        }
     }
 
     private static void DemoFacade()

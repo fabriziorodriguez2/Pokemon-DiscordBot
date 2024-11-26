@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using Library.Combate;
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
+using Ucu.Poo.DiscordBot.Domain;
+using Ucu.Poo.Pokemon;
 
 namespace Program.Tests.Combate;
 

@@ -1,5 +1,6 @@
 ﻿using Library.Combate;
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
 using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.Pokemon;
 
@@ -26,6 +27,7 @@ public class Pokemon
     private Efecto estado;
     private bool puedeAtacar;
     private IAtaqueDanioStrategy ataquedanio;
+    public Paralizar paralisis;
     
     /// <summary>
     /// Constructor para crear un Pokémon con nombre, movimientos, tipos, vida y defensa.
@@ -47,12 +49,7 @@ public class Pokemon
         puedeAtacar = true;
         this.ataquedanio = new AtaqueRandom();
     }
-
-    public void SetStrategy(IAtaqueDanioStrategy ataque)
-    {
-        this.ataquedanio = ataque;
-    }
-
+    
     /// <summary>
     /// Aplica el efecto de un Pokémon a otro Pokémon.
     /// </summary>

@@ -1,6 +1,8 @@
 using System.ComponentModel.Design;
 using DefaultNamespace;
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.Pokemon;
 
 namespace Library.Combate
@@ -30,7 +32,7 @@ namespace Library.Combate
             this.BatallaTerminada = false;
             this.BatallaIniciada = false;
         }
-
+        
         /// <summary>
         /// Recibe un ataque y lo aplica al Pokémon defensor.
         /// </summary>
