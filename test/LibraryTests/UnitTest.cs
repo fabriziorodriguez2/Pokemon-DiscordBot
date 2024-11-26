@@ -396,7 +396,7 @@ public class UnitTest
         double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
         Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
     }
-    
+
     [Test]
     /// <summary>
     /// Este test verifica que Un ataque puede ser no preciso a la hora de usarlo y que aunque sea critico
@@ -408,18 +408,19 @@ public class UnitTest
         menu.UnirJugadores("ash");
         menu.UnirJugadores("red");
         menu.AgregarPokemonesA("Pidgey");
-        menu.AgregarPokemonesD("Charmander"); 
+        menu.AgregarPokemonesD("Charmander");
         menu.IniciarEnfrentamiento();
         menu.SetStrategyPresicion(new StrategyNoPreciso());
         Pokemon charmander = menu.GetPokemonRival();
         charmander.SetStrategy(new AtaqueCritico());
         string mensajeObtenido = menu.UsarMovimientos(1);
         Assert.That(mensajeObtenido, Does.Contain("Y ha fallado."));
-        double numeroesperado = 85;// Vita totalya que el ataque ha fallado y no le ha hecho danio
-        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
-        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
+        double numeroesperado = 85; // Vita totalya que el ataque ha fallado y no le ha hecho danio
+        double numeroObtenido = menu.GetHpAtacante(); //Vida de charmander ya que pasa a ser el atacante
+        Assert.That(numeroesperado, Is.EqualTo(numeroObtenido));
+    }
 
-     [Test]
+    [Test]
     public void ProbarMovimientoDefensa()
     {
         string nombreesperado = "Escudo Epico";
