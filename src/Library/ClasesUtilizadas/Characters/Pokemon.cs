@@ -1,5 +1,7 @@
 ﻿using Library.Combate;
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.Pokemon;
 
 namespace DefaultNamespace;
@@ -24,6 +26,8 @@ public class Pokemon
     private bool isAlive;
     private Efecto estado;
     private bool puedeAtacar;
+    private IAtaqueDanioStrategy ataquedanio;
+    public Paralizar paralisis;
     
     /// <summary>
     /// Constructor para crear un Pokémon con nombre, movimientos, tipos, vida y defensa.
@@ -43,8 +47,14 @@ public class Pokemon
         isAlive = true;
         this.defensa = defensa;
         puedeAtacar = true;
+        this.ataquedanio = new AtaqueRandom();
     }
 
+    public void SetStrategy(IAtaqueDanioStrategy ataque)
+    {
+        this.ataquedanio = ataque;
+    }
+    
     /// <summary>
     /// Aplica el efecto de un Pokémon a otro Pokémon.
     /// </summary>
@@ -162,11 +172,11 @@ public class Pokemon
 
         string texto = "";
         double danio = (movimiento.GetAtaque() * efectividadTipo);
-        int numero = new Random().Next(10);
+        int numero = ataquedanio.GetNumero();
         if (numero == 0)
         {
             danio *= 1.2;
-            texto += ", Además ha sido un ataque crítico.";
+            texto += "Además ha sido un ataque crítico.\n";
         }
         // Aplicar el daño a la defensa o vida o un poco y un poco
         if (defensa > danio)
@@ -186,7 +196,7 @@ public class Pokemon
                 texto += ($"El pokemon {name} se ha debilitado, por que no podrá combatir más");
                 return texto;
             }
-            texto += ($"{GetName()} ha perdido toda su defensa y se ha quedado con {vidaActual}");
+            texto += ($"{GetName()} ha perdido toda su defensa y se ha quedado con {vidaActual} de vida restante");
         }
         if (movimiento is IMovimientoEspecial movimientoEspecial)
         {

@@ -10,6 +10,8 @@ public class Trainer
     /// </summary>
     public string DisplayName { get; }
 
+    public string id;
+
     /// <summary>
     /// Inicializa una nueva instancia de la clase <see cref="Trainer"/> con el
     /// nombre de usuario de Discord que se recibe como argumento.
@@ -18,5 +20,10 @@ public class Trainer
     public Trainer(string displayName)
     {
         this.DisplayName = displayName;
+    }
+
+    public void AssociateId(string id)
+    {
+        this.id = id;
     }
 }

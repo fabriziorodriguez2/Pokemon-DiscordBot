@@ -1,4 +1,5 @@
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
 
 namespace Ucu.Poo.Pokemon;
 //MovimientoEspecial:
@@ -107,6 +108,13 @@ public class MovimientoEspecial : IMovimientoEspecial
     public Efecto GetEfecto()
     {
         return Efecto;
+    }
+    public void SetStrategyParalisis(IEfectoParalisisStrategy efecto)
+    {
+        if (Efecto is Paralizar paralizar)
+        {
+            paralizar.SetStrategyParalisis(efecto);
+        }
     }
     
 }

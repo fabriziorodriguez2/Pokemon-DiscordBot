@@ -1,6 +1,8 @@
 using System.ComponentModel.Design;
 using DefaultNamespace;
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.Pokemon;
 
 namespace Library.Combate
@@ -30,7 +32,7 @@ namespace Library.Combate
             this.BatallaTerminada = false;
             this.BatallaIniciada = false;
         }
-
+        
         /// <summary>
         /// Recibe un ataque y lo aplica al Pokémon defensor.
         /// </summary>
@@ -48,12 +50,6 @@ namespace Library.Combate
         /// <param name="jugador">El jugador que se va a agregar a la batalla.</param>
         public string AgregarJugador(Jugador jugador)
         {
-            if (JugadorDefensor != null && JugadorAtacante != null)
-            {
-                return
-                    "No podemos agregar más jugadores pero se te va agregar a una lista de espera, ya hay 2 jugadores para jugar";
-            }
-
             if (JugadorDefensor == null && JugadorAtacante == null)
             {
                 // Asigna aleatoriamente al jugador como defensor o atacante si ambos están vacíos.
@@ -164,6 +160,11 @@ namespace Library.Combate
         {
             return BatallaIniciada;
         }
+
+        public List<Pokemon> GetTeamPokemonA()
+        {
+            return JugadorAtacante.GetPokemons();
+        }
         /// <summary>
         /// Inicia la batalla si ambos jugadores tienen Pokémon en sus equipos y la batalla no ha comenzado.
         /// </summary>
@@ -243,7 +244,7 @@ namespace Library.Combate
 
             if (!JugadorAtacante.GetPokemonEnTurnoAtaca())
             {
-                texto += $"{JugadorAtacante.GetName()} no puede atacar este turno.";
+                texto += $"{JugadorAtacante.GetName()} no puede atacar este turno.\n";
                 AvanzarTurno();
             }
             else

@@ -32,7 +32,7 @@ public class MovimientoDeDefensa : IMovimientoDefensa
     /// <param name="defensa">El valor numérico de defensa del movimiento.</param>  
     /// <param name="tipo">El tipo asociado con el movimiento de defensa.</param>  
     /// <param name="es_especial">Indica si el movimiento es especial (no se utiliza en este contexto).</param>  
-    public MovimientoDeDefensa(string name, int defensa, Tipo tipo, bool es_especial)
+    public MovimientoDeDefensa(string name, int defensa, Tipo tipo)
     {
         this.Name = name;
         this.Defensa = defensa;

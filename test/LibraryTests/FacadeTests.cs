@@ -115,6 +115,6 @@ public class FacadeTests
         
         string result = Facade.Instance.StartBattle("user", "opponent");
         
-        Assert.That(result, Is.EqualTo("Comienza user vs opponent"));
+        Assert.That(result, Is.EqualTo("Comienza user vs opponent\n"+"user tu empezaras el combate\n"+"opponent te va tocar esperar, empieza tu oponente"));
     }
 }

@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using Library.Tipos.Paralisis_Strategy;
 
 namespace Library.Tipos;
 
@@ -11,29 +12,17 @@ namespace Library.Tipos;
 
 public class Paralizar:Efecto
 {
-    private Random random = new Random();
-    
+    private IEfectoParalisisStrategy paralisisEfecto;
     /// <summary>  
     /// Inicializa una nueva instancia de la clase <see cref="Paralizar"/>.  
     /// </summary>
     public Paralizar()
     {
+        this.paralisisEfecto = new EfectoParalisisRandom();
     }
-    
-    /// <summary>  
-    /// Determina si el Pokémon puede atacar en su turno, teniendo en cuenta el efecto de paralización.  
-    /// Se genera un número aleatorio para simular la probabilidad de que el Pokémon pueda atacar.  
-    /// </summary>  
-    /// <param name="pokemon">El Pokémon que se está evaluando para determinar si puede atacar.</param>  
-    /// <returns>Verdadero si el Pokémon puede atacar, falso si no puede.</returns>  
-    private bool Jugar(Pokemon pokemon)
+    public void SetStrategyParalisis(IEfectoParalisisStrategy efecto)
     {
-        int numero= random.Next(1, 4);
-        if (numero == 1)
-        {
-            return true;
-        }
-        return false;
+        this.paralisisEfecto = efecto;
     }
 
     /// <summary>  
@@ -43,12 +32,13 @@ public class Paralizar:Efecto
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto de paralización.</param>  
     public override string HacerEfecto(Pokemon pokemon)
     {
-        pokemon.SetPuedeAtacar(Jugar(pokemon));
-        if (Jugar(pokemon))
+        bool valor = paralisisEfecto.GetValor();
+        pokemon.SetPuedeAtacar(valor);
+        if (valor)
         {
-            return $"El pokemon {pokemon.GetName()} puede atacar en este turno a pesar de estar paralizado";
+            return $"El pokemon {pokemon.GetName()} puede atacar en este turno a pesar de estar paralizado.";
         }
 
-        return $"El pokemon {pokemon.GetName()} no puede atacar, ha sido paralizado";
+        return $"El pokemon {pokemon.GetName()} no puede atacar, ha sido paralizado.";
     }
 }

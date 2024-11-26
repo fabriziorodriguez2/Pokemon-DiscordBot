@@ -1,3 +1,5 @@
+using Library.Combate;
+
 namespace Ucu.Poo.DiscordBot.Domain;
 
 /// <summary>
@@ -15,6 +17,8 @@ public class Battle
     /// </summary>
     public string Player2 { get; }
 
+    public Menu menu { get; }
+
     /// <summary>
     /// Inicializa una instancia de la clase <see cref="Battle"/> con los
     /// valores recibidos como argumento.
@@ -23,6 +27,7 @@ public class Battle
     /// <param name="player2">El oponente.</param>
     public Battle(string player1, string player2)
     {
+        this.menu = new Menu();
         this.Player1 = player1;
         this.Player2 = player2;
     }

@@ -22,8 +22,7 @@ public class ChangePokemonCommand : ModuleBase<SocketCommandContext>
         Cambia el Pokémon activo del jugador que envía el mensaje.
         Proporciona el índice del Pokémon en el equipo como parámetro.
         """)]
-    public async Task ExecuteAsync(
-        [Summary("Índice del Pokémon a cambiar (0 basado)")] 
+    public async Task ExecuteAsync([Summary("Índice del Pokémon a cambiar (0 basado)")] 
         int? pokemonIndex = null)
     {
         try

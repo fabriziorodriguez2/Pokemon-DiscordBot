@@ -7,13 +7,80 @@
         <member name="M:Program.Tests.Combate.UnitTest.JugadorTrataDeUsarPokemonQueNoTiene">
             <summary>
             Prueba de la clase <see cref="T:Library.Combate.Menu"/>.
-            Estos test nos permiten verificar que las historias de usuarios están bien implementadas
+            Estos test nos permiten verificar que fragmentos del codigo anden bien detectando errores tempranamente.
             </summary>
         </member>
-        <member name="M:Program.Tests.Combate.MenuTest.PikachuDañaAPidgey">
+        <member name="M:Program.Tests.Combate.UserStoriesTests.Agrego6Pokemons">
             <summary>
-            Prueba de la clase <see cref="T:Library.Combate.Menu"/>.
-            Estos test nos permiten verificar que las historias de usuarios están bien implementadas
+            Este test verifica la primer historia de usuario y verifica la historia de usuario que no suma a una lista a los usuarios que no pueden combatir
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.MostarCatalogo">
+            <summary>
+            Este test verifica la primera historia de usuario mostrando los pokemones del catálogo
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.VerAtaquesDisponiblesDeMisPokemons">
+            <summary>
+            Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catalogo de movmientos
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.RepticionEspecial">
+            <summary>
+            Este test verifica la segunda historia de usuario que comprueba que el pokemon no pueda usar su mismo ataque especial 2 veces seguidas
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.PikachuDañaAPidgey">
+            <summary>
+            Este test verifica la tercer historia de usuario que comprueba que las vidas se actualizan despues de un ataque
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.BulbasaurPorSquirtleParaAguantarAPikachu">
+            <summary>
+            Este test verifica la cuarta historia de usuario ya que un ataque electrico a un tipo planta le hace la mitad del daño del ataque
+            Además tambien cumple con la septima historia de usuario que dice puedo de pokemon cuando es mi turno pasando de Squirtle a Bulbasaur
+            Además que el que comienza es squirtle y bulbasaur , para luego jugar pikachu repetando el orden del enfrentamiento
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.Defensa">
+            <summary>
+            Este test verifica la quinta historia de usuario ya que pikachu siempre va a ser el pokemon atacante, es decir el que empiece
+            Junto a esto tenemos un Console.WriteLine que indica de quien es el turno (Tenemos pensado hacer un string builder que forme el mensaje para el usuario en cada turno)
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.GanoBatalla">
+            <summary>
+            Este test verifica la sexta historia de usuario ya que la batalla inicia y termina
+            El mensaje impreso en programa pasará a ser un string pasado al bot de discord
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.CambioPokemon">
+            <summary>
+            Este test verifica la septima historia de usuario ya que podes cambiar correctamente
+            de Pokemon durante la batalla
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.UsoItemEnBatalla">
+            <summary>
+            Este test verifica la octava historia de usuario que nos permite usar varios items
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.AgregarJugadorAListaDeEspera">
+            <summary>
+            Este test verifica la novena historia de usuario que nos permite unirnos a la lista
+            de jugadores esperando por un oponente
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.VerListaDeJugadoresEsperandoUnOponente">
+            <summary>
+            Este test verifica la decima historia de usuario que nos permite ver qué jugadores
+            están en la lista esperando por un oponente cuando hay oponentes y cuando no hay
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.IniciarBatallaConJugadorQueEstaEsperandoPorOponente">
+            <summary>
+            Este test verifica la decimo uno historia de usuarioque nos permite
+            iniciar una batalla con un jugador que esta esperando por un oponente
             </summary>
         </member>
     </members>
