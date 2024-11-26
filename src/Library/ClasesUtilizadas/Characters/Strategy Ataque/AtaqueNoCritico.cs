@@ -1,10 +1,9 @@
-﻿namespace Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
+﻿using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 
-public class AtaqueNoCritico:IAtaqueDanioStrategy
+public class AtaqueNoCritico : IAtaqueDanioStrategy
 {
     public int GetNumero()
     {
-        Random random = new Random();
-        return random.Next(1,10);
+        return 1; // Siempre devuelve no crítico.
     }
 }

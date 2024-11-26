@@ -107,7 +107,7 @@ public class UnitTest
         juego.AgregarPokemonesA("Bulbasaur");
         juego.IniciarEnfrentamiento();
         juego.UsarMovimientos(1); //Jugador 1 usa Rayo y pidgey es debilitado
-        juego.UsarItem("Superpocion", 1); //Trata de curar a Pidgey
+        juego.UsarItem("superpocion", 1); //Trata de curar a Pidgey
         
         //Verifica que la vida de Pidgey es 0 aun siendo curado con pocion después de ser debilitado 
         Assert.That(juego.GetPokemonActual().GetVidaActual(), Is.EqualTo(0));
@@ -286,6 +286,39 @@ public class UnitTest
         int vidaesperadadefensor = 80;
         double vidaObtenidaDefensor = menu.GetHpDefensor();
         
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
+    [Test]
+    public void DanioCritico() //En este test se puede ver que un ataque crítico hace el daño que le corresponde
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Gengar");
+        menu.AgregarPokemonesD("Charmander"); // 85 vida, 60 def 
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueCritico());
+        string retorno = menu.UsarMovimientos(3); //daño 80 * 1.2 = 96
+        int vidaesperadadefensor = 85 - 36 ;
+        double vidaObtenidaDefensor = menu.GetHpAtacante();
+        Assert.That(retorno, Does.Contain("Además ha sido un ataque crítico"));
+        Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
+    [Test]
+    public void DanioNoCritico() //En este test se puede ver que el ataque no resulta ser critico
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Gengar");
+        menu.AgregarPokemonesD("Charmander"); // 85 vida, 60 def 
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueNoCritico());
+        menu.UsarMovimientos(3); //daño 80 * 1.2 = 96
+        int vidaesperadadefensor = 85 - 20 ;
+        double vidaObtenidaDefensor = menu.GetHpAtacante();
         Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
     }
 }

@@ -337,7 +337,7 @@ public static class Pokedex
         MovimientoDeAtaque colaVeneno = new MovimientoDeAtaque("Cola Veneno", 50, listatiposdisponibles[14], 100);//Veneno
         MovimientoDeAtaque fuerza = new MovimientoDeAtaque("Fuerza", 80, listatiposdisponibles[5], 90);//Normal
         
-        MovimientoDeDefensa proteccion = new MovimientoDeDefensa("Protección", 40, listatiposdisponibles[5], false); // Normal + bonificación defensa
+        MovimientoDeDefensa proteccion = new MovimientoDeDefensa("Protección", 40, listatiposdisponibles[5]); // Normal + bonificación defensa
 
         // Agregar movimientos a la lista
         

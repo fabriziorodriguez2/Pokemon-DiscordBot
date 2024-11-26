@@ -15,9 +15,19 @@
             Este test verifica la primer historia de usuario y verifica la historia de usuario que no suma a una lista a los usuarios que no pueden combatir
             </summary>
         </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.MostarCatalogo">
+            <summary>
+            Este test verifica la primera historia de usuario mostrando los pokemones del catálogo
+            </summary>
+        </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.VerAtaquesDisponiblesDeMisPokemons">
             <summary>
             Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catalogo de movmientos
+            </summary>
+        </member>
+        <member name="M:Program.Tests.Combate.UserStoriesTests.RepticionEspecial">
+            <summary>
+            Este test verifica la segunda historia de usuario que comprueba que el pokemon no pueda usar su mismo ataque especial 2 veces seguidas
             </summary>
         </member>
         <member name="M:Program.Tests.Combate.UserStoriesTests.PikachuDañaAPidgey">

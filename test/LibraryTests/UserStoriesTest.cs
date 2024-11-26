@@ -48,6 +48,21 @@ public class UserStoriesTests
         
     }
     /// <summary>
+    /// Este test verifica la primera historia de usuario mostrando los pokemones del catálogo
+    /// </summary>
+    [Test]
+    public void MostarCatalogo()  
+    {
+        Facade.Reset();
+        Facade.Instance.StartBattle("Ash", "Red");
+        string catalogo = Facade.Instance.ShowCatolog();
+        string catalogoesperado =
+            "Los pokemones disponibles son:\nPikachu \nPidgey \nLarvitar \nBulbasaur \nCharmander \nSquirtle \nCaterpie " +
+            "\nDratini \nGengar \nRegice \nStufful \nGardevoir \nArbok \n";
+        Assert.That(catalogo, Is.EqualTo(catalogoesperado));
+    }
+
+    /// <summary>
     /// Este test verifica la segunda historia de usuario que comprueba que el usuario puede ver el catalogo de movmientos
     /// </summary>
     [Test]
@@ -65,6 +80,27 @@ public class UserStoriesTests
                                                                     "3.Ataque Rápido\n"+
                                                                     "4.Protección\n"+
                                                                     "Para usarlos, ingresa el número correspondiente a cada movimiento.\n"));
+    }
+    /// <summary>
+    /// Este test verifica la segunda historia de usuario que comprueba que el pokemon no pueda usar su mismo ataque especial 2 veces seguidas
+    /// </summary>
+    [Test]
+    public void RepticionEspecial()
+    {
+        Facade.Reset();
+        //Este test muestra como un pokemon envenena a otro
+        Facade.Instance.StartBattle("qcy", "manu¿");
+        Facade.Instance.AddPokemosA("Charmander");
+        Facade.Instance.AddPokemosD("Squirtle");
+        Facade.Instance.InitializeBattle();
+        Facade.Instance.UsePokemonMove(2); //usa un ataque especial que hace 70/2 de daño
+        Facade.Instance.UsePokemonMove(4);
+        Facade.Instance.UsePokemonMove(2);
+        string nombrepokemonactual = Facade.Instance.ShowAtualPokemonA();
+        double vidaesperadasquirtle = 72 ; //no toca su vida porque tiene 60 de defensa pero el efecto de quemar lo daña
+        double vidadada = Facade.Instance.Menu.GetHpDefensor();
+        Assert.That(vidaesperadasquirtle,Is.EqualTo(vidadada));
+        Assert.That(nombrepokemonactual, Is.EqualTo("Charmander"));
     }
     /// <summary>
     /// Este test verifica la tercer historia de usuario que comprueba que las vidas se actualizan despues de un ataque

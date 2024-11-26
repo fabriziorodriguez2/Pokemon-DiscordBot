@@ -1,3 +1,4 @@
+StrategyParalisis
 ﻿using System.Security.Cryptography;
 using DefaultNamespace;
 using Library.Combate;
@@ -19,8 +20,17 @@ internal static class Program
     /// </summary>
     private static void Main()
     {
+        Console.WriteLine(Facade.Instance.StartBattle("qcy", "manu¿"));
+        Console.WriteLine(Facade.Instance.AddPokemosA("Charmander"));
+        Console.WriteLine(Facade.Instance.AddPokemosD("Squirtle"));
+        Facade.Instance.InitializeBattle();
+        Pokemon squirtle = Facade.Instance.Menu.GetPokemonRival();
+        squirtle.SetStrategy(new AtaqueCritico());
+        Console.WriteLine(Facade.Instance.UsePokemonMove(2)); //usa un ataque especial que hace 70/2 de daño
+        
         //DemoFacade();
         //DemoBot();
+ StrategyParalisis
         Menu menu = new Menu();
         menu.UnirJugadores("player1");
         menu.UnirJugadores("player2");
@@ -37,6 +47,7 @@ internal static class Program
             string mensaje= menu.UsarMovimientos(1);
             Console.WriteLine(mensaje);
         }
+
     }
 
     private static void DemoFacade()
