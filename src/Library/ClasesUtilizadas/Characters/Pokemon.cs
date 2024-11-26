@@ -49,6 +49,11 @@ public class Pokemon
         puedeAtacar = true;
         this.ataquedanio = new AtaqueRandom();
     }
+
+    public void SetStrategy(IAtaqueDanioStrategy ataque)
+    {
+        this.ataquedanio = ataque;
+    }
     
     /// <summary>
     /// Aplica el efecto de un Pokémon a otro Pokémon.
