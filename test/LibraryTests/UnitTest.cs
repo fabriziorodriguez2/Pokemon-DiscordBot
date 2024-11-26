@@ -418,6 +418,19 @@ public class UnitTest
         double numeroesperado = 85;// Vita totalya que el ataque ha fallado y no le ha hecho danio
         double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
         Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
+
+     [Test]
+    public void ProbarMovimientoDefensa()
+    {
+        string nombreesperado = "Escudo Epico";
+        int defensaesperada = 50;
+        Tipo tipoesperado = new Tipo("Hielo");
+        
+        MovimientoDeDefensa movimiento = new MovimientoDeDefensa(nombreesperado, defensaesperada, tipoesperado);
+
+        Assert.That(nombreesperado, Is.EqualTo(movimiento.GetName()));
+        Assert.That(defensaesperada,Is.EqualTo(movimiento.GetDefensa()));
+        Assert.That(tipoesperado, Is.EqualTo(movimiento.GetTipo()));
     }
 }
 
