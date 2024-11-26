@@ -256,6 +256,9 @@ public class UnitTest
 
     }
     [Test]
+    /// <summary>
+    /// Este test verifica el efecto Envenenar
+    /// </summary>
     public void UsoDeEnvenenamiento()
     {
         Menu menu = new Menu();
@@ -272,7 +275,11 @@ public class UnitTest
         Assert.That(rival.GetEfecto().GetType(),Is.EqualTo(typeof(Envenenar)));
     }
     [Test]
-    public void Inmune() //En este test se puede ver que cuando un Pokemon que es inmune a otro es atacado, su vida no se ve afectada
+    /// <summary>
+    /// Este test verifica que se respeta el danio segun el tipo de ataque y el tipo de pokemon atacado,
+    /// en este caso al combatir 2 electricos, la vida del que es atacado no es afectada.
+    /// </summary>
+    public void Inmune() 
     {
         Menu menu = new Menu();
         menu.UnirJugadores("ash");
@@ -289,7 +296,10 @@ public class UnitTest
         Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
     }
     [Test]
-    public void DanioCritico() //En este test se puede ver que un ataque crítico hace el daño que le corresponde
+    /// <summary>
+    /// Este test verifica que Un ataque pueda ser Critico, y que aumenta en danio un 20%
+    /// </summary>
+    public void DanioCritico() 
     {
         Menu menu = new Menu();
         menu.UnirJugadores("ash");
@@ -306,7 +316,10 @@ public class UnitTest
         Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
     }
     [Test]
-    public void DanioNoCritico() //En este test se puede ver que el ataque no resulta ser critico
+    /// <summary>
+    /// Este test verifica que un ataque tambien puede ser No Critico y noaumentar el danio del ataque
+    /// </summary>
+    public void DanioNoCritico() 
     {
         Menu menu = new Menu();
         menu.UnirJugadores("ash");
@@ -320,6 +333,91 @@ public class UnitTest
         int vidaesperadadefensor = 85 - 20 ;
         double vidaObtenidaDefensor = menu.GetHpAtacante();
         Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
+    }
+
+    [Test]
+    /// <summary>
+    /// Este test verifica que Un ataque puede ser preciso a la hora de usarlo y critico al mismo tiempo
+    /// </summary>
+    public void PresicionAciertaYAtaqueCritico()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pidgey");
+        menu.AgregarPokemonesD("Charmander"); 
+        menu.IniciarEnfrentamiento();
+        menu.SetStrategyPresicion(new StrategyPreciso());
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueCritico());
+        string mensajeObtenido = menu.UsarMovimientos(1);
+        Assert.That(mensajeObtenido, Does.Contain("Y ha acertado."));
+        double numeroesperado = 85 - (60 * 1.2 - 60);// Calculo de danio con critico
+        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
+        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
+    }
+    
+    [Test]
+    /// <summary>
+    /// Este test verifica que Un ataque puede ser preciso a la hora de usarlo y tambien puede ser no critico
+    /// </summary>
+    public void PresicionAciertaYAtaqueNoCritico()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pidgey");
+        menu.AgregarPokemonesD("Charmander"); 
+        menu.IniciarEnfrentamiento();
+        menu.SetStrategyPresicion(new StrategyPreciso());
+        string mensajeObtenido = menu.UsarMovimientos(1);
+        Assert.That(mensajeObtenido, Does.Contain("Y ha acertado."));
+        double numeroesperado = 85 ;// su vida queda igual, ya que 85(vida Charmander)- 60(defensa Charmander)- 60(AtaquePidgey)= 85
+        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
+        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
+    }
+    
+    [Test]
+    /// <summary>
+    /// Este test verifica que Un ataque puede ser no preciso a la hora de usarlo
+    /// </summary>
+    public void PresicionNoAcierta()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pidgey");
+        menu.AgregarPokemonesD("Charmander"); 
+        menu.IniciarEnfrentamiento();
+        menu.SetStrategyPresicion(new StrategyNoPreciso());
+        string mensajeObtenido = menu.UsarMovimientos(1);
+        Assert.That(mensajeObtenido, Does.Contain("Y ha fallado."));
+        double numeroesperado = 85;// Vita totalya que el ataque ha fallado y no le ha hecho danio
+        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
+        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
+    }
+    
+    [Test]
+    /// <summary>
+    /// Este test verifica que Un ataque puede ser no preciso a la hora de usarlo y que aunque sea critico
+    /// esto no afecta al pokemon atacado y se respeta que fallo el ataque
+    /// </summary>
+    public void PresicionNoAciertaYAtaqueCritico()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pidgey");
+        menu.AgregarPokemonesD("Charmander"); 
+        menu.IniciarEnfrentamiento();
+        menu.SetStrategyPresicion(new StrategyNoPreciso());
+        Pokemon charmander = menu.GetPokemonRival();
+        charmander.SetStrategy(new AtaqueCritico());
+        string mensajeObtenido = menu.UsarMovimientos(1);
+        Assert.That(mensajeObtenido, Does.Contain("Y ha fallado."));
+        double numeroesperado = 85;// Vita totalya que el ataque ha fallado y no le ha hecho danio
+        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
+        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
     }
 }
 
