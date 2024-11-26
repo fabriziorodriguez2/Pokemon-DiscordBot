@@ -459,5 +459,56 @@ public class UnitTest
         Assert.That(defensaesperada,Is.EqualTo(movimiento.GetDefensa()));
         Assert.That(tipoesperado, Is.EqualTo(movimiento.GetTipo()));
     }
+    
+    [Test]
+    public void GettersStrategyCriticos()
+    {
+        IAtaqueDanioStrategy critico = new AtaqueCritico();
+        int esperadoCritico = critico.GetNumero();
+        Assert.That(esperadoCritico,Is.EqualTo(0));
+        
+        IAtaqueDanioStrategy noCritico = new AtaqueNoCritico();
+        int esperadoNoCritico = noCritico.GetNumero();
+        Assert.That(esperadoNoCritico,Is.EqualTo(1));
+
+        IAtaqueDanioStrategy random = new AtaqueRandom();
+        int esperadoRandom = random.GetNumero();
+        Assert.That(esperadoRandom, Is.InRange(0, 9));
+    }
+ [Test]
+    /// <summary>
+    /// Este test verifica que los Getters de Strategy de la precision de los ataques den el valor requerido
+    /// </summary>
+    public void GettersStrategyPrecision()
+    {
+        IStrategyPresicion preciso = new StrategyPreciso();
+        int numpreciso = preciso.GetNumber();
+        Assert.That(numpreciso,Is.EqualTo(1));
+
+        IStrategyPresicion noPreciso = new StrategyNoPreciso();
+        int numNoPreciso = noPreciso.GetNumber();
+        Assert.That(numNoPreciso,Is.EqualTo(100));
+
+        IStrategyPresicion random = new StrategyPrecisoRandom();
+        int numRandom = random.GetNumber();
+        Assert.That(numRandom, Is.InRange(1, 100));
+    }
+
+    [Test]
+    /// <summary>
+    /// Este test verifica que los Getters de Strategy del efecto Paralisis den el valor requerido
+    /// </summary>
+    public void GettersStrategyParalisis()
+    {
+        IEfectoParalisisStrategy paralisisTrue = new EfectoParalisisTrue();
+        bool valorTrue = paralisisTrue.GetValor();
+        Assert.That(valorTrue,Is.EqualTo(true));
+        
+        IEfectoParalisisStrategy paralisisFalse = new EfectoParalisisFalse();
+        bool valorFalse = paralisisFalse.GetValor();
+        Assert.That(valorFalse,Is.EqualTo(false));
+    }
+    
+    
 }
 
