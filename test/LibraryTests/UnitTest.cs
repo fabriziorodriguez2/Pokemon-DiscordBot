@@ -321,5 +321,18 @@ public class UnitTest
         double vidaObtenidaDefensor = menu.GetHpAtacante();
         Assert.That(vidaesperadadefensor,Is.EqualTo(vidaObtenidaDefensor));
     }
+     [Test]
+    public void ProbarMovimientoDefensa()
+    {
+        string nombreesperado = "Escudo Epico";
+        int defensaesperada = 50;
+        Tipo tipoesperado = new Tipo("Hielo");
+        
+        MovimientoDeDefensa movimiento = new MovimientoDeDefensa(nombreesperado, defensaesperada, tipoesperado);
+
+        Assert.That(nombreesperado, Is.EqualTo(movimiento.GetName()));
+        Assert.That(defensaesperada,Is.EqualTo(movimiento.GetDefensa()));
+        Assert.That(tipoesperado, Is.EqualTo(movimiento.GetTipo()));
+    }
 }
 
