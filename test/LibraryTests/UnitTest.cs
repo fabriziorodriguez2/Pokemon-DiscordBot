@@ -78,23 +78,17 @@ public class UnitTest
     [Test]
     public void PokemonParalizado()
     {
-        Paralizar paralizadoEsperado = new Paralizar();
-        Menu juego = new Menu();
-        juego.UnirJugadores("Ash");
-        juego.UnirJugadores("Red");
-        juego.AgregarPokemonesA("Pikachu");
-        juego.AgregarPokemonesD("Bulbasaur");
-        juego.IniciarEnfrentamiento();
-        
-        // Pikachu usa un movimiento que paraliza al rival (Bulbasaur).
-        juego.UsarMovimientos(1);
-
-        // Obtiene el Pokémon rival y su efecto después del movimiento.
-        Pokemon rival = juego.GetPokemonRival();
-        Efecto efectoAplicado = rival.GetEfecto();
-        
-        // Verifica que el tipo de efecto aplicado es del mismo tipo que 'Paralizar'.
-        Assert.That(efectoAplicado.GetType(), Is.EqualTo(paralizadoEsperado.GetType()));
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        Pokemon pikachu = menu.GetPokemonActual();
+        pikachu.SetStrategy(new AtaqueNoCritico()); // seteo el ataque para que no haga crítico
+        menu.UsarMovimientos(1); // Pikachu Paraliza a Charmander
+        Assert.That(charmander.GetEfecto().GetType(), Is.EqualTo(typeof(Paralizar)));
     }
     [Test]
     public void TrataDeUsarSuperPocionEnPokemonDebilitado()
@@ -146,7 +140,7 @@ public class UnitTest
         juego.AgregarPokemonesD("Squirtle");
         juego.IniciarEnfrentamiento();
         
-        // Pikachu usa un movimiento que paraliza al rival (Bulbasaur).
+        // Stufful usa un movimiento que duerme al rival (squirtle).
         juego.UsarMovimientos(1);
 
         // Obtiene el Pokémon rival y su efecto después del movimiento.
@@ -154,6 +148,39 @@ public class UnitTest
         
         // Verifica que el tipo de efecto aplicado es del mismo tipo que 'Dormir'.
         Assert.That(rival.GetEfecto().GetType(), Is.EqualTo(typeof(Dormir)));
+    }
+
+    [Test]
+    public void UsoCuraTotal()
+    {
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Arbok");
+        juego.AgregarPokemonesD("Squirtle");
+        juego.IniciarEnfrentamiento();
+        
+        // Arbok usa un movimiento que envenena al rival (Squirtle).
+        juego.UsarMovimientos(1);
+        juego.UsarItem("curatotal", 0); //aplica curatotal en el pokemon squirtle
+        Pokemon actual = juego.GetPokemonActual();
+        Pokemon rival = juego.GetPokemonRival();
+
+        Assert.That(actual.GetEfecto(), Is.EqualTo(rival.GetEfecto()));
+    }
+
+    [Test]
+    public void MuestroItems()
+    {
+        Menu juego = new Menu();
+        juego.UnirJugadores("Ash");
+        juego.UnirJugadores("Red");
+        juego.AgregarPokemonesA("Stufful");
+        juego.AgregarPokemonesD("Squirtle");
+        juego.IniciarEnfrentamiento();
+
+        string items = juego.MostrarItemsDisponibles();
+        Assert.That(items,Is.EqualTo("superpocion: 4 disponibles\nrevivir: 1 disponibles\ncuratotal: 2 disponibles\n"));
     }
 
     [Test]
@@ -172,7 +199,6 @@ public class UnitTest
         
         // Verifica que la vida de Charmander esta completa
         Assert.That(juego.GetHpDefensor(),Is.EqualTo(85));
-        
     }
 
     [Test]
