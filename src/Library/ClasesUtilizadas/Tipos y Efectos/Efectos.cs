@@ -15,7 +15,7 @@ namespace Library.Tipos;
 //tipos de efectos de manera uniforme.
 
 
-public class Efecto
+public abstract class Efecto
 {
     /// <summary>  
     /// Inicializa una nueva instancia de la clase <see cref="Efecto"/>.  
@@ -31,10 +31,8 @@ public class Efecto
     /// Este método puede ser sobrescrito por las subclases para proporcionar una implementación específica.  
     /// </summary>  
     /// <param name="pokemon">El Pokémon al que se le aplicará el efecto.</param>  
-    public virtual string HacerEfecto(Pokemon pokemon)
-    {
-        return "";
-    }
+    public abstract string HacerEfecto(Pokemon pokemon);
+    
 
     /// <summary>  
     /// Crea una copia de un efecto específico definido por el tipo proporcionado.  

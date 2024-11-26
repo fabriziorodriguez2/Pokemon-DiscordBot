@@ -29,8 +29,6 @@ internal static class Program
         menu.AgregarPokemonesA("Pikachu");
         menu.AgregarPokemonesD("Charmander");
         menu.IniciarEnfrentamiento();
-        Pokemon charmander = menu.GetPokemonRival();
-        charmander.SetStrategy(new AtaqueNoCritico());
         Pokemon pikachu = menu.GetPokemonActual();
         IMovimiento rayo = pikachu.GetListaMovimientos()[0];
         if (rayo is IMovimientoEspecial especial)
