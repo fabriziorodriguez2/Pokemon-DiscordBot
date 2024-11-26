@@ -1,5 +1,7 @@
 using DefaultNamespace;
 using Library.Tipos;
+using Library.Tipos.Paralisis_Strategy;
+using Ucu.Poo.DiscordBot.ClasesUtilizadas.Characters.Strategy_Ataque;
 using Ucu.Poo.Pokemon;
 
 namespace Library.Combate;
@@ -33,6 +35,7 @@ public class Jugador
         this.teamIsAlive = true;
         this.inventarioJugador = new InventarioItems();
     }
+    
     /// <summary>
     /// Obtiene si el Pokémon en turno puede atacar.
     /// </summary>
