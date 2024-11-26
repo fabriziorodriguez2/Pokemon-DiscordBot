@@ -17,7 +17,7 @@ namespace Library.Combate
    public class Menu
 {
     private Batalla batallaActual;
-
+    private IStrategyPresicion precision;
     /// <summary>
     /// Constructor de la clase `Menu`.
     /// Inicializa un nuevo objeto `Menu` y una instancia de `Batalla`.
@@ -25,6 +25,12 @@ namespace Library.Combate
     public Menu()
     {
         batallaActual = new Batalla();
+        this.precision = new StrategyPrecisoRandom();
+    }
+
+    public void SetStrategyPresicion(IStrategyPresicion pres)
+    {
+        this.precision = pres;
     }
 
     /// <summary>
@@ -263,8 +269,7 @@ namespace Library.Combate
                 if (movimiento is IMovimientoAtaque movimientoAtaque)
                 {
                     texto += ($"{pokemonActual.GetName()} ha usado {movimiento.GetName()}.");
-                    Random random = new Random();
-                    int numeroAleatorio = random.Next(1, 101);
+                    int numeroAleatorio = precision.GetNumber();
                     if (numeroAleatorio <= movimientoAtaque.GetPrecision())
                     {
                         texto += "Y ha acertado.";
