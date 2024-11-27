@@ -656,8 +656,8 @@ public class UnitTest
     
     [Test]
     /// <summary>
-    /// Este test verifica que si se intenta usar el Item de Superpocion,
-    /// si el pokemon no tiene danio alguno,este no la podra usar
+    /// Este test verifica que si se intenta usar el Item de CuraTotal,
+    /// si el pokemon no tiene ningun efecto, este no la podra usar.
     /// </summary>
     public void UsarItemCuraTotal()
     {
