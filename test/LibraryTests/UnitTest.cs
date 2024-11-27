@@ -616,5 +616,62 @@ public class UnitTest
         Assert.That(mensaje, Does.Contain("Stufful 55/70"));
 
     }
+    [Test]
+    /// <summary>
+    /// Este test verifica que si se intenta usar el Item de revivir,
+    /// si el pokemon no etsa muerto este item nopodra usarse
+    /// </summary>
+    public void UsarItemCuandoPokemonEstaVivo()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pidgey");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        string item = "revivir";
+
+        // Act & Assert
+        string mensaje = menu.UsarItem(item, 0);
+        Assert.That("No se puede revivir a un Pokémon que no está debilitado.", Is.EqualTo(mensaje));
+    }
+    [Test]
+    /// <summary>
+    /// Este test verifica que si se intenta usar el Item de Superpocion,
+    /// si el pokemon no tiene danio alguno,este no la podra usar
+    /// </summary>
+    public void UsarItemCurarFull()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Pidgey");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        
+        string mensaje = menu.UsarItem("superpocion", 0);
+        Assert.That("No deberías de curar a un pokemon que ya tiene toda su vida.", Is.EqualTo(mensaje));
+    }
+    
+    [Test]
+    /// <summary>
+    /// Este test verifica que si se intenta usar el Item de Superpocion,
+    /// si el pokemon no tiene danio alguno,este no la podra usar
+    /// </summary>
+    public void UsarItemCuraTotal()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("ash");
+        menu.UnirJugadores("red");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Pidgey");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        
+        string mensaje = menu.UsarItem("curatotal", 0);
+        Assert.That("El pokemon no está bajo ningún efecto, no hay porque usar un curatotal", Is.EqualTo(mensaje));
+    }
+    
 }
 
