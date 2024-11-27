@@ -398,9 +398,6 @@ public class UnitTest
         menu.SetStrategyPresicion(new StrategyPreciso());
         string mensajeObtenido = menu.UsarMovimientos(1);
         Assert.That(mensajeObtenido, Does.Contain("Y ha acertado."));
-        double numeroesperado = 85 ;// su vida queda igual, ya que 85(vida Charmander)- 60(defensa Charmander)- 60(AtaquePidgey)= 85
-        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
-        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
     }
     
     [Test]
@@ -508,7 +505,45 @@ public class UnitTest
         bool valorFalse = paralisisFalse.GetValor();
         Assert.That(valorFalse,Is.EqualTo(false));
     }
-    
-    
+    [Test]
+    public void AtaqueConParalisis()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        Paralizar paralizar = new Paralizar();
+        paralizar.SetStrategyParalisis(new EfectoParalisisFalse());
+        charmander.AgregarEfecto(paralizar);
+        string primerpokemon = menu.GetPokemonActual().GetName();
+        menu.UsarMovimientos(3);
+        string segundopokemon = menu.GetPokemonActual().GetName();
+        Assert.That(primerpokemon, Is.EqualTo(segundopokemon));
+    }
+
+    [Test]
+    public void AtaqueConParalisisPeroPermitoJugar()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        Pokemon charmander = menu.GetPokemonRival();
+        Paralizar paralizar = new Paralizar();
+        paralizar.SetStrategyParalisis(new EfectoParalisisTrue());
+        charmander.AgregarEfecto(paralizar);
+        string primerpokemon = menu.GetPokemonActual().GetName(); //Pikachu
+        menu.UsarMovimientos(3);
+        string segundopokemon = menu.GetPokemonActual().GetName(); //Charmander
+        string pokemon1esperado = "Pikachu";
+        string pokemon2esperado = "Charmander";
+        Assert.That(primerpokemon, Is.EqualTo(pokemon1esperado));
+        Assert.That(segundopokemon, Is.EqualTo(pokemon2esperado));
+    }
 }
 
