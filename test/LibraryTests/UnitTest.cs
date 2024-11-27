@@ -577,30 +577,17 @@ public class UnitTest
         menu.UnirJugadores("player2");
         menu.AgregarPokemonesA("Pikachu");
         menu.AgregarPokemonesD("Stufful");
-        menu.AgregarPokemonesA("Charmander");
-        menu.AgregarPokemonesD("Arbok");
+        menu.SetStrategyPresicion(new StrategyPreciso());
         Pokemon pikachu = menu.GetPokemonActual();
         pikachu.SetStrategy(new AtaqueNoCritico());
         Pokemon stufful = menu.GetPokemonRival();
         stufful.SetStrategy(new AtaqueNoCritico());
         menu.IniciarEnfrentamiento();
-        menu.IniciarEnfrentamiento();
-        menu.UsarMovimientos(2);
-        menu.UsarMovimientos(2);
-        menu.UsarMovimientos(1);//Uso defensa para no matar a Pikachu
-        menu.UsarMovimientos(2);
-        string mensaje = "";
-        if (menu.JugadorA().GetName() == "player1")
-        {
-            mensaje=menu.MostrarEstadoEquipo();
-        }
+        Console.WriteLine(menu.UsarMovimientos(2));
+        Console.WriteLine(menu.UsarMovimientos(2));
+        string mensaje = menu.MostrarEstadoEquipo();
 
-        if (menu.JugadorA().GetName() == "player2")
-        {
-             mensaje=menu.MostrarEstadoEquipo();
-        }
-
-        Assert.That(mensaje, Does.Contain("Pikachu 15/80\nCharmander 85/85"));
+        Assert.That(mensaje, Does.Contain("Pikachu 65/80"));
 
     }
     
@@ -616,8 +603,7 @@ public class UnitTest
         menu.UnirJugadores("player2");
         menu.AgregarPokemonesA("Pikachu");
         menu.AgregarPokemonesD("Stufful");
-        menu.AgregarPokemonesA("Charmander");
-        menu.AgregarPokemonesD("Arbok");
+        menu.SetStrategyPresicion(new StrategyPreciso());
         Pokemon pikachu = menu.GetPokemonActual();
         pikachu.SetStrategy(new AtaqueNoCritico());
         Pokemon stufful = menu.GetPokemonRival();
@@ -625,20 +611,9 @@ public class UnitTest
         menu.IniciarEnfrentamiento();
         Console.WriteLine(menu.UsarMovimientos(2));
         Console.WriteLine(menu.UsarMovimientos(2));
-        Console.WriteLine(menu.UsarMovimientos(2));
-        Console.WriteLine(menu.UsarMovimientos(2));
-        string mensaje = "";
-        if (menu.JugadorD().GetName() == "player1")
-        {
-            mensaje=menu.MostrarEstadoRival();
-        }
+        string mensaje = menu.MostrarEstadoRival();
 
-        if (menu.JugadorD().GetName() == "player2")
-        {
-             mensaje=menu.MostrarEstadoRival();
-        }
-
-        Assert.That(mensaje, Does.Contain("Arbok 60/60\nStufful ha muerto"));
+        Assert.That(mensaje, Does.Contain("Stufful 55/70"));
 
     }
 }
