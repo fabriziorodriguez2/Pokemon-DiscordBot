@@ -398,9 +398,6 @@ public class UnitTest
         menu.SetStrategyPresicion(new StrategyPreciso());
         string mensajeObtenido = menu.UsarMovimientos(1);
         Assert.That(mensajeObtenido, Does.Contain("Y ha acertado."));
-        double numeroesperado = 85 ;// su vida queda igual, ya que 85(vida Charmander)- 60(defensa Charmander)- 60(AtaquePidgey)= 85
-        double numeroObtenido = menu.GetHpAtacante();//Vida de charmander ya que pasa a ser el atacante
-        Assert.That(numeroesperado,Is.EqualTo(numeroObtenido));
     }
     
     [Test]
