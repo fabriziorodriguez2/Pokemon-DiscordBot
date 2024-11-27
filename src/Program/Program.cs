@@ -22,7 +22,23 @@ internal static class Program
     {
         
         //DemoFacade();
-        DemoBot();
+       // DemoBot();
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Stufful");
+        menu.SetStrategyPresicion(new StrategyPreciso());
+        Pokemon pikachu = menu.GetPokemonActual();
+        pikachu.SetStrategy(new AtaqueNoCritico());
+        Pokemon stufful = menu.GetPokemonRival();
+        stufful.SetStrategy(new AtaqueNoCritico());
+        menu.IniciarEnfrentamiento();
+        Console.WriteLine(menu.UsarMovimientos(2));
+        Console.WriteLine(menu.UsarMovimientos(2));
+        string mensaje = menu.MostrarEstadoRival();
+
+        Console.WriteLine(mensaje);
     }
 
     private static void DemoFacade()
