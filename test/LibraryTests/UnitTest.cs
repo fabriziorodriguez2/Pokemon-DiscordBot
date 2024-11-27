@@ -545,5 +545,101 @@ public class UnitTest
         Assert.That(primerpokemon, Is.EqualTo(pokemon1esperado));
         Assert.That(segundopokemon, Is.EqualTo(pokemon2esperado));
     }
+    
+    [Test]
+    /// <summary>
+    /// Este test verifica que el MetodoMostrarNum funcione correctamente, diciendole al jugador quien
+    /// es el pokemon en turno y los numeros de los otrospokemones del equipo, para que pueda usar por ejemplo
+    // el comando de change pokemon, el cual funciona solo co el numero del pokemon
+    /// </summary>
+    public void MostratNumPokemon()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesA("Bulbasaur");
+        menu.AgregarPokemonesA("Arbok");
+        menu.AgregarPokemonesD("Charmander");
+        menu.IniciarEnfrentamiento();
+        string mensaje=menu.MostrarNumPokemon();
+        Assert.That(mensaje, Does.Contain("Pikachu está en turno\n el número 1 es Bulbasaur \nel número 2 es Arbok "));
+    }
+
+    [Test]
+    /// <summary>
+    /// Este test verifica que Mostrar el estadodel equipo lo haga correctamente, asi el jugador puede ver la vida de los pokemones que tiene
+    /// </summary>
+    public void MostrarEstadoEquipo()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Stufful");
+        menu.AgregarPokemonesA("Charmander");
+        menu.AgregarPokemonesD("Arbok");
+        Pokemon pikachu = menu.GetPokemonActual();
+        pikachu.SetStrategy(new AtaqueNoCritico());
+        Pokemon stufful = menu.GetPokemonRival();
+        stufful.SetStrategy(new AtaqueNoCritico());
+        menu.IniciarEnfrentamiento();
+        menu.IniciarEnfrentamiento();
+        menu.UsarMovimientos(2);
+        menu.UsarMovimientos(2);
+        menu.UsarMovimientos(1);//Uso defensa para no matar a Pikachu
+        menu.UsarMovimientos(2);
+        string mensaje = "";
+        if (menu.JugadorA().GetName() == "player1")
+        {
+            mensaje=menu.MostrarEstadoEquipo();
+        }
+
+        if (menu.JugadorA().GetName() == "player2")
+        {
+             mensaje=menu.MostrarEstadoEquipo();
+        }
+
+        Assert.That(mensaje, Does.Contain("Pikachu 15/80\nCharmander 85/85"));
+
+    }
+    
+    [Test]
+    /// <summary>
+    /// Este test verifica que Mostrar el estado del equipo contrincante lo haga correctamente,
+    /// asi el jugador puede ver la vida de los pokemones que tiene el rival
+    /// </summary>
+    public void MostrarEstadoRival()
+    {
+        Menu menu = new Menu();
+        menu.UnirJugadores("player1");
+        menu.UnirJugadores("player2");
+        menu.AgregarPokemonesA("Pikachu");
+        menu.AgregarPokemonesD("Stufful");
+        menu.AgregarPokemonesA("Charmander");
+        menu.AgregarPokemonesD("Arbok");
+        Pokemon pikachu = menu.GetPokemonActual();
+        pikachu.SetStrategy(new AtaqueNoCritico());
+        Pokemon stufful = menu.GetPokemonRival();
+        stufful.SetStrategy(new AtaqueNoCritico());
+        menu.IniciarEnfrentamiento();
+        Console.WriteLine(menu.UsarMovimientos(2));
+        Console.WriteLine(menu.UsarMovimientos(2));
+        Console.WriteLine(menu.UsarMovimientos(2));
+        Console.WriteLine(menu.UsarMovimientos(2));
+        string mensaje = "";
+        if (menu.JugadorD().GetName() == "player1")
+        {
+            mensaje=menu.MostrarEstadoRival();
+        }
+
+        if (menu.JugadorD().GetName() == "player2")
+        {
+             mensaje=menu.MostrarEstadoRival();
+        }
+
+        Assert.That(mensaje, Does.Contain("Arbok 60/60\nStufful ha muerto"));
+
+    }
 }
 
