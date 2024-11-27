@@ -1,6 +1,11 @@
 using Ucu.Poo.DiscordBot.Domain;
 using Library.Combate;
-
+//Clase de AdapterBattle cumple con SRP ya que tiene la única responsabilidad de actuar como "puente" entre Batalla y
+//Battle de bot para que éste se adapte a la interfaz que utilizamos.
+//Cumple con Expert ya que es la que tiene toda esa información para actuar de esa manera
+//Cumple con OCP ya que está abierto a extensiones pero cerrado a modificaciones,
+//ya que por ejemplo puedes adaptar nuevas funcionalidades de Batalla que añadas sin que esto afecte a lo que ya está hecho
+//También cumple con LSP ya que puede usarse donde se espere un objeto de tipo Battle sin romper nada.
 namespace AdapterNamespace
 {
     /// <summary>

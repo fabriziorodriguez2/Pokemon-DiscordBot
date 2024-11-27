@@ -1,6 +1,12 @@
 using Library.Combate;
 
 namespace Ucu.Poo.DiscordBot.Domain;
+//Clase de Facade cumple con SRP ya que tiene la única responsabilidad de manejar las funciones de menu que teníamos 
+//para que se adapten al bot, también cumple con Expert ya que es la que tiene toda esa información para actuar de esa manera
+//Cumple con OCP ya que está abierto a extensiones pero cerrado a modificaciones,
+//ya que por ejemplo puedes adaptar nuevas funcionalidades de menu que añadas sin que esto afecte a lo que ya está hecho
+
+
 
 /// <summary>
 /// Esta clase recibe las acciones y devuelve los resultados que permiten
